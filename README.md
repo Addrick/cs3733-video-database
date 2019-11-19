@@ -1,4 +1,4 @@
 # cs3733-video-database
 SoftEng Group Project
 
-Names: Zach Zlotnick, Adam Santos
+Names: Zach Zlotnick, Adam Santos, Jonathon Brownlow
