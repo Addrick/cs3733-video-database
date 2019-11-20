@@ -71,7 +71,7 @@ paths:
         400:
           description: Failed to delete video from library.
           
-   /list_video_segments:          
+  /list_video_segments:          
     post:
       tags:
       - Administrator
@@ -95,7 +95,7 @@ paths:
         400:
           description: Failed to fetch video segment list from library.
                     
-   /search_video_segments:          
+  /search_video_segments:          
     post:
       tags:
       - Administrator
@@ -118,6 +118,102 @@ paths:
           description: Successfully searched all video segments in library.
         400:
           description: Failed to search video segment library.
+          
+  /create_playlist: 
+    post:
+      tags:
+      - Participant
+      summary: Create a playlist with video segments in the library
+      description: Requests the addition of a playlist to the library
+      operationId: requestPlaylistCreate
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: CreateRequest
+        description: Creates a playlist
+        required: false
+        schema:
+          $ref: '#/definitions/CreatePlaylist'
+      responses:
+        200:
+          description: Successfully created playlist in the library.
+        400:
+          description: Playlist already exists under this name.        
+          
+  /delete_playlist: 
+    post:
+      tags:
+      - Participant
+      summary: Delete a playlist with video segments in the library
+      description: Requests the deletion of a playlist in the library
+      operationId: requestPlaylistDelete
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: DeleteRequest
+        description: Deletes a playlist
+        required: false
+        schema:
+          $ref: '#/definitions/DeletePlaylist'
+      responses:
+        200:
+          description: Successfully deleted playlist in the library.
+        400:
+          description: No playlist found.        
+          
+  /list_playlists: 
+    post:
+      tags:
+      - Participant
+      summary: List all playlists in the library
+      description: Requests a list of the playlists in the library
+      operationId: requestPlaylistList
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: ListPlaylistRequest
+        description: List all playlists
+        required: false
+        schema:
+          $ref: '#/definitions/ListPlaylists'
+      responses:
+        200:
+          description: Successfully listed all playlists in the library.
+        400:
+          description: No playlists found.        
+
+  /play_playlist: 
+    post:
+      tags:
+      - Participant
+      summary: Plays the video segments in a certain playlist
+      description: Requests a a playlist in the library
+      operationId: requestPlaylistPlay
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: ListPlaylistRequest
+        description: Plays all video segments in playlist
+        required: false
+        schema:
+          $ref: '#/definitions/PlayPlaylist'
+      responses:
+        200:
+          description: Successfully played playlist
+        400:
+          description: No playlist found with that name.
           
 #############
 definitions:
@@ -144,3 +240,35 @@ definitions:
     properties:
        keyword:
           type: string
+          
+  CreatePlaylist:
+    type: object
+    required:
+    - playlist_to_create
+    properties:
+      arg1:
+        type: string
+        
+  DeletePlaylist:
+    type: object
+    required:
+    - playlist_to_delete
+    properties:
+      arg1:
+        type: string
+  
+  ListPlaylists:
+    type: object
+    required:
+    - playlists_to_list
+    properties:
+      arg1:
+        type: string
+    
+  PlayPlaylist:
+    type: object
+    required:
+    - playlist_to_play
+    properties:
+      arg1:
+        type: string
