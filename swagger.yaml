@@ -24,11 +24,11 @@ schemes:
 
 ##########
 paths:
-# admin use cases
   /upload_video:
     post:
       tags:
       - Administrator
+      - Participant
       summary: Upload a video to remote library
       description: Requests the upload of a video by an admin.
       operationId: requestVideoUpload
@@ -53,6 +53,7 @@ paths:
     post:
       tags:
       - Administrator
+      - Participant
       summary: Delete a video from remote library
       description: Requests the deletion of a video by an admin.
       operationId: requestVideoDelete
@@ -74,9 +75,10 @@ paths:
           description: Failed to delete video from library.
           
   /list_video_segments:          
-    post:
+    get:
       tags:
       - Administrator
+      - Participant
       summary: Returns a list of all video segments in the library.
       description: Requests a list of all video segments by an admin.
       operationId: requestVideoList
@@ -101,6 +103,7 @@ paths:
     post:
       tags:
       - Administrator
+      - Participant
       summary: Returns a list of all video segments in the library matching key word.
       description: Requests a list of all video segments matching title key word criteria by an admin.
       operationId: requestVideoSearch
@@ -120,11 +123,11 @@ paths:
           description: Successfully searched all video segments in library.
         400:
           description: Failed to search video segment library.
-   
-# participant use cases 
+          
   /create_playlist: 
     post:
       tags:
+      - Administrator
       - Participant
       summary: Create a playlist with video segments in the library
       description: Requests the addition of a playlist to the library
@@ -149,6 +152,7 @@ paths:
   /delete_playlist: 
     post:
       tags:
+      - Administrator
       - Participant
       summary: Delete a playlist with video segments in the library
       description: Requests the deletion of a playlist in the library
@@ -171,8 +175,9 @@ paths:
           description: No playlist found.        
           
   /list_playlists: 
-    post:
+    get:
       tags:
+      - Administrator
       - Participant
       summary: List all playlists in the library
       description: Requests a list of the playlists in the library
@@ -197,6 +202,7 @@ paths:
   /play_playlist: 
     post:
       tags:
+      - Administrator
       - Participant
       summary: Plays the video segments in a certain playlist
       description: Requests a a playlist in the library
@@ -220,7 +226,6 @@ paths:
           
 #############
 definitions:
-# admin use cases
   DeleteVideo:
     type: object
     properties:
@@ -236,7 +241,8 @@ definitions:
          type: string      
          
   ListVideoSegments:
-    type: object
+    type: string
+      
              
   SearchVideoSegments:
     type: object
