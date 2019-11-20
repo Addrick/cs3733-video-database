@@ -1,4 +1,5 @@
 ---
+# check the definitions for listing segments and playlists
 swagger: "2.0"
 info:
   description: AWS API implementation for a web-based video library
@@ -244,31 +245,26 @@ definitions:
   CreatePlaylist:
     type: object
     required:
-    - playlist_to_create
+    - title
     properties:
-      arg1:
+      title:
         type: string
         
   DeletePlaylist:
     type: object
     required:
-    - playlist_to_delete
+    - title
     properties:
-      arg1:
+      title:
         type: string
   
   ListPlaylists:
-    type: object
-    required:
-    - playlists_to_list
-    properties:
-      arg1:
-        type: string
+    type: string
     
   PlayPlaylist:
     type: object
     required:
-    - playlist_to_play
+    - title
     properties:
-      arg1:
+      title:
         type: string
