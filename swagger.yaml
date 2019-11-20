@@ -23,6 +23,7 @@ schemes:
 
 ##########
 paths:
+# admin use cases
   /upload_video:
     post:
       tags:
@@ -118,9 +119,11 @@ paths:
           description: Successfully searched all video segments in library.
         400:
           description: Failed to search video segment library.
+   
           
 #############
 definitions:
+# admin use cases
   DeleteVideo:
     type: object
     properties:
@@ -136,8 +139,7 @@ definitions:
          type: string      
          
   ListVideoSegments:
-    type: string
-      
+    type: object
              
   SearchVideoSegments:
     type: object
