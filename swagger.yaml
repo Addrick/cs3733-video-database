@@ -232,8 +232,8 @@ definitions:
          type: string      
          
   ListVideoSegments:
-    type: object
-    properties:
+    type: string
+      
              
   SearchVideoSegments:
     type: object
