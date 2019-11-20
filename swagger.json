@@ -22,6 +22,31 @@
     "description" : "allowed to access videos, playlists, and has ability to create and manage playlists (upload videos?)"
   } ],
   "paths" : {
+    "/upload_video" : {
+      "post" : {
+        "tags" : [ "Administrator" ],
+        "summary" : "Uploads a video to the remote library",
+        "description" : "Requests a new video upload by an admin.",
+        "operationId" : "requestVideoUpload",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "UploadRequest",
+          "description" : "Uploads a video",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UploadVideo"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully uploaded video to the library."
+          },
+          "400" : {
+            "description" : "Failed to upload video from the library."
+          }
+        }}}
     "/delete_video" : {
       "post" : {
         "tags" : [ "Administrator" ],
@@ -47,11 +72,18 @@
             "description" : "Failed to delete video from library."
           }
         }
-      }
-    }
   },
   "definitions" : {
     "DeleteVideo" : {
+      "type" : "object",
+      "required" : [ "video_to_delete" ],
+      "properties" : {
+        "arg1" : {
+          "type" : "string"
+        }
+      }
+    }   
+    "UploadVideo" : {
       "type" : "object",
       "required" : [ "video_to_delete" ],
       "properties" : {
