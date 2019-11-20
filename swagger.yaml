@@ -1,0 +1,146 @@
+---
+swagger: "2.0"
+info:
+  description: AWS API implementation for a web-based video library
+  version: 1.0.0
+  title: Quietly Confident AWS API
+  contact:
+    email: asantos@wpi.edu
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: virtserver.swaggerhub.com
+basePath: /Quietly-Confident/AWS-api/1.0.0
+tags:
+- name: Administrator
+  description: Privledged user responsible for maintaining video database
+- name: user
+  description: allowed to access videos, playlists, and has ability to create and manage playlists (upload videos?)
+schemes:
+- https
+- http
+
+
+##########
+paths:
+  /upload_video:
+    post:
+      tags:
+      - Administrator
+      summary: Upload a video to remote library
+      description: Requests the upload of a video by an admin.
+      operationId: requestVideoUpload
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: UploadRequest
+        description: Uploads a video
+        required: false
+        schema:
+          $ref: '#/definitions/UploadVideo'
+      responses:
+        200:
+          description: Successfully uploaded video from library.
+        400:
+          description: Failed to upload video to library.
+          
+  /delete_video:
+    post:
+      tags:
+      - Administrator
+      summary: Delete a video from remote library
+      description: Requests the deletion of a video by an admin.
+      operationId: requestVideoDelete
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: DeleteRequest
+        description: Deletes a video
+        required: false
+        schema:
+          $ref: '#/definitions/DeleteVideo'
+      responses:
+        200:
+          description: Successfully deleted video from library.
+        400:
+          description: Failed to delete video from library.
+          
+   /list_video_segments:          
+    post:
+      tags:
+      - Administrator
+      summary: Returns a list of all video segments in the library.
+      description: Requests a list of all video segments by an admin.
+      operationId: requestVideoList
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: VideoListRequest
+        description: Lists all video segements in library
+        required: false
+        schema:
+          $ref: '#/definitions/ListVideoSegments'
+      responses:
+        200:
+          description: Successfully listed all video segments in library.
+        400:
+          description: Failed to fetch video segment list from library.
+                    
+   /search_video_segments:          
+    post:
+      tags:
+      - Administrator
+      summary: Returns a list of all video segments in the library matching key word.
+      description: Requests a list of all video segments matching title key word criteria by an admin.
+      operationId: requestVideoSearch
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: VideoSearchRequest
+        description: Searches by key word and lists all video segements in library that match
+        required: false
+        schema:
+          $ref: '#/definitions/SearchVideoSegments'
+      responses:
+        200:
+          description: Successfully searched all video segments in library.
+        400:
+          description: Failed to search video segment library.
+          
+#############
+definitions:
+  DeleteVideo:
+    type: object
+    properties:
+      title:
+        type: string
+        
+  UploadVideo:
+    type: object
+    properties:
+      filepath:
+        type: string 
+      title:
+         type: string      
+         
+  ListVideoSegments:
+    type: object
+    properties:
+             
+  SearchVideoSegments:
+    type: object
+    properties:
+       keyword:
+          type: string
