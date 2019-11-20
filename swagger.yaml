@@ -71,7 +71,7 @@ paths:
         400:
           description: Failed to delete video from library.
           
-   /list_video_segments:          
+  /list_video_segments:          
     post:
       tags:
       - Administrator
@@ -95,7 +95,7 @@ paths:
         400:
           description: Failed to fetch video segment list from library.
                     
-   /search_video_segments:          
+  /search_video_segments:          
     post:
       tags:
       - Administrator
@@ -136,8 +136,8 @@ definitions:
          type: string      
          
   ListVideoSegments:
-    type: object
-    properties:
+    type: string
+      
              
   SearchVideoSegments:
     type: object
