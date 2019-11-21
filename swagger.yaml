@@ -84,13 +84,7 @@ paths:
       operationId: requestVideoList
       produces:
       - application/json
-      parameters:
-      - in: body
-        name: VideoListRequest
-        description: Lists all video segements in library
-        required: false
-        schema:
-          $ref: '#/definitions/ListVideoSegments'
+      parameters: []
       responses:
         200:
           description: Successfully listed all video segments in library.
@@ -182,13 +176,7 @@ paths:
       operationId: requestPlaylistList
       produces:
       - application/json
-      parameters:
-      - in: body
-        name: ListPlaylistRequest
-        description: List all playlists
-        required: false
-        schema:
-          $ref: '#/definitions/ListPlaylists'
+      parameters: []      
       responses:
         200:
           description: Successfully listed all playlists in the library.
@@ -333,13 +321,7 @@ paths:
       operationId: requestRemoteRegister
       produces:
       - application/json
-      parameters:
-      - in: body
-        name: RegisterRequest
-        description: Registers a remote site
-        required: false
-        schema:
-          $ref: '#/definitions/RegisterRemote'
+      parameters: []
       responses:
         200:
           description: Successfully listed all remote sites.
@@ -387,10 +369,7 @@ definitions:
     properties:
       title:
         type: string
-  
-  ListPlaylists:
-    type: string
-    
+   
   PlayPlaylist:
     type: object
     required:
@@ -430,7 +409,4 @@ definitions:
     properties:
       title:
         type: string
-  
-  ListRemote:
-    type: string
-    
+ 
