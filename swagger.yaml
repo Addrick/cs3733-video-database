@@ -224,6 +224,134 @@ paths:
         400:
           description: No playlist found with that name.
           
+  /mark_video:
+    post:
+      tags:
+      - Administrator
+      summary: Marks a local video as not available remotely
+      description: Makes a video segment private so only the local user sees it
+      operationId: requestVideoPrivatize
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: MarkRequest
+        description: Marks a video
+        required: false
+        schema:
+          $ref: '#/definitions/MarkVideo'
+      responses:
+        200:
+          description: Successfully made video segment private.
+        400:
+          description: Cannot privatize video segment because it is not local.
+        404:
+          description: Video segment does not exist.
+          
+  /unmark_video:
+    post:
+      tags:
+      - Administrator
+      summary: Marks a local video as available remotely
+      description: Makes a video segment public so remote viewers can access it
+      operationId: requestVideoPublicize
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: UnmarkRequest
+        description: Unmarks a video
+        required: false
+        schema:
+          $ref: '#/definitions/UnmarkVideo'
+      responses:
+        200:
+          description: Successfully made video segment public.
+        400:
+          description: Could not make video available remotely.
+        404:
+          description: Video segment does not exist.
+          
+  /register_remote:
+    post:
+      tags:
+      - Administrator
+      summary: Registers a remote site
+      description: Makes a remote site available for users to take video segments from
+      operationId: requestRemoteRegister
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: RegisterRequest
+        description: Registers a remote site
+        required: false
+        schema:
+          $ref: '#/definitions/RegisterRemote'
+      responses:
+        200:
+          description: Successfully registered remote site.
+        400:
+          description: Remote site is already registered.
+        404:
+          description: Remote site does not exist or could not be accessed.
+          
+  /unregister_remote:
+    post:
+      tags:
+      - Administrator
+      summary: Unregisters a remote site
+      description: Makes a remote site unavailable for users to take video segments from
+      operationId: requestRemoteUnregister
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: UnregisterRequest
+        description: Unregisters a remote site
+        required: false
+        schema:
+          $ref: '#/definitions/UnregisterRemote'
+      responses:
+        200:
+          description: Successfully unregistered remote site.
+        400:
+          description: Remote site is already unregistered.
+        404:
+          description: Remote site does not exist or could not be accessed.
+          
+  /list_remote:
+    post:
+      tags:
+      - Administrator
+      summary: Lists all registered remote sites
+      description: Requests a list of remote sites available for users to take video segments from
+      operationId: requestRemoteRegister
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: RegisterRequest
+        description: Registers a remote site
+        required: false
+        schema:
+          $ref: '#/definitions/RegisterRemote'
+      responses:
+        200:
+          description: Successfully listed all remote sites.
+        400:
+          description: No remote sites are available to list.
+          
 #############
 definitions:
   DeleteVideo:
@@ -270,6 +398,46 @@ definitions:
     type: string
     
   PlayPlaylist:
+    type: object
+    required:
+    - title
+    properties:
+      title:
+        type: string
+  
+  MarkVideo:
+    type: object
+    required:
+    - title
+    properties:
+      title:
+        type: string
+  
+  UnmarkVideo:
+    type: object
+    required:
+    - title
+    properties:
+      title:
+        type: string
+  
+  RegisterRemote:
+    type: object
+    required:
+    - title
+    properties:
+      title:
+        type: string
+  
+  UnregisterRemote:
+    type: object
+    required:
+    - title
+    properties:
+      title:
+        type: string
+  
+  ListRemote:
     type: object
     required:
     - title
