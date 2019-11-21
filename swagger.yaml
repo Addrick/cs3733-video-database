@@ -282,9 +282,12 @@ paths:
         200:
           description: Successfully registered remote site.
         400:
-          description: Remote site is already registered.
+          description: Invalid request to add remote library.
         404:
           description: Remote site does not exist or could not be accessed.
+        409:
+          description: Remote site is already registered.
+          
           
   /unregister_remote:
     post:
