@@ -86,13 +86,7 @@ paths:
       operationId: requestVideoList
       produces:
       - application/json
-      parameters:
-      - in: body
-        name: VideoListRequest
-        description: Lists all video segements in library
-        required: false
-        schema:
-          $ref: '#/definitions/ListVideoSegments'
+      parameters: []
       responses:
         200:
           description: Successfully listed all video segments in library.
@@ -186,13 +180,7 @@ paths:
       operationId: requestPlaylistList
       produces:
       - application/json
-      parameters:
-      - in: body
-        name: ListPlaylistRequest
-        description: List all playlists
-        required: false
-        schema:
-          $ref: '#/definitions/ListPlaylists'
+      parameters: []      
       responses:
         200:
           description: Successfully listed all playlists in the library.
@@ -302,9 +290,12 @@ paths:
         200:
           description: Successfully registered remote site.
         400:
-          description: Remote site is already registered.
+          description: Invalid request to add remote library.
         404:
           description: Remote site does not exist or could not be accessed.
+        409:
+          description: Remote site is already registered.
+          
           
   /unregister_remote:
     post:
@@ -341,13 +332,7 @@ paths:
       operationId: requestRemoteRegister
       produces:
       - application/json
-      parameters:
-      - in: body
-        name: RegisterRequest
-        description: Registers a remote site
-        required: false
-        schema:
-          $ref: '#/definitions/RegisterRemote'
+      parameters: []
       responses:
         200:
           description: Successfully listed all remote sites.
@@ -369,11 +354,7 @@ definitions:
         type: string 
       title:
          type: string      
-         
-  ListVideoSegments:
-    type: string
-      
-             
+           
   SearchVideoSegments:
     type: object
     properties:
@@ -395,10 +376,7 @@ definitions:
     properties:
       title:
         type: string
-  
-  ListPlaylists:
-    type: string
-    
+   
   PlayPlaylist:
     type: object
     required:
@@ -438,7 +416,4 @@ definitions:
     properties:
       title:
         type: string
-  
-  ListRemote:
-    type: string
-    
+ 
