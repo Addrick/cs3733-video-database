@@ -343,11 +343,7 @@ definitions:
         type: string 
       title:
          type: string      
-         
-  ListVideoSegments:
-    type: string
-      
-             
+           
   SearchVideoSegments:
     type: object
     properties:
