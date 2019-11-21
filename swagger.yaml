@@ -48,6 +48,8 @@ paths:
           description: Successfully uploaded video from library.
         400:
           description: Failed to upload video to library.
+        409:
+          description: valid input but duplicate video
           
   /delete_video:
     post:
@@ -145,7 +147,9 @@ paths:
         200:
           description: Successfully created playlist in the library.
         400:
-          description: Playlist already exists under this name.        
+          description: Playlist already exists under this name.  
+        409:
+          description: valid input but duplicate playlist      
           
   /delete_playlist: 
     post:
@@ -245,6 +249,8 @@ paths:
           description: Cannot privatize video segment because it is not local.
         404:
           description: Video segment does not exist.
+        409:
+          description: valid input but video already marked
           
   /unmark_video:
     post:
@@ -271,6 +277,8 @@ paths:
           description: Could not make video available remotely.
         404:
           description: Video segment does not exist.
+        409:
+          description: valid input but video already unmarked
           
   /register_remote:
     post:
