@@ -230,7 +230,7 @@ paths:
           description: Appends a video segment
           required: false
           schema:
-            $ref: '#/definitions/ApendVideoSegment'
+            $ref: '#/definitions/AppendVideoSegment'
       responses:
         200:
           description: Successfully appended the video segment to the playlist
