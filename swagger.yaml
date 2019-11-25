@@ -185,7 +185,57 @@ paths:
         200:
           description: Successfully listed all playlists in the library.
         400:
-          description: No playlists found.        
+          description: No playlists found.  
+
+   /removeVideoSegment:
+    post:
+      tags:
+        - Administrator
+        - Participant
+      summary: Remove a video segment from the playlist
+      description: requests the removal of the video segment by an admin
+      operationId: requestVSRemoval
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: RemoveVideoSegmentRequest
+          description: Removes a video segment
+          required: false
+          schema:
+            $ref: '#/definitions/RemoveVideoSegment'
+      responses:
+        200:
+          description: Successfully removed the video segment from the playlist
+        400:
+          description: Failed to removed the video segment from the playlist  
+
+  /append_video_segment:
+    post:
+      tags:
+        - Administrator
+        - Participant
+      summary: Append a video segment to the playlist
+      description: requests the appending of the video segment by an admin
+      operationId: requestVSAppend
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: requestVSAppend
+          description: Appends a video segment
+          required: false
+          schema:
+            $ref: '#/definitions/ApendVideoSegment'
+      responses:
+        200:
+          description: Successfully appended the video segment to the playlist
+        400:
+          description: Failed to append the video segment to the playlist    
 
   /play_playlist: 
     post:
@@ -378,6 +428,22 @@ definitions:
         type: string
    
   PlayPlaylist:
+    type: object
+    required:
+    - title
+    properties:
+      title:
+        type: string
+
+  RemoveVideoSegment:
+    type: object
+    required:
+    - title
+    properties:
+      title:
+        type: string
+
+  AppendVideoSegment:
     type: object
     required:
     - title
