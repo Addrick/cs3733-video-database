@@ -86,7 +86,6 @@ paths:
       operationId: requestVideoList
       produces:
       - application/json
-      parameters: []
       responses:
         200:
           description: Successfully listed all video segments in library.
@@ -180,7 +179,6 @@ paths:
       operationId: requestPlaylistList
       produces:
       - application/json
-      parameters: []      
       responses:
         200:
           description: Successfully listed all playlists in the library.
@@ -377,17 +375,33 @@ paths:
     get:
       tags:
       - Administrator
+      - Participant
       summary: Lists all registered remote sites
       description: Requests a list of remote sites available for users to take video segments from
       operationId: requestRemoteRegister
       produces:
       - application/json
-      parameters: []
       responses:
         200:
           description: Successfully listed all remote sites.
         400:
           description: No remote sites are available to list.
+          
+  /list_public:
+    get:
+      tags:
+      - Administrator
+      - Participant
+      summary: Lists all publicly available video segments
+      description: Requests a list of all unmarked video segments available to a participant
+      operationId: requestPublicList
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Successfully listed all public video segments.
+        409:
+          description: Unable to find public video segments.
           
 #############
 definitions:
