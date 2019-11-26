@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `Video and Playlist DB`.`remote libraries` (
   PRIMARY KEY (`url`))
 ENGINE = InnoDB
 
-Public URL to an OGG Video Segment in our S3 bucket: https://3733quietlyconfident.s3.us-east-2.amazonaws.com/constants/1makeyourself.Ogg
+Public URL to an OGG Video Segment in our S3 bucket: https://3733quietlyconfident.s3.us-east-2.amazonaws.com/videosegments/1makeyourself.Ogg
 
 LANDING PAGE URLS:
 Participant landing page: https://3733quietlyconfident.s3.us-east-2.amazonaws.com/presentation/participant.html
