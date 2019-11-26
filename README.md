@@ -33,3 +33,9 @@ CREATE TABLE IF NOT EXISTS `Video and Playlist DB`.`remote libraries` (
   `url` VARCHAR(256) NOT NULL COMMENT 'URL storage for remote libraries.',
   PRIMARY KEY (`url`))
 ENGINE = InnoDB
+
+
+LANDING PAGE URLS:
+Participant landing page: https://3733quietlyconfident.s3.us-east-2.amazonaws.com/presentation/participant.html
+
+Administrator landing page: https://3733quietlyconfident.s3.us-east-2.amazonaws.com/presentation/administrator.html
