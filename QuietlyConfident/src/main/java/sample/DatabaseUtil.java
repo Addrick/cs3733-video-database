@@ -24,7 +24,7 @@ public class DatabaseUtil {
 	public final static String rdsMySqlDatabasePort = "3306";
 	public final static String multiQueries = "?allowMultiQueries=true";
 	   
-	public final static String dbName = "innodb";         // default created from MySQL WorkBench
+	public final static String dbName = "Video and Playlist DB";         // default created from MySQL WorkBench
 	public final static String testingName = "tmp";       // used for testing (also default created)
 	
 	// pooled across all usages.
