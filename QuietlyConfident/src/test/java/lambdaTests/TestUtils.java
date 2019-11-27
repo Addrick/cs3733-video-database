@@ -1,4 +1,4 @@
-package com.amazonaws.lambda.demo;
+package lambdaTests;
 
 import java.io.IOException;
 import java.io.InputStream;

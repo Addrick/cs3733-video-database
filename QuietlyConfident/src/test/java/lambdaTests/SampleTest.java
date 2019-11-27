@@ -1,11 +1,12 @@
-package com.amazonaws.lambda.demo;
+package lambdaTests;
 
 import org.junit.Test;
+
+import db.DatabaseUtil;
 
 import java.sql.Connection;
 
 import junit.framework.TestCase;
-import sample.DatabaseUtil;
 
 public class SampleTest extends TestCase {
 	
