@@ -22,7 +22,7 @@ import model.Playlist;
 /**
  * Eliminated need to work with JSON
  */
-public class ListAllPlaylistsHandler implements RequestHandler<Object,AllPlaylistsResponse> {
+public class CreatePlaylistHandler implements RequestHandler<Object,AllPlaylistsResponse> {
 
 	public LambdaLogger logger;
 

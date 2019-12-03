@@ -1,18 +1,16 @@
 package model;
 
-public class Playlist {
+public class VideoSegment {
 	
 	public final String id_playlist;
 	public final int order_playlist;
 	public boolean system;      // when TRUE this is actually stored in S3 bucket
 	
-	public Playlist (String id_playlist, int order_playlist) {
-		this.id_playlist = id_playlist;
-		this.order_playlist = order_playlist;
-		System.out.println(id_playlist);
+	public VideoSegment (String name, String url, String chars, String transcript) {
+		
 	}
 	
-	public Playlist (String id_playlist, double order_playlist, boolean system) {
+	public VideoSegment (String id_playlist, double order_playlist, boolean system) {
 		this.id_playlist = id_playlist;
 		this.order_playlist = (int)order_playlist; 
 		this.system = system;
@@ -27,8 +25,8 @@ public class Playlist {
 	public boolean equals (Object o) {
 		if (o == null) { System.out.println("got null"); return false; }
 		
-		if (o instanceof Playlist) {
-			Playlist other = (Playlist) o;
+		if (o instanceof VideoSegment) {
+			VideoSegment other = (VideoSegment) o;
 			System.out.println(id_playlist);
 			return id_playlist.equals(other.id_playlist);
 		}

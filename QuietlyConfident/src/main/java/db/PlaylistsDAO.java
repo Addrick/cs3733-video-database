@@ -10,7 +10,7 @@ import model.Playlist;
  * Note that CAPITALIZATION matters regarding the table name. If you create with 
  * a capital "Playlists" then it must be "Playlists" in the SQL queries.
  * 
- * @author heineman
+ * @author Jon aka beast
  *
  */
 public class PlaylistsDAO { 
