@@ -2,15 +2,19 @@ package model;
 
 public class VideoSegment {
 	
-	public final String id_playlist;
-	public final int order_playlist;
+	public String id_playlist;
+	public int order_playlist;
 	public boolean system;      // when TRUE this is actually stored in S3 bucket
 	
 	public VideoSegment (String name, String url, String chars, String transcript) {
+		this.id_playlist = "";
+		this.order_playlist = 0;
 		
 	}
 	
-	public VideoSegment (String id_playlist, double order_playlist, boolean system) {
+	public VideoSegment (String id_playlist, int order_playlist, boolean system) {
+		this.id_playlist = "";
+		this.order_playlist = 0;
 		this.id_playlist = id_playlist;
 		this.order_playlist = (int)order_playlist; 
 		this.system = system;
