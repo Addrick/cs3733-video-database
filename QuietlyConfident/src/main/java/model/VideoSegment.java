@@ -2,21 +2,23 @@ package model;
 
 public class VideoSegment {
 	
-	public String id_playlist;
-	public int order_playlist;
+	public String id_video;
+	public String characters;
+	public String transcript;
+	public String url_video;
 	public boolean system;      // when TRUE this is actually stored in S3 bucket
 	
-	public VideoSegment (String name, String url, String chars, String transcript) {
-		this.id_playlist = "";
-		this.order_playlist = 0;
-		
-	}
+//	public VideoSegment (String name, String url, String chars, String transcript) {
+//		this.id_playlist = "";
+//		this.order_playlist = 0;
+//		
+//	}
 	
-	public VideoSegment (String id_playlist, int order_playlist, boolean system) {
-		this.id_playlist = "";
-		this.order_playlist = 0;
-		this.id_playlist = id_playlist;
-		this.order_playlist = (int)order_playlist; 
+	public VideoSegment (String id_video, String characters, String transcript, String url_video, boolean system) {
+		this.id_video = id_video;
+		this.characters = characters;
+		this.transcript = transcript;
+		this.url_video = url_video; 
 		this.system = system;
 	}
 	
@@ -24,15 +26,15 @@ public class VideoSegment {
 	public void setSystem(boolean s) { system = s; }
 	
 	/**
-	 * Equality of Constants determined by id_playlist alone.
+	 * no idea what this does
 	 */
 	public boolean equals (Object o) {
 		if (o == null) { System.out.println("got null"); return false; }
 		
 		if (o instanceof VideoSegment) {
 			VideoSegment other = (VideoSegment) o;
-			System.out.println(id_playlist);
-			return id_playlist.equals(other.id_playlist);
+			System.out.println(id_video);
+			return id_video.equals(other.id_video);
 		}
 		
 		return false;  // not a Constant

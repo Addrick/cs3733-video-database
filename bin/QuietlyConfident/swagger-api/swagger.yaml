@@ -1,0 +1,499 @@
+---
+# check the definitions for listing segments and playlists
+swagger: "2.0"
+info:
+  description: AWS API implementation for a web-based video library
+  version: 1.0.0
+  title: Quietly Confident AWS API
+  contact:
+    email: asantos@wpi.edu
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: virtserver.swaggerhub.com
+basePath: /Quietly-Confident/AWS-api/1.0.0
+tags:
+- name: Administrator
+  description: Privledged user responsible for maintaining video database
+- name: Participant
+  description: allowed to access videos, playlists, and has ability to create and manage playlists (upload videos?)
+schemes:
+- https
+- http
+
+
+##########
+paths:
+  /upload_video:
+    post:
+      tags:
+      - Administrator
+      - Participant
+      summary: Upload a video to remote library
+      description: Requests the upload of a video by an admin.
+      operationId: requestVideoUpload
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: UploadRequest
+        description: Uploads a video
+        required: false
+        schema:
+          $ref: '#/definitions/UploadVideo'
+      responses:
+        200:
+          description: Successfully uploaded video from library.
+        400:
+          description: Failed to upload video to library.
+        409:
+          description: valid input but duplicate video
+          
+  /delete_video:
+    post:
+      tags:
+      - Administrator
+      - Participant
+      summary: Delete a video from remote library
+      description: Requests the deletion of a video by an admin.
+      operationId: requestVideoDelete
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: DeleteRequest
+        description: Deletes a video
+        required: false
+        schema:
+          $ref: '#/definitions/DeleteVideo'
+      responses:
+        200:
+          description: Successfully deleted video from library.
+        400:
+          description: Failed to delete video from library.
+          
+  /list_video_segments:          
+    get:
+      tags:
+      - Administrator
+      - Participant
+      summary: Returns a list of all video segments in the library.
+      description: Requests a list of all video segments by an admin.
+      operationId: requestVideoList
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Successfully listed all video segments in library.
+        400:
+          description: Failed to fetch video segment list from library.
+                    
+  /search_video_segments:          
+    post:
+      tags:
+      - Administrator
+      - Participant
+      summary: Returns a list of all video segments in the library matching key word.
+      description: Requests a list of all video segments matching title key word criteria by an admin.
+      operationId: requestVideoSearch
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: VideoSearchRequest
+        description: Searches by key word and lists all video segements in library that match
+        required: false
+        schema:
+          $ref: '#/definitions/SearchVideoSegments'
+      responses:
+        200:
+          description: Successfully searched all video segments in library.
+        400:
+          description: Failed to search video segment library.
+          
+  /create_playlist: 
+    post:
+      tags:
+      - Administrator
+      - Participant
+      summary: Create a playlist with video segments in the library
+      description: Requests the addition of a playlist to the library
+      operationId: requestPlaylistCreate
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: CreateRequest
+        description: Creates a playlist
+        required: false
+        schema:
+          $ref: '#/definitions/CreatePlaylist'
+      responses:
+        200:
+          description: Successfully created playlist in the library.
+        400:
+          description: Playlist already exists under this name.  
+        409:
+          description: valid input but duplicate playlist      
+          
+  /delete_playlist: 
+    post:
+      tags:
+      - Administrator
+      - Participant
+      summary: Delete a playlist with video segments in the library
+      description: Requests the deletion of a playlist in the library
+      operationId: requestPlaylistDelete
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: DeleteRequest
+        description: Deletes a playlist
+        required: false
+        schema:
+          $ref: '#/definitions/DeletePlaylist'
+      responses:
+        200:
+          description: Successfully deleted playlist in the library.
+        400:
+          description: No playlist found.        
+          
+  /list_playlists: 
+    get:
+      tags:
+      - Administrator
+      - Participant
+      summary: List all playlists in the library
+      description: Requests a list of the playlists in the library
+      operationId: requestPlaylistList
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Successfully listed all playlists in the library.
+        400:
+          description: No playlists found.  
+
+  /removeVideoSegment:
+    post:
+      tags:
+        - Administrator
+        - Participant
+      summary: Remove a video segment from the playlist
+      description: requests the removal of the video segment by an admin
+      operationId: requestVSRemoval
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: RemoveVideoSegmentRequest
+          description: Removes a video segment
+          required: false
+          schema:
+            $ref: '#/definitions/RemoveVideoSegment'
+      responses:
+        200:
+          description: Successfully removed the video segment from the playlist
+        400:
+          description: Failed to removed the video segment from the playlist  
+
+  /append_video_segment:
+    post:
+      tags:
+        - Administrator
+        - Participant
+      summary: Append a video segment to the playlist
+      description: requests the appending of the video segment by an admin
+      operationId: requestVSAppend
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: requestVSAppend
+          description: Appends a video segment
+          required: false
+          schema:
+            $ref: '#/definitions/AppendVideoSegment'
+      responses:
+        200:
+          description: Successfully appended the video segment to the playlist
+        400:
+          description: Failed to append the video segment to the playlist    
+
+  /play_playlist: 
+    post:
+      tags:
+      - Administrator
+      - Participant
+      summary: Plays the video segments in a certain playlist
+      description: Requests a a playlist in the library
+      operationId: requestPlaylistPlay
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: ListPlaylistRequest
+        description: Plays all video segments in playlist
+        required: false
+        schema:
+          $ref: '#/definitions/PlayPlaylist'
+      responses:
+        200:
+          description: Successfully played playlist
+        400:
+          description: No playlist found with that name.
+          
+  /mark_video:
+    post:
+      tags:
+      - Administrator
+      summary: Marks a local video as not available remotely
+      description: Makes a video segment private so only the local user sees it
+      operationId: requestVideoPrivatize
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: MarkRequest
+        description: Marks a video
+        required: false
+        schema:
+          $ref: '#/definitions/MarkVideo'
+      responses:
+        200:
+          description: Successfully made video segment private.
+        400:
+          description: Cannot privatize video segment because it is not local.
+        404:
+          description: Video segment does not exist.
+        409:
+          description: valid input but video already marked
+          
+  /unmark_video:
+    post:
+      tags:
+      - Administrator
+      summary: Marks a local video as available remotely
+      description: Makes a video segment public so remote viewers can access it
+      operationId: requestVideoPublicize
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: UnmarkRequest
+        description: Unmarks a video
+        required: false
+        schema:
+          $ref: '#/definitions/UnmarkVideo'
+      responses:
+        200:
+          description: Successfully made video segment public.
+        400:
+          description: Could not make video available remotely.
+        404:
+          description: Video segment does not exist.
+        409:
+          description: valid input but video already unmarked
+          
+  /register_remote:
+    post:
+      tags:
+      - Administrator
+      summary: Registers a remote site
+      description: Makes a remote site available for users to take video segments from
+      operationId: requestRemoteRegister
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: RegisterRequest
+        description: Registers a remote site
+        required: false
+        schema:
+          $ref: '#/definitions/RegisterRemote'
+      responses:
+        200:
+          description: Successfully registered remote site.
+        400:
+          description: Invalid request to add remote library.
+        404:
+          description: Remote site does not exist or could not be accessed.
+        409:
+          description: Remote site is already registered.
+          
+          
+  /unregister_remote:
+    post:
+      tags:
+      - Administrator
+      summary: Unregisters a remote site
+      description: Makes a remote site unavailable for users to take video segments from
+      operationId: requestRemoteUnregister
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: UnregisterRequest
+        description: Unregisters a remote site
+        required: false
+        schema:
+          $ref: '#/definitions/UnregisterRemote'
+      responses:
+        200:
+          description: Successfully unregistered remote site.
+        400:
+          description: Remote site is already unregistered.
+        404:
+          description: Remote site does not exist or could not be accessed.
+          
+  /list_remote:
+    get:
+      tags:
+      - Administrator
+      - Participant
+      summary: Lists all registered remote sites
+      description: Requests a list of remote sites available for users to take video segments from
+      operationId: requestRemoteRegister
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Successfully listed all remote sites.
+        400:
+          description: No remote sites are available to list.
+          
+  /list_public:
+    get:
+      tags:
+      - Administrator
+      - Participant
+      summary: Lists all publicly available video segments
+      description: Requests a list of all unmarked video segments available to a participant
+      operationId: requestPublicList
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Successfully listed all public video segments.
+        409:
+          description: Unable to find public video segments.
+          
+#############
+definitions:
+  DeleteVideo:
+    type: object
+    properties:
+      title:
+        type: string
+        
+  UploadVideo:
+    type: object
+    properties:
+      filepath:
+        type: string 
+      title:
+         type: string      
+           
+  SearchVideoSegments:
+    type: object
+    properties:
+       keyword:
+          type: string
+          
+  CreatePlaylist:
+    type: object
+    required:
+    - title
+    properties:
+      title:
+        type: string
+        
+  DeletePlaylist:
+    type: object
+    required:
+    - title
+    properties:
+      title:
+        type: string
+   
+  PlayPlaylist:
+    type: object
+    required:
+    - title
+    properties:
+      title:
+        type: string
+
+  RemoveVideoSegment:
+    type: object
+    required:
+    - title
+    properties:
+      title:
+        type: string
+
+  AppendVideoSegment:
+    type: object
+    required:
+    - title
+    properties:
+      title:
+        type: string
+  
+  MarkVideo:
+    type: object
+    required:
+    - title
+    properties:
+      title:
+        type: string
+  
+  UnmarkVideo:
+    type: object
+    required:
+    - title
+    properties:
+      title:
+        type: string
+  
+  RegisterRemote:
+    type: object
+    required:
+    - title
+    properties:
+      title:
+        type: string
+  
+  UnregisterRemote:
+    type: object
+    required:
+    - title
+    properties:
+      title:
+        type: string
+ 
