@@ -21,6 +21,7 @@ import model.Playlist;
 
 /**
  * Eliminated need to work with JSON
+ * TODO: The systemPlaylists() class is likely unnecessary (and useless?) and can be removed
  */
 public class ListAllPlaylistsHandler implements RequestHandler<Object,AllPlaylistsResponse> {
 
