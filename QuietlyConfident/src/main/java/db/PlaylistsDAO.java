@@ -30,7 +30,7 @@ public class PlaylistsDAO {
         
         try {
             Playlist playlist = null;
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM playlists WHERE name=?;");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `Video and Playlist DB`.playlists WHERE name=?;");
             ps.setString(1,  name);
             ResultSet resultSet = ps.executeQuery();
             
@@ -65,7 +65,7 @@ public class PlaylistsDAO {
     
     public boolean deletePlaylist(Playlist playlist) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM playlists WHERE name = ?;");
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM `Video and Playlist DB`.playlists WHERE name = ?;");
             ps.setString(1, playlist.id_playlist);
             int numAffected = ps.executeUpdate();
             ps.close();
@@ -80,7 +80,7 @@ public class PlaylistsDAO {
 
     public boolean addPlaylist(Playlist playlist) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM playlists WHERE name = ?;");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `Video and Playlist DB`.playlists WHERE name = ?;");
             ps.setString(1, playlist.id_playlist);
             ResultSet resultSet = ps.executeQuery();
             
@@ -91,7 +91,7 @@ public class PlaylistsDAO {
                 return false;
             }
 
-            ps = conn.prepareStatement("INSERT INTO playlists (name,value) values(?,?);");
+            ps = conn.prepareStatement("INSERT INTO `Video and Playlist DB`.playlists (name,value) values(?,?);");
             ps.setString(1,  playlist.id_playlist);
             ps.setDouble(2,  playlist.order_playlist);
             ps.execute();
