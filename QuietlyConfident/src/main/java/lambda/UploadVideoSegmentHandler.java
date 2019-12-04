@@ -16,112 +16,120 @@ import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 import db.PlaylistsDAO;
+import db.VideoSegmentsDAO;
 import http.AllPlaylistsResponse;
+import http.UploadVideoSegmentRequest;
+import http.UploadVideoSegmentResponse;
 import model.Playlist;
+import model.VideoSegment;
+
+import java.io.ByteArrayInputStream;
+
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.PutObjectResult;
 
 /**
- * Eliminated need to work with JSON
+ * Create a new VideoSegment and store in S3 bucket.
+
+ * @author heineman
  */
-public class UploadVideoSegmentHandler implements RequestHandler<Object,AllPlaylistsResponse> {
+public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegmentRequest,UploadVideoSegmentResponse> {
 
-	public LambdaLogger logger;
-
+	LambdaLogger logger;
+	
+	// To access S3 storage
+	private AmazonS3 s3 = null;
+		
 	// Note: this works, but it would be better to move this to environment/configuration mechanisms
 	// which you don't have to do for this project.
-	public static final String REAL_BUCKET = "playlists";
-	public static final String TEST_BUCKET = "testplaylists";
-
-	/** Load from RDS, if it exists
-	 *  
+	public static final String REAL_BUCKET = "videosegments/";
+	public static final String TEST_BUCKET = "testvideosegments/";
+	
+	/** Store into RDS.
+	 * 
 	 * @throws Exception 
 	 */
-	List<Playlist> getPlaylists() throws Exception {
-		logger.log("in getPlaylists");
-		PlaylistsDAO dao = new PlaylistsDAO();
+	boolean UploadVideoSegment(String id_video, String characters, String transcript, String url_video, boolean system) throws Exception { 
+		if (logger != null) { logger.log("in UploadVideoSegment"); }
+		VideoSegmentsDAO dao = new VideoSegmentsDAO();
 		
-		return dao.getAllPlaylists();
+		// check if present
+		VideoSegment exist = dao.getVideoSegment(id_video);
+		VideoSegment VideoSegment = new VideoSegment (id_video, characters, transcript, url_video, system);
+		if (exist == null) {
+			return dao.addVideoSegment(VideoSegment);
+		} else {
+			return false;
+		}
 	}
 	
-	// I am leaving in this S3 code so it can be a LAST RESORT if the playlist is not in the database
-	private AmazonS3 s3 = null;
-	
-	/**
-	 * Retrieve all SYSTEM playlists. This code is surprisingly dangerous since there could
-	 * be an incredible number of objects in the bucket. Ignoring this for now.
+	/** Create S3 bucket
+	 * 
+	 * @throws Exception 
 	 */
-	List<Playlist> systemPlaylists() throws Exception {
-		logger.log("in systemPlaylists");
+	boolean createSystemVideoSegment(String name, byte[]  contents) throws Exception {
+		if (logger != null) { logger.log("in createSystemVideoSegment"); }
+		
 		if (s3 == null) {
 			logger.log("attach to S3 request");
-			s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_2).build();
+			s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1).build();
 			logger.log("attach to S3 succeed");
 		}
-		ArrayList<Playlist> sysPlaylists = new ArrayList<>();
-	    
+
 		String bucket = REAL_BUCKET;
 		boolean useTestDB = System.getenv("TESTING") != null;
 		if (useTestDB) {
 			bucket = TEST_BUCKET;
 		}
-		
-		// retrieve listing of all objects in the designated bucket
-		ListObjectsV2Request listObjectsRequest = new ListObjectsV2Request()
-				  .withBucketName("3733quietlyconfident")    // top-level bucket
-				  .withPrefix(bucket);            // sub-folder declarations here (i.e., a/b/c)
-												  
-		
-		// request the s3 objects in the s3 bucket 'cs3733wpi/playlists' -- change based on your bucket name
-		logger.log("process request");
-		ListObjectsV2Result result = s3.listObjectsV2(listObjectsRequest);
-		logger.log("process request succeeded");
-		List<S3ObjectSummary> objects = result.getObjectSummaries();
-		
-		for (S3ObjectSummary os: objects) {
-	      String name = os.getKey();
-		  logger.log("S3 found:" + name);
 
-	      // If name ends with slash it is the 'playlists/' bucket itself so you skip
-	      if (name.endsWith("/")) { continue; }
-			
-	      S3Object obj = s3.getObject("3733quietlyconfident", name);
-	    	
-	    	try (S3ObjectInputStream playlistStream = obj.getObjectContent()) {
-				Scanner sc = new Scanner(playlistStream);
-				String val = sc.nextLine();
-				sc.close();
-				
-				// just grab name *after* the slash. Note this is a SYSTEM playlist
-				int postSlash = name.indexOf('/');
-				sysPlaylists.add(new Playlist(name.substring(postSlash+1), Double.valueOf(val), true));
-			} catch (Exception e) {
-				logger.log("Unable to parse contents of " + name);
-			}
-	    }
+		ByteArrayInputStream bais = new ByteArrayInputStream(contents);
+		ObjectMetadata omd = new ObjectMetadata();
+		omd.setContentLength(contents.length);
 		
-		return sysPlaylists;
+		// makes the object publicly visible
+		PutObjectResult res = s3.putObject(new PutObjectRequest("QuietlyConfident", bucket + name, bais, omd)
+				.withCannedAcl(CannedAccessControlList.PublicRead));
+		
+		// if we ever get here, then whole thing was stored
+		return true;
 	}
 	
-	@Override
-	public AllPlaylistsResponse handleRequest(Object input, Context context)  {
+	@Override 
+	public UploadVideoSegmentResponse handleRequest(UploadVideoSegmentRequest req, Context context)  {
 		logger = context.getLogger();
-		logger.log("Loading Java Lambda handler to list all playlists");
+		logger.log(req.toString());
 
-		AllPlaylistsResponse response;
-		try {			System.out.println("here");
-
-			// get all user defined playlists AND system-defined playlists.
-			// Note that user defined playlists override system-defined playlists.
-			List<Playlist> list = getPlaylists();
-			for (Playlist c : systemPlaylists()) {
-				if (!list.contains(c)) {
-					list.add(c);
+		UploadVideoSegmentResponse response;
+		try {
+//			byte[] encoded = java.util.Base64.getDecoder().decode(req.base64EncodedValue);
+			if (req.system) {
+				if (UploadVideoSegment(req.id_video, req.characters, req.transcript, req.url_video, req.system)) {
+					response = new UploadVideoSegmentResponse(req.id_video);
+				} else {
+					response = new UploadVideoSegmentResponse(req.id_video, 422);
+				}
+			} else {
+//				String contents = new String(encoded);
+//				double value = Double.valueOf(contents);
+				
+				if (UploadVideoSegment(req.id_video, req.characters, req.transcript, req.url_video, req.system)) {
+					response = new UploadVideoSegmentResponse(req.id_video);
+				} else {
+					response = new UploadVideoSegmentResponse(req.id_video, 422);
 				}
 			}
-			response = new AllPlaylistsResponse(list, 200);
 		} catch (Exception e) {
-			response = new AllPlaylistsResponse(400, e.getMessage());
+			response = new UploadVideoSegmentResponse("Unable to create VideoSegment: " + req.id_video + "(" + e.getMessage() + ")", 400);
 		}
-		
+
 		return response;
 	}
 }
