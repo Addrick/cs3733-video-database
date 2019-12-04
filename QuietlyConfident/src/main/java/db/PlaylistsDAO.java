@@ -7,7 +7,7 @@ import java.util.List;
 import model.Playlist;
 
 /**
- * Note that CAPITALIZATION matters regarding the table name. If you create with 
+ * Note that CAPITALIZATION matters regarding the table id_playlist. If you create with 
  * a capital "Playlists" then it must be "Playlists" in the SQL queries.
  * 
  * @author Jon aka beast
@@ -26,12 +26,12 @@ public class PlaylistsDAO {
     	}
     }
 
-    public Playlist getPlaylist(String name) throws Exception {
+    public Playlist getPlaylist(String id_playlist) throws Exception {
         
         try {
             Playlist playlist = null;
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `Video and Playlist DB`.playlists WHERE name=?;");
-            ps.setString(1,  name);
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `Video and Playlist DB`.playlists WHERE id_playlist=?;");
+            ps.setString(1,  id_playlist);
             ResultSet resultSet = ps.executeQuery();
             
             while (resultSet.next()) {
@@ -50,7 +50,7 @@ public class PlaylistsDAO {
     
     public boolean updatePlaylist(Playlist playlist) throws Exception {
         try {
-        	String query = "UPDATE `Video and Playlist DB`.playlists SET value=? WHERE name=?;";
+        	String query = "UPDATE `Video and Playlist DB`.playlists SET order_playlist=? WHERE id_playlist=?;";
         	PreparedStatement ps = conn.prepareStatement(query);
             ps.setDouble(1, playlist.order_playlist);
             ps.setString(2, playlist.id_playlist);
@@ -65,7 +65,7 @@ public class PlaylistsDAO {
     
     public boolean deletePlaylist(Playlist playlist) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM `Video and Playlist DB`.playlists WHERE name = ?;");
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM `Video and Playlist DB`.playlists WHERE id_playlist = ?;");
             ps.setString(1, playlist.id_playlist);
             int numAffected = ps.executeUpdate();
             ps.close();
@@ -80,7 +80,7 @@ public class PlaylistsDAO {
 
     public boolean addPlaylist(Playlist playlist) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `Video and Playlist DB`.playlists WHERE name = ?;");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `Video and Playlist DB`.playlists WHERE id_playlist = ?;");
             ps.setString(1, playlist.id_playlist);
             ResultSet resultSet = ps.executeQuery();
             
@@ -91,7 +91,7 @@ public class PlaylistsDAO {
                 return false;
             }
 
-            ps = conn.prepareStatement("INSERT INTO `Video and Playlist DB`.playlists (name,value) values(?,?);");
+            ps = conn.prepareStatement("INSERT INTO `Video and Playlist DB`.playlists (id_playlist,order_playlist) values(?,?);");
             ps.setString(1,  playlist.id_playlist);
             ps.setDouble(2,  playlist.order_playlist);
             ps.execute();
@@ -128,11 +128,11 @@ public class PlaylistsDAO {
     
     private Playlist generatePlaylist(ResultSet resultSet) throws Exception {
     	System.out.println("got ruleset");
-        String name  = resultSet.getString("id_playlist");
+        String id_playlist  = resultSet.getString("id_playlist");
     	System.out.println("got id");
 
-        int value = (int)resultSet.getDouble("order_playlist");
-        return new Playlist (name, value);
+        int order_playlist = (int)resultSet.getDouble("order_playlist");
+        return new Playlist (id_playlist, order_playlist);
     }
 
 }

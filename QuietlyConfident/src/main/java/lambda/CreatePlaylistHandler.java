@@ -15,11 +15,6 @@ public class CreatePlaylistHandler implements RequestHandler<CreatePlaylistReque
 
 	public LambdaLogger logger;
 
-	// Note: this works, but it would be better to move this to environment/configuration mechanisms
-	// which you don't have to do for this project.
-	public static final String REAL_BUCKET = "playlists";
-	public static final String TEST_BUCKET = "testplaylists";
-
 	/** Load from RDS, if it exists
 	 *  
 	 * @throws Exception 
@@ -32,8 +27,12 @@ public class CreatePlaylistHandler implements RequestHandler<CreatePlaylistReque
 		Playlist exist = dao.getPlaylist(id_playlist);
 		Playlist playlist = new Playlist (id_playlist, 1); // get rid of 1 later when we change database object
 		if (exist == null) {
+
+			System.out.println("Playlist didn't already exist");
 			return dao.addPlaylist(playlist);
 		} else {
+
+			System.out.println("Playlist already exists");
 			return false;
 		}
 	}
