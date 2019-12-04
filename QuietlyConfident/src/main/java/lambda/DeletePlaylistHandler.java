@@ -31,10 +31,10 @@ public class DeletePlaylistHandler implements RequestHandler<DeletePlaylistReque
 			if (dao.deletePlaylist(playlist)) {
 				response = new DeletePlaylistResponse(req.id_playlist, 200);
 			} else {
-				response = new DeletePlaylistResponse(req.id_playlist, 422, "Unable to delete playlist.");
+				response = new DeletePlaylistResponse(req.id_playlist, 409, "Unable to delete playlist.");
 			}
 		} catch (Exception e) {
-			response = new DeletePlaylistResponse(req.id_playlist, 403, "Unable to delete playlist: " + req.id_playlist + "(" + e.getMessage() + ")");
+			response = new DeletePlaylistResponse(req.id_playlist, 400, "Unable to delete playlist: " + req.id_playlist + "(" + e.getMessage() + ")");
 		}
 
 		return response;

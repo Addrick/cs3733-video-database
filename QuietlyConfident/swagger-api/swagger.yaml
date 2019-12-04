@@ -165,9 +165,11 @@ paths:
           $ref: '#/definitions/DeletePlaylist'
       responses:
         200:
-          description: Successfully deleted playlist in the library.
+          description: Successfully removed playlist from the library.
         400:
-          description: No playlist found.        
+          description: Invalid playlist name input.
+        409:
+          description: Playlist does not exist in the library.     
           
   /list_playlists: 
     get:
