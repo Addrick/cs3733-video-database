@@ -140,9 +140,9 @@ paths:
         200:
           description: Successfully created playlist in the library.
         400:
-          description: Playlist already exists under this name.  
+          description: Invalid playlist name input.
         409:
-          description: valid input but duplicate playlist      
+          description: Playlist already exists in the library.
           
   /delete_playlist: 
     post:
@@ -165,9 +165,11 @@ paths:
           $ref: '#/definitions/DeletePlaylist'
       responses:
         200:
-          description: Successfully deleted playlist in the library.
+          description: Successfully removed playlist from the library.
         400:
-          description: No playlist found.        
+          description: Invalid playlist name input.
+        409:
+          description: Playlist does not exist in the library.     
           
   /list_playlists: 
     get:
