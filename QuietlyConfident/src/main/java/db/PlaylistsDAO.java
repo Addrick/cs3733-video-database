@@ -50,7 +50,7 @@ public class PlaylistsDAO {
     
     public boolean updatePlaylist(Playlist playlist) throws Exception {
         try {
-        	String query = "UPDATE playlists SET value=? WHERE name=?;";
+        	String query = "UPDATE `Video and Playlist DB`.playlists SET value=? WHERE name=?;";
         	PreparedStatement ps = conn.prepareStatement(query);
             ps.setDouble(1, playlist.order_playlist);
             ps.setString(2, playlist.id_playlist);

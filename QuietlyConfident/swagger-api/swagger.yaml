@@ -140,9 +140,9 @@ paths:
         200:
           description: Successfully created playlist in the library.
         400:
-          description: Playlist already exists under this name.  
+          description: Invalid playlist name input.
         409:
-          description: valid input but duplicate playlist      
+          description: Playlist already exists in the library.
           
   /delete_playlist: 
     post:
