@@ -34,6 +34,6 @@ public class UploadVideoSegmentRequest {
 	}
 	
 	public String toString() {
-		return "CreateConstant(" + id_video + "," + characters + "," + transcript + "," + url_video + ")";
+		return "UploadVideoSegment(" + id_video + "," + characters + "," + transcript + "," + url_video + ")";
 	}
 }

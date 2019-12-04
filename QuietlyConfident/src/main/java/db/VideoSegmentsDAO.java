@@ -7,7 +7,7 @@ import java.util.List;
 import model.VideoSegment;
 
 /**
- * Note that CAPITALIZATION matters regarding the table name. If you create with 
+ * Note that CAPITALIZATION matters regarding the table id_video. If you create with 
  * a capital "videos" then it must be "videos" in the SQL queries.
  * 
  * @author 
@@ -26,12 +26,12 @@ public class VideoSegmentsDAO {
     	}
     }
 
-    public VideoSegment getVideoSegment(String name) throws Exception {
+    public VideoSegment getVideoSegment(String id_video) throws Exception {
         
         try {
         	VideoSegment video = null;
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM videos WHERE name=?;");
-            ps.setString(1,  name);
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM videos WHERE id_video=?;");
+            ps.setString(1,  id_video);
             ResultSet resultSet = ps.executeQuery();
             
             while (resultSet.next()) {
@@ -50,7 +50,7 @@ public class VideoSegmentsDAO {
     
     public boolean updateVideoSegment(VideoSegment video) throws Exception {
         try {
-        	String query = "UPDATE videos SET value=? WHERE name=?;";
+        	String query = "UPDATE videos SET value=? WHERE id_video=?;";
         	PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, video.id_video);
             ps.setString(2, video.characters);
@@ -67,7 +67,7 @@ public class VideoSegmentsDAO {
     
     public boolean deleteVideoSegment(VideoSegment video) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM videos WHERE name = ?;");
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM videos WHERE id_video = ?;");
             ps.setString(1, video.id_video);
             int numAffected = ps.executeUpdate();
             ps.close();
@@ -82,7 +82,7 @@ public class VideoSegmentsDAO {
 
     public boolean addVideoSegment(VideoSegment video) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM videos WHERE name = ?;");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM videos WHERE id_video = ?;");
             ps.setString(1, video.id_video);
             ResultSet resultSet = ps.executeQuery();
             
@@ -93,12 +93,17 @@ public class VideoSegmentsDAO {
                 return false;
             }
 
-            ps = conn.prepareStatement("INSERT INTO videos (name,value) values(?,?);");
+            ps = conn.prepareStatement("INSERT INTO videos (id_video,characters,transcript,url_video) values(?,?,?,?);");
             ps.setString(1,  video.id_video);
+            ps.setString(2,  video.characters);
+            ps.setString(3,  video.transcript);
+            ps.setString(4,  video.url_video);
             ps.execute();
             return true;
 
         } catch (Exception e) {
+            System.out.println("Failed to insert video: " + e.getMessage());
+
             throw new Exception("Failed to insert video: " + e.getMessage());
         }
     }
@@ -129,13 +134,13 @@ public class VideoSegmentsDAO {
     
     private VideoSegment generateVideoSegment(ResultSet resultSet) throws Exception {
     	System.out.println("got ruleset");
-        String name  = resultSet.getString("id_video");
+        String id_video  = resultSet.getString("id_video");
     	System.out.println("got id");
         String characters  = resultSet.getString("characters");
         String transcript  = resultSet.getString("transcript");
         String url_video  = resultSet.getString("url_video");
 
-        return new VideoSegment (name, characters, transcript, url_video, false);
+        return new VideoSegment (id_video, characters, transcript, url_video, false);
     }
 
 }
