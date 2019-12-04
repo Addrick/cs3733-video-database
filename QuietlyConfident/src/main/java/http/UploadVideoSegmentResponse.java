@@ -8,17 +8,17 @@ package http;
  */
 public class UploadVideoSegmentResponse {
 	public final String response;
-	public final int httpCode;
+	public final int statusCode;
 	
-	public UploadVideoSegmentResponse (String s, int code) {
+	public UploadVideoSegmentResponse (String s, int statusCode) {
 		this.response = s;
-		this.httpCode = code;
+		this.statusCode = statusCode;
 	}
 	
 	// 200 means success
 	public UploadVideoSegmentResponse (String s) {
 		this.response = s;
-		this.httpCode = 200;
+		this.statusCode = 200;
 	}
 	
 	public String toString() {
