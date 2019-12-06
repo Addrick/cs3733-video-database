@@ -109,7 +109,7 @@ public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegm
 
 		UploadVideoSegmentResponse response;
 		try {
-			byte[] encoded = java.util.Base64.getDecoder().decode(req.file_path);
+			byte[] encoded = java.util.Base64.getDecoder().decode(req.base64EncodedValue);
 			if (req.system) {
 				if (uploadSystemVideoSegment(req.id_video, encoded)) {
 					response = new UploadVideoSegmentResponse(req.id_video);

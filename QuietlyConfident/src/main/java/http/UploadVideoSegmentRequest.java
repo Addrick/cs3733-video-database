@@ -5,7 +5,7 @@ public class UploadVideoSegmentRequest {
 	public String characters;
 	public String transcript;
 	public String url_video;
-	public String file_path = System.getProperty("user.dir") + "\\" + "Desktop" + "\\" + "Air_La-Femme-DArgent-Reedit_v1_p.psarc";
+	public String base64EncodedValue;
 
 	public boolean system;
 	
@@ -20,6 +20,9 @@ public class UploadVideoSegmentRequest {
 	
 	public String getUrl_video( ) { return url_video; }
 	public void setUrl_video(String url_video) { this.id_video = url_video; }
+	
+	public String getBase64EncodedValue() { return base64EncodedValue; }
+	public void setBase64EncodedValue(String base64EncodedValue) { this.base64EncodedValue = base64EncodedValue; }
 	
 	public boolean getSystem( ) { return system; }
 	public void setSystem(boolean system) { this.system = system; }
