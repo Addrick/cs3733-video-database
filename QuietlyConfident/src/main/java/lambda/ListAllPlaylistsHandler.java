@@ -120,7 +120,7 @@ public class ListAllPlaylistsHandler implements RequestHandler<Object,AllPlaylis
 			}
 			response = new AllPlaylistsResponse(list, 200);
 		} catch (Exception e) {
-			response = new AllPlaylistsResponse(400, e.getMessage());
+			response = new AllPlaylistsResponse(409, e.getMessage());
 		}
 		
 		return response;

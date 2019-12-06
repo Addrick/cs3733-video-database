@@ -45,11 +45,11 @@ paths:
           $ref: '#/definitions/UploadVideo'
       responses:
         200:
-          description: Successfully uploaded video from library.
+          description: Successfully uploaded video segment to library.
         400:
-          description: Failed to upload video to library.
+          description: Invalid input for video upload.
         409:
-          description: valid input but duplicate video
+          description: Video already exists in the library.
           
   /delete_video:
     post:
@@ -72,9 +72,9 @@ paths:
           $ref: '#/definitions/DeleteVideo'
       responses:
         200:
-          description: Successfully deleted video from library.
-        400:
-          description: Failed to delete video from library.
+          description: Successfully deleted video segment from library.
+        409:
+          description: Video segment does not exist in the library.
           
   /list_video_segments:          
     get:
@@ -115,7 +115,7 @@ paths:
         200:
           description: Successfully searched all video segments in library.
         400:
-          description: Failed to search video segment library.
+          description: Invalid search criteria.
           
   /create_playlist: 
     post:
@@ -184,10 +184,10 @@ paths:
       responses:
         200:
           description: Successfully listed all playlists in the library.
-        400:
-          description: No playlists found.  
+        409:
+          description: No playlists found.
 
-  /removeVideoSegment:
+  /remove_video_segment:
     post:
       tags:
         - Administrator
@@ -208,9 +208,11 @@ paths:
             $ref: '#/definitions/RemoveVideoSegment'
       responses:
         200:
-          description: Successfully removed the video segment from the playlist
+          description: Successfully removed the video segment from the playlist.
         400:
-          description: Failed to removed the video segment from the playlist  
+          description: Invalid input for playlist or video segment.
+        409:
+          description: Video segment does not exist in the playlist.
 
   /append_video_segment:
     post:
@@ -226,16 +228,18 @@ paths:
         - application/json
       parameters:
         - in: body
-          name: requestVSAppend
+          name: AppendVideoSegmentRequest
           description: Appends a video segment
           required: false
           schema:
             $ref: '#/definitions/AppendVideoSegment'
       responses:
         200:
-          description: Successfully appended the video segment to the playlist
+          description: Successfully appended the video segment to the playlist.
         400:
-          description: Failed to append the video segment to the playlist    
+          description: Invalid input for playlist or video segment.
+        409:
+          description: Video segment or playlist does not exist in the library.  
 
   /play_playlist: 
     post:
@@ -258,9 +262,9 @@ paths:
           $ref: '#/definitions/PlayPlaylist'
       responses:
         200:
-          description: Successfully played playlist
-        400:
-          description: No playlist found with that name.
+          description: Successfully played playlist.
+        409:
+          description: Could not find selected playlist in the library.
           
   /mark_video:
     post:

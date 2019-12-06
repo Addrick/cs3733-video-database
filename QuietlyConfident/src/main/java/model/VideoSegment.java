@@ -23,6 +23,9 @@ public class VideoSegment {
 	}
 	
 	public boolean getSystem() { return system; }
+	public String getID() { return id_video; }
+	public String getChars() { return characters; }
+	public String getURL() { return url_video; }
 	public void setSystem(boolean s) { system = s; }
 	
 	/**
