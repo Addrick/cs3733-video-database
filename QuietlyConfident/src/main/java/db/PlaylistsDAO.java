@@ -68,6 +68,8 @@ public class PlaylistsDAO {
             PreparedStatement ps = conn.prepareStatement("DELETE FROM `Video and Playlist DB`.playlists WHERE id_playlist = ?;");
             ps.setString(1, playlist.id_playlist);
             int numAffected = ps.executeUpdate();
+            ps = conn.prepareStatement("DROP TABLE `Video and Playlist DB`.`" + playlist.id_playlist + "`;");
+            ps.execute();
             ps.close();
             
             return (numAffected == 1);
@@ -94,6 +96,11 @@ public class PlaylistsDAO {
             ps = conn.prepareStatement("INSERT INTO `Video and Playlist DB`.playlists (id_playlist,order_playlist) values(?,?);");
             ps.setString(1,  playlist.id_playlist);
             ps.setDouble(2,  playlist.order_playlist);
+            ps.execute();
+            ps = conn.prepareStatement("CREATE TABLE `Video and Playlist DB`.`" + playlist.id_playlist
+            							+ "` (`id_video` VARCHAR(64) NOT NULL,"
+            							+ "PRIMARY KEY (`id_video`),"
+            							+ "UNIQUE INDEX `id_video_UNIQUE` (`id_video` ASC));");
             ps.execute();
             return true;
 
