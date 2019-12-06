@@ -5,6 +5,8 @@ public class UploadVideoSegmentRequest {
 	public String characters;
 	public String transcript;
 	public String url_video;
+	public String file_path = System.getProperty("user.dir") + "\\" + "Desktop" + "\\" + "Air_La-Femme-DArgent-Reedit_v1_p.psarc";
+
 	public boolean system;
 	
 	public String getId_video( ) { return id_video; }

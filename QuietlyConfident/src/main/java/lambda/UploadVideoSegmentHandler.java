@@ -39,7 +39,7 @@ import com.amazonaws.services.s3.model.PutObjectResult;
 /**
  * Create a new VideoSegment and store in S3 bucket.
 
- * @author heineman
+ * @author 
  */
 public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegmentRequest,UploadVideoSegmentResponse> {
 
@@ -75,12 +75,12 @@ public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegm
 	 * 
 	 * @throws Exception 
 	 */
-	boolean createSystemVideoSegment(String name, byte[]  contents) throws Exception {
+	boolean uploadSystemVideoSegment(String name, byte[]  contents) throws Exception {
 		if (logger != null) { logger.log("in createSystemVideoSegment"); }
 		
 		if (s3 == null) {
 			logger.log("attach to S3 request");
-			s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1).build();
+			s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_2).build();
 			logger.log("attach to S3 succeed");
 		}
 
@@ -95,7 +95,7 @@ public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegm
 		omd.setContentLength(contents.length);
 		
 		// makes the object publicly visible
-		PutObjectResult res = s3.putObject(new PutObjectRequest("QuietlyConfident", bucket + name, bais, omd)
+		PutObjectResult res = s3.putObject(new PutObjectRequest("3733quietlyconfident", bucket + name, bais, omd)
 				.withCannedAcl(CannedAccessControlList.PublicRead));
 		
 		// if we ever get here, then whole thing was stored
@@ -109,17 +109,17 @@ public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegm
 
 		UploadVideoSegmentResponse response;
 		try {
-//			byte[] encoded = java.util.Base64.getDecoder().decode(req.base64EncodedValue);
+			byte[] encoded = java.util.Base64.getDecoder().decode(req.file_path);
 			if (req.system) {
-				if (UploadVideoSegment(req.id_video, req.characters, req.transcript, req.url_video, req.system)) {
+				if (uploadSystemVideoSegment(req.id_video, encoded)) {
 					response = new UploadVideoSegmentResponse(req.id_video);
 				} else {
 					response = new UploadVideoSegmentResponse(req.id_video, 422);
 				}
 			} else {
-//				String contents = new String(encoded);
-//				double value = Double.valueOf(contents);
-				
+				String contents = new String(encoded);
+				double value = Double.valueOf(contents);
+//				
 				if (UploadVideoSegment(req.id_video, req.characters, req.transcript, req.url_video, req.system)) {
 					response = new UploadVideoSegmentResponse(req.id_video);
 				} else {
@@ -129,7 +129,7 @@ public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegm
 		} catch (Exception e) {
 			response = new UploadVideoSegmentResponse("Unable to create VideoSegment: " + req.id_video + "(" + e.getMessage() + ")", 400);
 		}
-
+		System.out.println(response);
 		return response;
 	}
 }

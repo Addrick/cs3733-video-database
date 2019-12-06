@@ -60,7 +60,7 @@ public class UploadVideoSegmentHandlerTest extends LambdaTest {
     	UploadVideoSegmentResponse resp = handler.handleRequest(req, createContext("create"));
         Assert.assertEquals(failureCode, resp.statusCode);
     }
-//    
+    
 //    @Test
 //    public void testShouldBeDuplicate() {
 //    	int rndNum = (int)(20000*(Math.random()));
@@ -97,7 +97,7 @@ public class UploadVideoSegmentHandlerTest extends LambdaTest {
         } catch (IOException ioe) {
         	Assert.fail("Invalid:" + ioe.getMessage());
         }
-    }}
+    }
 //    
 //    @Test
 //    public void testFailInput() {
@@ -124,14 +124,14 @@ public class UploadVideoSegmentHandlerTest extends LambdaTest {
 //        }
 //    }
 //    
-//    // overwrites into it
-//    @Test
-//    public void testCreateSystemVideoSegment() {
-//    	// create VideoSegment
-//        UploadVideoSegmentRequest csr = new UploadVideoSegmentRequest("to-delete-again", "Mi43MTgyODE4Mjg=", true);
-//        
-//        UploadVideoSegmentResponse resp = new UploadVideoSegmentHandler().handleRequest(csr, createContext("create"));
-//        Assert.assertEquals(200, resp.statusCode);
-//    }
-//    
-//}
+    // overwrites into it
+    @Test
+    public void testCreateSystemVideoSegment() {
+    	// create VideoSegment
+        UploadVideoSegmentRequest csr = new UploadVideoSegmentRequest("to-delete-again", "Mi43MTgyODE4Mjg=", "idk", "idk", true);
+        
+        UploadVideoSegmentResponse resp = new UploadVideoSegmentHandler().handleRequest(csr, createContext("create"));
+        Assert.assertEquals(200, resp.statusCode);
+    }
+    
+}

@@ -4,22 +4,22 @@
  *    GET list_url
  *    RESPONSE  list of [name, value] constants 
  */
-function refreshConstantsList() {
-   var xhr = new XMLHttpRequest();
-   xhr.open("GET", list_vid, true);
-   xhr.send();
-   
-   console.log("sent");
+function refreshVideoSegmentsList() {
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", list_vid, true);
+	xhr.send();
 
-  // This will process results and update HTML as appropriate. 
-  xhr.onloadend = function () {
-    if (xhr.readyState == XMLHttpRequest.DONE) {
-      console.log ("XHR:" + xhr.responseText);
-      processListResponse(xhr.responseText);
-    } else {
-      processListResponse("N/A");
-    }
-  };
+	console.log("sent");
+
+	// This will process results and update HTML as appropriate. 
+	xhr.onloadend = function () {
+		if (xhr.readyState == XMLHttpRequest.DONE) {
+			console.log ("XHR:" + xhr.responseText);
+			processVideoSegmentListResponse(xhr.responseText);
+		} else {
+			processVideoSegmentListResponse("N/A");
+		}
+	};
 }
 
 /**
@@ -27,23 +27,25 @@ function refreshConstantsList() {
  *
  * Replace the contents of 'constantList' with a <br>-separated list of name,value pairs.
  */
-function processListResponse(result) {
-  console.log("res:" + result);
-  // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
-  var js = JSON.parse(result);
-  var constList = document.getElementById('videoList');
-  
-  var output = "";
-  for (var i = 0; i < js.list.length; i++) {
-    var constantJson = js.list[i];
-    console.log(constantJson);
-    
-    var cname = constantJson["name"];
-    var cval = constantJson["value"];
-    output = output + "<div id=\"const" + cname + "\"><b>" + cname + ":</b> = " + cval + "(<a href='javaScript:requestDelete(\"" + cname + "\")'><img src='deleteIcon.png'></img></a>) <br></div>";
-  }
+function processVideoSegmentListResponse(result) {
+	console.log("res:" + result);
+	// Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
+	var js = JSON.parse(result);
+	var constList = document.getElementById('videoList');
 
-  // Update computation result
-  constList.innerHTML = output;
+	var output = "";
+	for (var i = 0; i < js.list.length; i++) {
+		var constantJson = js.list[i];
+		console.log(constantJson);
+
+		var id_video = constantJson["id_video"];
+		var characters = constantJson["characters"];
+		var transcript = constantJson["transcript"];
+		var url_video = constantJson["url_video"];
+		output = output + "<div id=\"const" + id_video + "\"><b>" + "Video ID: "+ id_video + ", Characters:  " + characters + ", URL:  " + url_video + "<br></div>";
+	}
+
+	// Update computation result
+	constList.innerHTML = output;
 }
 
