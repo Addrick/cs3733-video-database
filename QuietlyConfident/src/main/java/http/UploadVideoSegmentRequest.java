@@ -39,6 +39,6 @@ public class UploadVideoSegmentRequest {
 	}
 	
 	public String toString() {
-		return "UploadVideoSegment(" + id_video + "," + characters + "," + transcript + "," + url_video + ")";
+		return "upload_video(" + id_video + "," + base64EncodedValue + ")";
 	}
 }

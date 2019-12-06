@@ -30,20 +30,18 @@
 	<h3>Video List:</h3>
 	<div id="videoList"></div>
 
-	<script type='text/javascript' src='../js/get_Playlists.js'></script>
-	<script type='text/javascript' src='../js/get_Videos.js'></script>
 	<title>HTML Video embed</title>
 </head>
 
 
-<h2>Constants</h2>
+<h2>Videos</h2>
 
 <form name="createForm" method="post">
-   <input name="constantName" value="constantName" />
+   <input name="id_video" value="id_video" />
    <input name="base64Encoding" hidden value=""/>
-   Select a constant in file: <input type="file" id="constantValue" name="constantValue">
-   <input type="button" id="createButton" value="Create Constant" disabled onClick="JavaScript:handleCreateClick(this)">
-<br>   <input type="checkbox" name="system">Create System Constant<br>
+   Select a video in file: <input type="file" id="video_file" name="video_file">
+   <input type="button" id="createButton" value="Create Video" disabled onClick="JavaScript:handleCreateClick(this)">
+<br>   <input type="checkbox" name="system">Create System Video<br>
 </form>
 
 <script>
@@ -67,10 +65,11 @@
     	alert("File size too large to use:" + files[0].size + " bytes");
     } else {
     	getBase64(files[0]); // request the load (async)
+
     }
   }
   
   // register
-  document.getElementById('constantValue').addEventListener('change', handleFileSelect, false);
+  document.getElementById('video_file').addEventListener('change', handleFileSelect, false);
 </script>
 
