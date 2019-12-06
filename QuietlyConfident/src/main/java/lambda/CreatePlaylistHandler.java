@@ -15,7 +15,7 @@ public class CreatePlaylistHandler implements RequestHandler<CreatePlaylistReque
 
 	public LambdaLogger logger;
 
-	/** Load from RDS, if it exists
+	/** Load from RDS, if it existsa
 	 *  
 	 * @throws Exception 
 	 */
