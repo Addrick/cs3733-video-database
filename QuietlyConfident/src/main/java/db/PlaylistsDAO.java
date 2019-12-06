@@ -4,7 +4,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import db.*;
 import model.*;
 
 /**
@@ -139,6 +138,38 @@ public class PlaylistsDAO {
 
         } catch (Exception e) {
             throw new Exception("Failed to append video segment: " + e.getMessage());
+        }
+    }
+    
+    public boolean removeFromPlaylist(Playlist playlist, VideoSegment video) throws Exception {
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `Video and Playlist DB`.playlists WHERE id_playlist = ?;");
+            ps.setString(1, playlist.id_playlist);
+            ResultSet resultSet = ps.executeQuery();
+            
+            while (resultSet.next()) // First checks if playlist exists
+            {
+                System.out.println("Found playlist");
+                resultSet.close();
+                ps = conn.prepareStatement("SELECT * FROM `Video and Playlist DB`.videos WHERE id_video = ?;");
+                ps.setString(1, video.id_video);
+                resultSet = ps.executeQuery();
+                System.out.println("Searching for video segment in database");
+                while (resultSet.next()) // Next checks if video segment exists
+                {
+                    System.out.println("Found video segment");
+                    resultSet.close();
+                    ps = conn.prepareStatement("DELETE FROM `Video and Playlist DB`.`" + playlist.id_playlist + "` WHERE id_video = `" + video.id_video + "`;");
+                    ps.execute();
+                    System.out.println("Removed video segment from " + playlist.id_playlist);
+                    return true; // Returns true when both playlist and video segment exists, meaning the VS was removed to the playlist
+                }
+                System.out.println("Didn't find video segment");
+            }
+            return false; // Returns false if either the playlist or video segment does not exist in the databases
+
+        } catch (Exception e) {
+            throw new Exception("Failed to remove video segment from playlist: " + e.getMessage());
         }
     }
 
