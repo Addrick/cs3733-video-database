@@ -13,8 +13,12 @@ function requestAppendVideoSegment(val) {
 }
 
 function processAppendVideoSegment(val) {
-  var data = {};
-  data["id_video"] = val;
+	var form = document.createForm;
+
+	var data = {};
+	data["id_playlist"] = appendVideoForm.id_playlist.value;
+	data["id_video"] = appendVideoForm.id_video.value;
+
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);
