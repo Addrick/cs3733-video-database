@@ -110,9 +110,12 @@ public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegm
 		UploadVideoSegmentResponse response;
 		try {
 			byte[] encoded = java.util.Base64.getDecoder().decode(req.base64EncodedValue);
-			if (uploadSystemVideoSegment(req.id_video, encoded)) {
+			if (uploadSystemVideoSegment(req.id_video + ".ogg", encoded)) {
 				if(UploadVideoSegment(req.id_video, req.characters, req.transcript, req.url_video, req.system)) {
 					System.out.println("Video added to RDS successfully.");
+				}
+				else {
+					System.out.println("Error adding video to RDS.");
 				}
 				response = new UploadVideoSegmentResponse(req.id_video);
 			} else {

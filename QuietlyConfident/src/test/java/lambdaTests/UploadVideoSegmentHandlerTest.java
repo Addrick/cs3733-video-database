@@ -88,7 +88,7 @@ public class UploadVideoSegmentHandlerTest extends LambdaTest {
     	int rndNum = (int)(990*(Math.random()));
     	String var = "throwAway" + rndNum;
     	
-    	UploadVideoSegmentRequest ccr = new UploadVideoSegmentRequest(var, "Mi43MTgyODE4Mjg=", var, var, false);
+    	UploadVideoSegmentRequest ccr = new UploadVideoSegmentRequest(var, "Mi43MTgyODE4Mjg=", var, false);
     	//String SAMPLE_INPUT_STRING = "{\"name\": \"" + var + "\", \"value\": \"Mi43MTgyODE4Mjg=\"}";
         String SAMPLE_INPUT_STRING = new Gson().toJson(ccr);  
         
@@ -128,7 +128,7 @@ public class UploadVideoSegmentHandlerTest extends LambdaTest {
     @Test
     public void testCreateSystemVideoSegment() {
     	// create VideoSegment
-        UploadVideoSegmentRequest csr = new UploadVideoSegmentRequest("to-delete-again", "Mi43MTgyODE4Mjg=", "idk", "idk", true);
+        UploadVideoSegmentRequest csr = new UploadVideoSegmentRequest("to-delete-again", "Mi43MTgyODE4Mjg=", "idk", true);
         csr.base64EncodedValue = "Mi43MTgyODE4Mjg=";
         
         UploadVideoSegmentResponse resp = new UploadVideoSegmentHandler().handleRequest(csr, createContext("create"));
