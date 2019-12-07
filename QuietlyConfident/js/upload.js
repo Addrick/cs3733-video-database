@@ -1,20 +1,19 @@
-function processCreateResponse(result) {
+function processUploadResponse(result) {
 	// Can grab any DIV or SPAN HTML element and can then manipulate its
 	// contents dynamically via javascript
 	console.log("result:" + result);
 
-	refreshPlaylistList();
+	refreshVideoSegmentsList();
 
 }
 
-function handleCreateClick(e) {
+function handleUploadClick(e) {
 	var form = document.createForm;
 
 	var data = {};
-	data["characters"] = form.characters.value;
-
 	data["id_video"] = form.id_video.value;
-	data["transcript"] = form.transcript.value;
+	data["characters"] = form.id_video.value;
+	data["transcript"] = form.id_video.value;
 	data["system"] = true;
 
 	// base64EncodedValue":"data:text/plain;base64,My4xND....."
@@ -25,7 +24,7 @@ function handleCreateClick(e) {
 	var js = JSON.stringify(data);
 	console.log("JS:" + js);
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", create_pl_url, true);
+	xhr.open("POST", create_video_url, true);
 
 	// send the collected data as JSON
 	xhr.send(js);
@@ -39,7 +38,7 @@ function handleCreateClick(e) {
 			if (xhr.status == 200) {
 				console.log ("XHR:" + xhr.responseText);
 				alert("XHR:" + xhr.responseText);
-				processCreateResponse(xhr.responseText);
+				processUploadResponse(xhr.responseText);
 			} else {
 				console.log("actual:" + xhr.responseText)
 				var js = JSON.parse(xhr.responseText);
@@ -47,7 +46,7 @@ function handleCreateClick(e) {
 				alert (err);
 			}
 		} else {
-			processCreateResponse("N/A");
+			processUploadResponse("N/A");
 		}
 	};
 }

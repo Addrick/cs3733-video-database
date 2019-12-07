@@ -1,12 +1,12 @@
 /**
  * Refresh constant list from server
  *
- *    GET list_pl
+ *    GET list_pl_url
  *    RESPONSE  list of [name, value] constants 
  */
 function refreshPlaylistList() {
 	var xhr = new XMLHttpRequest();
-	xhr.open("GET", list_pl, true);
+	xhr.open("GET", list_pl_url, true);
 	xhr.send();
 
 	console.log("sent");
