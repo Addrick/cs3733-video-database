@@ -9,7 +9,6 @@ function processUploadResponse(result) {
 
 function handleUploadClick(e) {
 	var form = document.createForm;
-
 	var data = {};
 	data["id_video"] = form.id_video.value;
 	data["characters"] = form.id_video.value;
