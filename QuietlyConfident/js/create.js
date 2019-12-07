@@ -12,8 +12,8 @@ function handleCreateClick(e) {
 
 	var data = {};
 	data["id_video"] = form.id_video.value;
-	data["characters"] = form.id_video.value;
-	data["transcript"] = form.id_video.value;
+	data["characters"] = form.characters.value;
+	data["transcript"] = form.transcript.value;
 	data["system"] = true;
 
 	// base64EncodedValue":"data:text/plain;base64,My4xND....."
