@@ -129,6 +129,7 @@ public class UploadVideoSegmentHandlerTest extends LambdaTest {
     public void testCreateSystemVideoSegment() {
     	// create VideoSegment
         UploadVideoSegmentRequest csr = new UploadVideoSegmentRequest("to-delete-again", "Mi43MTgyODE4Mjg=", "idk", "idk", true);
+        csr.base64EncodedValue = "Mi43MTgyODE4Mjg=";
         
         UploadVideoSegmentResponse resp = new UploadVideoSegmentHandler().handleRequest(csr, createContext("create"));
         Assert.assertEquals(200, resp.statusCode);

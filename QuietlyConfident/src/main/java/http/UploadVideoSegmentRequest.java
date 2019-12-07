@@ -36,9 +36,13 @@ public class UploadVideoSegmentRequest {
 		this.transcript = transcript;
 		this.url_video = url_video; 
 		this.system = system;
+
 	}
 	
-	public String toString() {
+	public String toStringS3() {
 		return "upload_video(" + id_video + "," + base64EncodedValue + ")";
+	}	
+	public String toStringSQL() {
+		return "upload_video(" + id_video + "," + characters + "," + transcript + "," + url_video + ")";
 	}
 }

@@ -44,15 +44,15 @@ import com.amazonaws.services.s3.model.PutObjectResult;
 public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegmentRequest,UploadVideoSegmentResponse> {
 
 	LambdaLogger logger;
-	
+
 	// To access S3 storage
 	private AmazonS3 s3 = null;
-		
+
 	// Note: this works, but it would be better to move this to environment/configuration mechanisms
 	// which you don't have to do for this project.
 	public static final String REAL_BUCKET = "videosegments/";
 	public static final String TEST_BUCKET = "testvideosegments/";
-	
+
 	/** Store into RDS.
 	 * 
 	 * @throws Exception 
@@ -60,7 +60,7 @@ public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegm
 	boolean UploadVideoSegment(String id_video, String characters, String transcript, String url_video, boolean system) throws Exception { 
 		if (logger != null) { logger.log("in UploadVideoSegment"); }
 		VideoSegmentsDAO dao = new VideoSegmentsDAO();
-		
+
 		// check if present
 		VideoSegment exist = dao.getVideoSegment(id_video);
 		VideoSegment VideoSegment = new VideoSegment (id_video, characters, transcript, url_video, system);
@@ -70,14 +70,14 @@ public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegm
 			return false;
 		}
 	}
-	
+
 	/** Create S3 bucket
 	 * 
 	 * @throws Exception 
 	 */
 	boolean uploadSystemVideoSegment(String name, byte[]  contents) throws Exception {
 		if (logger != null) { logger.log("in createSystemVideoSegment"); }
-		
+
 		if (s3 == null) {
 			logger.log("attach to S3 request");
 			s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_2).build();
@@ -93,15 +93,15 @@ public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegm
 		ByteArrayInputStream bais = new ByteArrayInputStream(contents);
 		ObjectMetadata omd = new ObjectMetadata();
 		omd.setContentLength(contents.length);
-		
+
 		// makes the object publicly visible
 		PutObjectResult res = s3.putObject(new PutObjectRequest("3733quietlyconfident", bucket + name, bais, omd)
 				.withCannedAcl(CannedAccessControlList.PublicRead));
-		
+
 		// if we ever get here, then whole thing was stored
 		return true;
 	}
-	
+
 	@Override 
 	public UploadVideoSegmentResponse handleRequest(UploadVideoSegmentRequest req, Context context)  {
 		logger = context.getLogger();
@@ -110,23 +110,17 @@ public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegm
 		UploadVideoSegmentResponse response;
 		try {
 			byte[] encoded = java.util.Base64.getDecoder().decode(req.base64EncodedValue);
-			if (req.system) {
-				if (uploadSystemVideoSegment(req.id_video, encoded)) {
-					response = new UploadVideoSegmentResponse(req.id_video);
-				} else {
-					response = new UploadVideoSegmentResponse(req.id_video, 422);
+			if (uploadSystemVideoSegment(req.id_video, encoded)) {
+				if(UploadVideoSegment(req.id_video, req.characters, req.transcript, req.url_video, req.system)) {
+					System.out.println("Video added to RDS successfully.");
 				}
+				response = new UploadVideoSegmentResponse(req.id_video);
 			} else {
-				String contents = new String(encoded);
-				double value = Double.valueOf(contents);
-//				
-				if (UploadVideoSegment(req.id_video, req.characters, req.transcript, req.url_video, req.system)) {
-					response = new UploadVideoSegmentResponse(req.id_video);
-				} else {
-					response = new UploadVideoSegmentResponse(req.id_video, 422);
-				}
+				response = new UploadVideoSegmentResponse(req.id_video, 422);
 			}
-		} catch (Exception e) {
+		}
+
+		catch (Exception e) {
 			response = new UploadVideoSegmentResponse("Unable to create VideoSegment: " + req.id_video + "(" + e.getMessage() + ")", 400);
 		}
 		System.out.println(response);
