@@ -78,7 +78,6 @@
   document.getElementById('video_file').addEventListener('change', handleFileSelect, false);
 </script>
 
-<h2>Upload New Video</h2>
 <h2>Create New Playlist</h2>
 
 <form name="createPlaylistForm" method="post">
@@ -86,3 +85,12 @@
 	<input type="button" id="createButton" value="Upload Video"
 		onClick="JavaScript:handleCreateClick(this)">
 </form>
+<h3>Remote Constants between 1 and 3</h3>
+
+<div id="remoteConstantList"></div>
+
+<h3>Remote Video Segments</h3>
+
+The following is RAW JSON
+
+<div id="remoteVideoSegmentsList"></div>
