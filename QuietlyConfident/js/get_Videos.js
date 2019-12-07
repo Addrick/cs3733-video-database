@@ -42,7 +42,7 @@ function processVideoSegmentListResponse(result) {
 		var characters = constantJson["characters"];
 		var transcript = constantJson["transcript"];
 		var url_video = constantJson["url_video"];
-		output = output + "<div id=\"const" + id_video + "\"><b>" + "Video ID: "+ id_video + ", Characters:  " + characters + ", URL:  " + url_video + "(<a href='javaScript:requestDelete(\"" + id_video + "\")'><img src='deleteIcon.png'></img></a>) <br></div>";
+		output = output + "<div id=\"const" + id_video + "\"><b>" + "Video ID: "+ id_video + ", Transcript:  " + transcript + ", URL:  " + url_video + "(<a href='javaScript:requestDeleteVideoSegment(\"" + id_video + "\")'><img src='deleteIcon.png'></img></a>) <br></div>";
 	}
 
 	// Update computation result

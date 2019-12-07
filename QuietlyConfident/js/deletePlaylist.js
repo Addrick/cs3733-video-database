@@ -8,7 +8,7 @@ function processDeletePlaylistResponse(result) {
 
 function requestDeletePlaylist(val) {
    if (confirm("Request to delete " + val)) {
-     processDelete(val);
+	   processDeletePlaylist(val);
    }
 }
 

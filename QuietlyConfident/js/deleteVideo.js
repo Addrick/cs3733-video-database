@@ -8,7 +8,7 @@ function processDeleteVideoSegmentResponse(result) {
 
 function requestDeleteVideoSegment(val) {
    if (confirm("Request to delete " + val)) {
-     processDelete(val);
+	   processDeleteVideoSegment(val);
    }
 }
 

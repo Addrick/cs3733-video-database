@@ -8,6 +8,7 @@
 
 <script type='text/javascript' src='../js/add.js'></script>
 <script type='text/javascript' src='../js/create.js'></script>
+<script type='text/javascript' src='../js/upload.js'></script>
 <script type='text/javascript' src='../js/deleteVideo.js'></script>
 <script type='text/javascript' src='../js/deletePlaylist.js'></script>
 <script type='text/javascript' src='../js/remote.js'></script>
@@ -35,18 +36,17 @@
 </head>
 
 
-<h2>Videos</h2>
+<h2>Upload New Video</h2>
 
 <form name="createForm" method="post">
 	<input name="id_video" value="id_video" /> 
 	<input name="characters" value="characters" /> 
 	<input name="transcript" value="transcript" />
-	
-	<input name="base64Encoding" hidden value="" /> 
-	Select a video in file: 
-	<input type="file" id="video_file" name="video_file"> <input
+
+	<input name="base64Encoding" hidden value="" /> Select a video in
+	file: <input type="file" id="video_file" name="video_file"> <input
 		type="button" id="createButton" value="Upload Video" disabled
-		onClick="JavaScript:handleCreateClick(this)">
+		onClick="JavaScript:handleUploadClick(this)">
 </form>
 
 <script>
@@ -77,3 +77,12 @@
   // register
   document.getElementById('video_file').addEventListener('change', handleFileSelect, false);
 </script>
+
+<h2>Upload New Video</h2>
+<h2>Create New Playlist</h2>
+
+<form name="createPlaylistForm" method="post">
+	<input name="id_playlist" value="id_playlist" /> 
+	<input type="button" id="createButton" value="Upload Video"
+		onClick="JavaScript:handleCreateClick(this)">
+</form>

@@ -11,15 +11,8 @@ function handleCreateClick(e) {
 	var form = document.createForm;
 
 	var data = {};
-	data["characters"] = form.characters.value;
+	data["id_playlist"] = createPlaylistForm.id_playlist.value;
 
-	data["id_video"] = form.id_video.value;
-	data["transcript"] = form.transcript.value;
-	data["system"] = true;
-
-	// base64EncodedValue":"data:text/plain;base64,My4xND....."
-	var segments = document.createForm.base64Encoding.value.split(',');
-	data["base64EncodedValue"] = segments[1];  // skip first one 
 	alert(data);
 
 	var js = JSON.stringify(data);
