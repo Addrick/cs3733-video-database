@@ -18,7 +18,8 @@ public class VideoSegment {
 		this.id_video = id_video;
 		this.characters = characters;
 		this.transcript = transcript;
-		this.url_video = url_video; 
+//		this.url_video = url_video; 
+		this.url_video = "https://3733quietlyconfident.s3.us-east-2.amazonaws.com/videosegments/" + id_video + ".ogg"; 
 		this.system = system;
 	}
 	
