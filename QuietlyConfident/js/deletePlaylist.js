@@ -1,25 +1,25 @@
-function processDeleteResponse(result) {
+function processDeletePlaylistResponse(result) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
   console.log("deleted :" + result);
   
-  refreshConstantsList();
+  refreshPlaylistList();
 }
 
-function requestDelete(val) {
+function requestDeletePlaylist(val) {
    if (confirm("Request to delete " + val)) {
      processDelete(val);
    }
 }
 
-function processDelete(val) {
+function processDeletePlaylist(val) {
   var data = {};
-  data["name"] = val;
+  data["id_playlist"] = val;
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", delete_url, true);
+  xhr.open("POST", delete_pl_url, true);
 
   // send the collected data as JSON
   xhr.send(js);
@@ -31,7 +31,7 @@ function processDelete(val) {
 	  if (xhr.readyState == XMLHttpRequest.DONE) {
 		  if (xhr.status == 200) {
 			  console.log ("XHR:" + xhr.responseText);
-			  processDeleteResponse(xhr.responseText);
+			  processDeletePlaylistResponse(xhr.responseText);
 		  } else {
 			  console.log("actual:" + xhr.responseText)
 			  var js = JSON.parse(xhr.responseText);
@@ -39,7 +39,7 @@ function processDelete(val) {
 			  alert (err);
 		  }
 	  } else {
-		  processDeleteResponse("N/A");
+		  processDeletePlaylistResponse("N/A");
 	  }
   };
 }
