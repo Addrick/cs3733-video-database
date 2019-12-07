@@ -7,7 +7,8 @@ function processCreateResponse(result) {
 
 }
 
-function handleCreateClick(e) {
+function handleCreateClick(e)
+{
 	var form = document.createForm;
 
 	var data = {};
