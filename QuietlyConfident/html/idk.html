@@ -5,13 +5,13 @@
 <script type='text/javascript' src='../js/api.js'></script>
 <script type='text/javascript' src='../js/get_Playlists.js'></script>
 <script type='text/javascript' src='../js/get_Videos.js'></script>
-
 <script type='text/javascript' src='../js/add.js'></script>
 <script type='text/javascript' src='../js/create.js'></script>
 <script type='text/javascript' src='../js/upload.js'></script>
 <script type='text/javascript' src='../js/deleteVideo.js'></script>
 <script type='text/javascript' src='../js/deletePlaylist.js'></script>
 <script type='text/javascript' src='../js/remote.js'></script>
+<script type='text/javascript' src='../js/append.js'></script>
 
 <script type="text/javascript">
 	function initialize() {
@@ -70,7 +70,6 @@
     	alert("File size too large to use:" + files[0].size + " bytes");
     } else {
     	getBase64(files[0]); // request the load (async)
-
     }
   }
   
