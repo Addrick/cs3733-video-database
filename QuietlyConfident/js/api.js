@@ -9,8 +9,8 @@ var delete_video_url 	= base_url + "delete_video";     		// POST because of CORS
 var delete_pl_url 		= base_url + "delete_playlist";     	// POST because of CORS
 var list_pl_url   	    = base_url + "list_playlists";    		// GET
 var list_vid_url   	    = base_url + "list_video_segments"; 	// GET
-var search_videos 		= base_url + "search_video_segments" 	// GET
-var rem_video			= base_url + "remove_video_segment"		// POST because of CORS
-var append_video		= base_url + "append_video_segment"		// POST
+var search_videos_url 	= base_url + "search_video_segments" 	// GET
+var rem_video_url		= base_url + "remove_video_segment"		// POST because of CORS
+var append_video_url	= base_url + "append_video_segment"		// POST
 
 
