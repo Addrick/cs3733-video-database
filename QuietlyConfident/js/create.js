@@ -6,36 +6,38 @@ function processCreateResponse(result)
 	refreshPlaylistList();
 }
 
-function handleCreateClick(e)
+function handleCreateClick()
 {
-	var form = document.createForm;
-
-	var data = {};
-	data["id_playlist"] = createPlaylistForm.id_playlist.value;
-
-	alert(data);
-
-	var js = JSON.stringify(data);
-	console.log("JS:" + js);
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", create_pl_url, true);
-
-	// send the collected data as JSON
-	xhr.send(js);
-
-
-	// This will process results and update HTML as appropriate. 
-	xhr.onloadend = function () {
-		console.log(xhr);
-		console.log(xhr.request);
-		if (xhr.readyState == XMLHttpRequest.DONE) {
-			if (xhr.status == 200) {
-				console.log ("XHR:" + xhr.responseText);
-				alert("XHR:" + xhr.responseText);
-				processCreateResponse(xhr.responseText);
-			} else {
-				processCreateResponse("N/A");
-			}
-		};
+	var txt;
+	var id_playlist = prompt("Enter Playlist Name:", "New Playlist");
+	if (id_playlist == null || id_playlist == "") {}
+	else {
+		var data = {};
+		data["id_playlist"] = id_playlist;
+		alert("Created playlist: " + id_playlist);
+	
+		var js = JSON.stringify(data);
+		console.log("JS:" + js);
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", create_pl_url, true);
+	
+		// send the collected data as JSON
+		xhr.send(js);
+	
+	
+		// This will process results and update HTML as appropriate. 
+		xhr.onloadend = function () {
+			console.log(xhr);
+			console.log(xhr.request);
+			if (xhr.readyState == XMLHttpRequest.DONE) {
+				if (xhr.status == 200) {
+					console.log ("XHR:" + xhr.responseText);
+					alert("XHR:" + xhr.responseText);
+					processCreateResponse(xhr.responseText);
+				} else {
+					processCreateResponse("N/A");
+				}
+			};
+		}
 	}
 }
