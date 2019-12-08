@@ -29,7 +29,7 @@
 	<h3>Playlist List:</h3>
 	<div id="playlistList"></div>
 	<button onclick="handleCreateClick()">Create New Playlist</button>
-	
+
 	<h3>Video List:</h3>
 	<div id="videoList"></div>
 
@@ -40,9 +40,8 @@
 <h2>Upload New Video</h2>
 
 <form name="createForm" method="post">
-	<input name="id_video" value="id_video" /> 
-	<input name="characters" value="characters" /> 
-	<input name="transcript" value="transcript" />
+	<input name="id_video" value="id_video" /> <input name="characters"
+		value="characters" /> <input name="transcript" value="transcript" />
 
 	<input name="base64Encoding" hidden value="" /> Select a video in
 	file: <input type="file" id="video_file" name="video_file"> <input
@@ -78,32 +77,19 @@
   document.getElementById('video_file').addEventListener('change', handleFileSelect, false);
 </script>
 
-<<<<<<< HEAD
-<h2>Create New Playlist</h2>
+<h2>Append Video</h2>
 
-<form name="createPlaylistForm" method="post">
-	<input name="id_playlist" value="id_playlist" /> 
-	<input type="button" id="createButton" value="Upload Video"
-		onClick="JavaScript:handleCreateClick(this)">
+<form name="appendVideoForm" method="post">
+	<input name="id_playlist" value="id_playlist" /> <input
+		name="id_video" value="id_video" /> <input type="button"
+		id="createButton" value="Append Video"
+		onClick="JavaScript:requestAppendVideoSegment(this)">
 </form>
-=======
-<h3>Remote Constants between 1 and 3</h3>
 
-<div id="remoteConstantList"></div>
->>>>>>> refs/remotes/origin/bettermaybe
+=======
 
 <h3>Remote Video Segments</h3>
 
 The following is RAW JSON
 
 <div id="remoteVideoSegmentsList"></div>
-
-
-<h2>Append Video</h2>
-
-<form name="appendVideoForm" method="post">
-	<input name="id_playlist" value="id_playlist" /> 
-	<input name="id_video" value="id_video" /> 
-	<input type="button" id="createButton" value="Append Video"
-		onClick="JavaScript:requestAppendVideoSegment(this)">
-</form>

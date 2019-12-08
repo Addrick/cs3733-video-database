@@ -18,7 +18,6 @@ function handleUploadClick(e) {
 	// base64EncodedValue":"data:text/plain;base64,My4xND....."
 	var segments = document.createForm.base64Encoding.value.split(',');
 	data["base64EncodedValue"] = segments[1];  // skip first one 
-	alert(data);
 
 	var js = JSON.stringify(data);
 	console.log("JS:" + js);
