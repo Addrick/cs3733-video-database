@@ -17,7 +17,7 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 import db.PlaylistsDAO;
 import http.AllPlaylistsResponse;
-import model.Playlist;
+import model.*;
 
 /**
  * Eliminated need to work with JSON
