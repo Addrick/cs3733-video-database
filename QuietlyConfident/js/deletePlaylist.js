@@ -6,10 +6,10 @@ function processDeletePlaylistResponse(result) {
   refreshPlaylistList();
 }
 
-function requestDeletePlaylist(val) {
-   if (confirm("Request to delete " + val)) {
-	   processDeletePlaylist(val);
-   }
+function requestDeletePlaylist(val)
+{
+	val = val.slice(3);
+	if (confirm("Are you sure you want to delete the playslist " + val + "?")) {processDeletePlaylist(val);}
 }
 
 function processDeletePlaylist(val) {

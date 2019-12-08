@@ -6,10 +6,10 @@ function processDeleteVideoSegmentResponse(result) {
   refreshVideoSegmentsList();
 }
 
-function requestDeleteVideoSegment(val) {
-   if (confirm("Request to delete " + val)) {
-	   processDeleteVideoSegment(val);
-   }
+function requestDeleteVideoSegment(val)
+{
+	val = val.slice(3);
+	if (confirm("Are you sure you want to delete " + val + "?")) {processDeleteVideoSegment(val);}
 }
 
 function processDeleteVideoSegment(val) {

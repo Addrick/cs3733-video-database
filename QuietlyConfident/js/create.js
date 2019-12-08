@@ -8,9 +8,10 @@ function processCreateResponse(result)
 
 function handleCreateClick()
 {
-	var txt;
 	var id_playlist = prompt("Enter Playlist Name:", "New Playlist");
 	if (id_playlist == null || id_playlist == "") {}
+	else if (id_playlist == "playlists" || id_playlist == "remote libraries" || id_playlist == "videos")
+		{alert("Forbidden playlist name. Please select a different name");}
 	else {
 		var data = {};
 		data["id_playlist"] = id_playlist;
