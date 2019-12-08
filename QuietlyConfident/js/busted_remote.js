@@ -6,7 +6,7 @@ function refreshRemoteList() {
   var js = JSON.stringify(data);	
 	
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", search_remote_url, true);
+  xhr.open("POST", list_remote_url, true);
   xhr.setRequestHeader("x-api-key", apikey);
 
   // send the collected data as JSON
