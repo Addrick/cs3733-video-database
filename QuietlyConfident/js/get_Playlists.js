@@ -40,7 +40,7 @@ function processPlaylistListResponse(result) {
 
 		var id_playlist = constantJson["id_playlist"];
 		var order_playlist = constantJson["order_playlist"];
-		output = output + "<div id=\"const" + id_playlist + "\"><b>" + "Playlist ID: " + id_playlist + ":</b> = " + "Playlist Order: " + order_playlist + "(<a href='javaScript:requestDeletePlaylist(\"" + id_playlist + "\")'><img src='deleteIcon.png'></img></a>) <br></div>";
+		output = output + "<div id=\"pl_" + id_playlist + "\"><b>" + "Playlist ID: " + id_playlist + ":</b> = " + "Playlist Order: " + order_playlist + " <button onclick=\"requestDeletePlaylist(document.getElementById('pl_" + id_playlist + "').id)\"><img src='deleteIcon.png'></img></a> <br></div>";
 	}
 
 	// Update computation result

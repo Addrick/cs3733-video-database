@@ -97,9 +97,7 @@ public class PlaylistsDAO {
             ps.setDouble(2,  playlist.order_playlist);
             ps.execute();
             ps = conn.prepareStatement("CREATE TABLE `Video and Playlist DB`.`" + playlist.id_playlist
-            							+ "` (`id_video` VARCHAR(64) NOT NULL,"
-            							+ "PRIMARY KEY (`id_video`),"
-            							+ "UNIQUE INDEX `id_video_UNIQUE` (`id_video` ASC));");
+            							+ "` (`id_video` VARCHAR(64) NOT NULL);");
             ps.execute();
             return true;
 
