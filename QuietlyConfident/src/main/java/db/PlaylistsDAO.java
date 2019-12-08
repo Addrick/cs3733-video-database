@@ -198,7 +198,15 @@ public class PlaylistsDAO {
     private Playlist generatePlaylist(ResultSet resultSet) throws Exception {
         String id_playlist  = resultSet.getString("id_playlist");
         int order_playlist = (int)resultSet.getDouble("order_playlist");
-        return new Playlist (id_playlist, order_playlist);
+        List<String> videos = new ArrayList<>();
+        Statement statement2 = conn.createStatement();
+        String query = "SELECT * FROM `Video and Playlist DB`.`" + id_playlist + "`;";
+        System.out.println("selected playlist");
+        ResultSet vids = statement2.executeQuery(query);
+        while (vids.next()) {videos.add(vids.getString("id_video"));}
+        vids.close();
+        statement2.close();
+        return new Playlist(id_playlist, order_playlist, videos);
     }
 
 }
