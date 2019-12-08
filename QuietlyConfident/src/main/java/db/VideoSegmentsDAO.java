@@ -107,6 +107,38 @@ public class VideoSegmentsDAO {
             throw new Exception("Failed to insert video: " + e.getMessage());
         }
     }
+    
+    public boolean markVideoSegment(VideoSegment video) throws Exception {
+        try {
+        	String query = "UPDATE `Video and Playlist DB`.`videos` SET public=? WHERE id_video=? AND system=?;";
+        	PreparedStatement ps = conn.prepareStatement(query);
+            ps.setDouble(1, 0);
+            ps.setString(2, video.id_video);
+            ps.setDouble(3, 1);
+            int numAffected = ps.executeUpdate();
+            ps.close();
+            
+            return (numAffected == 1);
+        } catch (Exception e) {
+            throw new Exception("Failed to mark video: " + e.getMessage());
+        }
+    }
+    
+    public boolean unmarkVideoSegment(VideoSegment video) throws Exception {
+        try {
+        	String query = "UPDATE `Video and Playlist DB`.`videos` SET public=? WHERE id_video=? AND system=?;";
+        	PreparedStatement ps = conn.prepareStatement(query);
+            ps.setDouble(1, 1);
+            ps.setString(2, video.id_video);
+            ps.setDouble(3, 1);
+            int numAffected = ps.executeUpdate();
+            ps.close();
+            
+            return (numAffected == 1);
+        } catch (Exception e) {
+            throw new Exception("Failed to unmark video: " + e.getMessage());
+        }
+    }
 
     public List<VideoSegment> getAllVideoSegments() throws Exception {
         
