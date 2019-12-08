@@ -15,9 +15,9 @@ function refreshRemoteList() {
 	xhr.onloadend = function () {
 		if (xhr.readyState == XMLHttpRequest.DONE) {
 			console.log ("XHR:" + xhr.responseText);
-			processPlaylistListResponse(xhr.responseText);
+			processRemoteListResponse(xhr.responseText);
 		} else {
-			processPlaylistListResponse("N/A");
+			processRemoteListResponse("N/A");
 		}
 	};
 }

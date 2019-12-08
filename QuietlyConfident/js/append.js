@@ -3,7 +3,7 @@ function processAppendVideoSegmentResponse(result) {
   // contents dynamically via javascript
   console.log("appended :" + result);
   
-  refreshVideoSegmentsList();
+  refreshPlaylistList();
 }
 
 function processAppendVideoSegment(val) {

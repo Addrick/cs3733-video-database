@@ -12,7 +12,7 @@ var list_vid_url   	    = base_url + "list_video_segments"; 	// GET
 var search_videos_url 	= base_url + "search_video_segments" 	// GET
 var rem_video_url		= base_url + "remove_video_segment"		// POST because of CORS
 var append_video_url	= base_url + "append_video_segment"		// POST
-var list_remote_url   	= base_url + "listRemote";    		// GET
+var list_remote_url   	= base_url + "list_remote";    		// GET
 
 
 //generated from aws. BAD IDEA to encode here, but just getting something done.
