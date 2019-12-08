@@ -9,11 +9,13 @@ function processUploadResponse(result) {
 
 function handleUploadClick(e) {
 	var form = document.createForm;
+	
 	var data = {};
-	data["id_video"] = form.id_video.value;
-	data["characters"] = form.id_video.value;
-	data["transcript"] = form.id_video.value;
-	data["system"] = true;
+	data["id_video"] 			= form.id_video.value;
+	data["characters"] 			= form.characters.value;
+//	data["transcript"] 			= form.transcript.value;
+	data["system"] 				= true;
+	alert(data["characters"])
 
 	// base64EncodedValue":"data:text/plain;base64,My4xND....."
 	var segments = document.createForm.base64Encoding.value.split(',');

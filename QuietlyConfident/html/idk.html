@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<title>Star Trek Video DB</title>
 
 <script type='text/javascript' src='../js/api.js'></script>
 <script type='text/javascript' src='../js/get_Playlists.js'></script>
@@ -23,8 +24,8 @@
 	}
 </script>
 </head>
+<body>
 <body onload="initialize()">
-
 
 	<h3>Playlist List:</h3>
 	<div id="playlistList"></div>
@@ -33,17 +34,17 @@
 	<h3>Video List:</h3>
 	<div id="videoList"></div>
 
-	<title>HTML Video embed</title>
 </head>
 
 
 <h2>Upload New Video</h2>
 
 <form name="createForm" method="post">
-	<input name="id_video" value="id_video" /> <input name="characters"
-		value="characters" /> <input name="transcript" value="transcript" />
+	<input name="id_video" value="id_video" /> 
+	<input name="characters" value="characters" /> 
+	<input name="transcript" value="transcript" />
 
-	<input name="base64Encoding" hidden value="" /> Select a video in
+	<input name="base64Encoding" hidden="" value="" /> Select a video in
 	file: <input type="file" id="video_file" name="video_file"> <input
 		type="button" id="createButton" value="Upload Video" disabled
 		onClick="JavaScript:handleUploadClick(this)">
@@ -86,10 +87,10 @@
 		onClick="JavaScript:requestAppendVideoSegment(this)">
 </form>
 
-=======
 
-<h3>Remote Video Segments</h3>
-
+<h2>Remote Video Segments</h2>
 The following is RAW JSON
 
+
 <div id="remoteVideoSegmentsList"></div>
+</body>

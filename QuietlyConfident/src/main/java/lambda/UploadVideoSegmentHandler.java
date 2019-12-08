@@ -115,7 +115,7 @@ public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegm
 					System.out.println("Video added to RDS successfully.");
 				}
 				else {
-					System.out.println("Error adding video to RDS.");
+					System.out.println("Error adding video to RDS. (likely duplicate)");
 				}
 				response = new UploadVideoSegmentResponse(req.id_video);
 			} else {

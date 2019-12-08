@@ -419,10 +419,14 @@ definitions:
   UploadVideo:
     type: object
     properties:
-      filepath:
+      id_video:
+        type: string
+  	  characters:
+        type: string
+  	  transcript:
+        type: string
+  	  base64EncodedValue:
         type: string 
-      title:
-         type: string      
            
   SearchVideoSegments:
     type: object
