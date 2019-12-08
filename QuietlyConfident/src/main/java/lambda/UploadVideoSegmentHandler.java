@@ -60,6 +60,9 @@ public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegm
 	boolean UploadVideoSegment(String id_video, String characters, String transcript, String url_video, boolean system) throws Exception { 
 		if (logger != null) { logger.log("in UploadVideoSegment"); }
 		VideoSegmentsDAO dao = new VideoSegmentsDAO();
+		logger.log("video item id field: " + id_video);
+		logger.log("video item character field: " + characters);
+		logger.log("video item script field: " + transcript);
 
 		// check if present
 		VideoSegment exist = dao.getVideoSegment(id_video);

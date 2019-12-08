@@ -13,13 +13,13 @@ public class UploadVideoSegmentRequest {
 	public void setName(String id_video) { this.id_video = id_video; }	
 	
 	public String getCharacters( ) { return characters; }
-	public void setCharacters(String characters) { this.id_video = characters; }	
+	public void setCharacters(String characters) { this.characters = characters; }	
 	
 	public String getTranscript( ) { return transcript; }
 	public void setTranscript(String transcript) { this.transcript = transcript; }	
 	
 	public String getUrl_video( ) { return url_video; }
-	public void setUrl_video(String url_video) { this.id_video = url_video; }
+	public void setUrl_video(String url_video) { this.url_video = url_video; }
 	
 	public String getBase64EncodedValue() { return base64EncodedValue; }
 	public void setBase64EncodedValue(String base64EncodedValue) { this.base64EncodedValue = base64EncodedValue; }
@@ -36,6 +36,7 @@ public class UploadVideoSegmentRequest {
 		this.transcript = transcript;
 		this.url_video = "https://3733quietlyconfident.s3.us-east-2.amazonaws.com/videosegments/" + id_video + ".ogg"; 
 		this.system = system;
+		
 
 	}
 	

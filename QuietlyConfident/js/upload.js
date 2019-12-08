@@ -13,7 +13,7 @@ function handleUploadClick(e) {
 	var data = {};
 	data["id_video"] 			= form.id_video.value;
 	data["characters"] 			= form.characters.value;
-//	data["transcript"] 			= form.transcript.value;
+	data["transcript"] 			= form.transcript.value;
 	data["system"] 				= true;
 	alert(data["characters"])
 
