@@ -25,7 +25,7 @@ public class CreatePlaylistHandler implements RequestHandler<CreatePlaylistReque
 		
 		// check if present
 		Playlist exist = dao.getPlaylist(id_playlist);
-		Playlist playlist = new Playlist (id_playlist, 1); // get rid of 1 later when we change database object
+		Playlist playlist = new Playlist (id_playlist, 0); // initialize playlist with 0 videos
 		if (exist == null) {
 
 			System.out.println("Playlist didn't already exist");

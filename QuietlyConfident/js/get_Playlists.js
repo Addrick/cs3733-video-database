@@ -40,13 +40,16 @@ function processPlaylistListResponse(result) {
 
 		var id_playlist = constantJson["id_playlist"];
 		var order_playlist = constantJson["order_playlist"];
+		var s = "";
+		if(order_playlist != 1)
+			s = "s";
 		var videos = constantJson["videos"];
 		var vidlist = "<ol>";
 		for(var j = 0; j < videos.length; j++) {
 			vidlist = vidlist + "<li>" + videos[j] + "</li>";
 		}
 		vidlist = vidlist + "</ol>";
-		output = output + "<div id=\"pl_" + id_playlist + "\"><b>" + "Playlist ID: " + id_playlist + ":</b> = " + "Playlist Order: " + order_playlist + " <button onclick=\"requestDeletePlaylist(document.getElementById('pl_" + id_playlist + "').id)\"><img src='deleteIcon.png'></img></button>" +
+		output = output + "<div id=\"pl_" + id_playlist + "\"><b>" + "Playlist ID: " + id_playlist + "</b> (" + order_playlist + " video" + s + ") <button onclick=\"requestDeletePlaylist(document.getElementById('pl_" + id_playlist + "').id)\"><img src='deleteIcon.png'></img></button>" +
 				vidlist + "</div>";
 	}
 

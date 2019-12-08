@@ -127,6 +127,10 @@ public class PlaylistsDAO {
                     ps = conn.prepareStatement("INSERT INTO `Video and Playlist DB`.`" + playlist.id_playlist + "` (id_video) values(?);");
                     ps.setString(1, video.id_video);
                     ps.execute();
+                    ps = conn.prepareStatement("UPDATE `Video and Playlist DB`.`playlists` SET `order_playlist` = ? WHERE `id_playlist` = ?;");
+                    ps.setDouble(1, playlist.order_playlist + 1);
+                    ps.setString(2, playlist.id_playlist);
+                    ps.execute();
                     System.out.println("Appended video segment");
                     return true; // Returns true when both playlist and video segment exists, meaning the VS was added to the playlist
                 }
@@ -159,6 +163,9 @@ public class PlaylistsDAO {
                     resultSet.close();
                     ps = conn.prepareStatement("DELETE FROM `Video and Playlist DB`.`" + playlist.id_playlist + "` WHERE id_video = `" + video.id_video + "`;");
                     ps.execute();
+                    ps = conn.prepareStatement("UPDATE `Video and Playlist DB`.`playlists` SET `order_playlist` = ? WHERE `id_playlist` = ?;");
+                    ps.setDouble(1, playlist.order_playlist - 1);
+                    ps.setString(2, playlist.id_playlist);
                     System.out.println("Removed video segment from " + playlist.id_playlist);
                     return true; // Returns true when both playlist and video segment exists, meaning the VS was removed to the playlist
                 }

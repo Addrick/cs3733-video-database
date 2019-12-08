@@ -22,14 +22,13 @@ public class AppendVideoSegmentHandler implements RequestHandler<AppendVideoSegm
 		
 		// check if present
 		Playlist existPL = dao.getPlaylist(id_playlist);
-		Playlist playlist = new Playlist (id_playlist, 1); // get rid of 1 later when we change database object
 		VideoSegment video = new VideoSegment (id_video, "", "", "", false);
 		if (existPL == null) {
 			System.out.println("Playlist does not exist");
 			return false;
 		} else {
 			System.out.println("Playlist exists. Attempting to append VS...");
-			return dao.appendToPlaylist(playlist, video);
+			return dao.appendToPlaylist(existPL, video);
 		}
 	}
 	
