@@ -16,20 +16,19 @@ public class RemoveVideoSegmentHandler implements RequestHandler<RemoveVideoSegm
 	 *  
 	 * @throws Exception 
 	 */
-	boolean removeVS(String id_playlist, String id_video) throws Exception { 
+	boolean removeVS(String id_playlist, String id_video, int num) throws Exception { 
 		if (logger != null) { logger.log("in removeVS"); }
 		PlaylistsDAO dao = new PlaylistsDAO();
 		
 		// check if present
 		Playlist existPL = dao.getPlaylist(id_playlist);
-		Playlist playlist = new Playlist (id_playlist, 1); // get rid of 1 later when we change database object
 		VideoSegment video = new VideoSegment (id_video, "", "", "", false);
 		if (existPL == null) {
 			System.out.println("Playlist does not exist");
 			return false;
 		} else {
 			System.out.println("Playlist exists. Attempting to remove VS...");
-			return dao.removeFromPlaylist(playlist, video);
+			return dao.removeFromPlaylist(existPL, video, num);
 		}
 	}
 	
@@ -40,7 +39,7 @@ public class RemoveVideoSegmentHandler implements RequestHandler<RemoveVideoSegm
 
 		RemoveVideoSegmentResponse response;
 		try {
-			if (removeVS(req.id_playlist, req.id_video))
+			if (removeVS(req.id_playlist, req.id_video, req.num))
 			{
 				response = new RemoveVideoSegmentResponse("playlist: " + req.id_playlist + "  video: " + req.id_video);
 			}

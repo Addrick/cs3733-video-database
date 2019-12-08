@@ -3,6 +3,7 @@ package http;
 public class RemoveVideoSegmentRequest {
 	public String id_playlist;
 	public String id_video;
+	public int num; // represents the position in the playlist
 	
 	public String getPL( ) { return id_playlist; }
 	public void setPL(String id_playlist) { this.id_playlist = id_playlist; }
@@ -12,13 +13,14 @@ public class RemoveVideoSegmentRequest {
 	
 	public RemoveVideoSegmentRequest() {}
 	
-	public RemoveVideoSegmentRequest (String pl, String vs) {
+	public RemoveVideoSegmentRequest (String pl, String vs, int n) {
 		this.id_playlist = pl;
 		this.id_video = vs;
+		this.num = n;
 		System.out.println("Request to remove video " + vs + " from playlist " + pl);
 	}
 	
 	public String toString() {
-		return "removeVS(" + id_playlist  + ", " + id_video + ")";
+		return "removeVS(" + id_playlist  + ", " + id_video + ", " + num + ")";
 	}
 }
