@@ -21,7 +21,6 @@ import model.RemoteLibrary;
 
 /**
  * Eliminated need to work with JSON
- * TODO: The systemPlaylists() class is likely unnecessary (and useless?) and can be removed
  */
 public class ListAllRemoteHandler implements RequestHandler<Object,AllRemoteResponse> {
 
@@ -40,10 +39,9 @@ public class ListAllRemoteHandler implements RequestHandler<Object,AllRemoteResp
 		logger.log("Loading Java Lambda handler to list all remote sites");
 
 		AllRemoteResponse response;
-		try {			System.out.println("here");
+		try {			
+			System.out.println("here");
 
-			// get all user defined playlists AND system-defined playlists.
-			// Note that user defined playlists override system-defined playlists.
 			List<RemoteLibrary> list = getRemoteLibraries();
 
 			response = new AllRemoteResponse(list, 200);

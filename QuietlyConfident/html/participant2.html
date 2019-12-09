@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script type='text/javascript' src='../js/api.js'></script>
+<script type='text/javascript' src='../js/get_Playlists.js'></script>
+<script type='text/javascript' src='../js/get_Videos.js'></script>
+
+<script type="text/javascript">
+	function initialize() {
+
+		// get all videos and playlists
+		refreshPlaylistList();
+		refreshVideoSegmentsList();
+
+	}
+</script>
+</head>
+<body onload="initialize()">
+
+
+	<h3>Playlist List:</h3>
+	<div id="playlistList"></div>
+
+	<h3>Video List:</h3>
+	<div id="videoList"></div>
+
+	<script type='text/javascript' src='../js/get_Playlists.js'></script>
+	<script type='text/javascript' src='../js/get_Videos.js'></script>
+	<title>HTML Video embed</title>
+</head>
+<body>
+	<h1>Participant Landing Page</h1>
+	<p>This webpage shows all actions that the Participant can do in
+		the library.</p>
+	<form action="/action_page.php">
+		Search for a video segment by number: <input type="text" name="fname"><br>
+		<input type="submit" value="Search">
+	</form>
+	<form action="/action_page.php">
+		Search for a playlist by number: <input type="text" name="fname"><br>
+		<input type="submit" value="Search">
+	</form>
+	<div>
+		<TABLE style="float: left" BORDER="5" WIDTH="50%" CELLPADDING="4"
+			CELLSPACING="3">
+			<TR>
+				<TH COLSPAN="4"><BR>
+					<H3>List of Video Segments in Library</H3></TH>
+			</TR>
+			<TR>
+				<TH>Video Clip Number</TH>
+				<TH>Text Associated with Video Clip</TH>
+				<TH>Video Clip</TH>
+				<TH>Select Video Clip</TH>
+			</TR>
+			<TR ALIGN="CENTER">
+				<TD>1</TD>
+				<TD>Make yourself a drink, Captain. It's good stuff, I distill
+					it myself.</TD>
+				<TD><iframe width="560" height="315"
+						src=""
+						frameborder="0" allowfullscreen></iframe> </iframe></TD>
+				<td><input type="checkbox" /></td>
+			</TR>
+			<TR ALIGN="CENTER">
+				<TD>2</TD>
+				<TD>What government? Like I told you, I got the territory and I
+					run it, that's all.</TD>
+				<TD><iframe width="560" height="315"
+						src=""
+						frameborder="0" allowfullscreen></iframe> </iframe></TD>
+				<td><input type="checkbox" /></td>
+			</TR>
+			<TR ALIGN="CENTER">
+				<TD>3</TD>
+				<TD>Now let me get this straight. You want us to supply you
+					with arms and assistance so you can carry out an aggression against
+					your neighbors?</TD>
+				<TD><iframe width="560" height="315"
+						src=""
+						frameborder="0" allowfullscreen></iframe> </iframe></TD>
+				<td><input type="checkbox" /></td>
+			</TR>
+			<TR ALIGN="CENTER">
+				<TD>4</TD>
+				<TD>I'm merely saying, the computers can offer us no logical,
+					rational, factual way out of our current dilemma.</TD>
+				<TD><iframe width="560" height="315"
+						src=""
+						frameborder="0" allowfullscreen></iframe> </iframe></TD>
+				<td><input type="checkbox" /></td>
+			</TR>
+			<TR ALIGN="CENTER">
+				<TD>5</TD>
+				<TD>If I understand you correctly, that would seem to be a
+					problem.</TD>
+				<TD><iframe width="560" height="315"
+						src=""
+						frameborder="0" allowfullscreen></iframe> </iframe></TD>
+				<td><input type="checkbox" /></td>
+			</TR>
+			<TR ALIGN="CENTER">
+				<TD>6</TD>
+				<TD>The most cooperative man in this world is a dead man. And
+					if you don't keep your mouth shut, you're gonna be cooperating.</TD>
+				<TD><iframe width="560" height="315"
+						src=""
+						frameborder="0" allowfullscreen></iframe> </iframe></TD>
+				<td><input type="checkbox" /></td>
+			</TR>
+			<TR ALIGN="CENTER">
+				<TD>7</TD>
+				<TD>Alright young man, we'll guarantee you a piece of the
+					action if we can pull this thing off.</TD>
+				<TD><iframe width="560" height="315"
+						src=""
+						frameborder="0" allowfullscreen></iframe> </iframe></TD>
+				<td><input type="checkbox" /></td>
+			</TR>
+			<TR ALIGN="CENTER">
+				<TD>8</TD>
+				<TD>What do you think we're here for? A cut of your deal?
+					Forget it.</TD>
+				<TD><iframe width="560" height="315"
+						src=""
+						frameborder="0" allowfullscreen></iframe> </iframe></TD>
+				<td><input type="checkbox" /></td>
+			</TR>
+			<TR ALIGN="CENTER">
+				<TD>9</TD>
+				<TD>If you cooperate with us then maybe we'll cut you in for a
+					piece of the action.</TD>
+				<TD><iframe width="560" height="315"
+						src=""
+						frameborder="0" allowfullscreen></iframe> </iframe></TD>
+				<td><input type="checkbox" /></td>
+			</TR>
+			<TR ALIGN="CENTER">
+				<TD>10</TD>
+				<TD>And celebrate the syndicate.</TD>
+				<TD><iframe width="560" height="315"
+						src=""
+						frameborder="0" allowfullscreen></iframe> </iframe></TD>
+				<td><input type="checkbox" /></td>
+			</TR>
+		</TABLE>
+		<TABLE style="float: left" BORDER="5" WIDTH="50%" CELLPADDING="4"
+			CELLSPACING="3">
+			<TR>
+				<TH COLSPAN="4"><BR>
+					<H3>List of Playlists in Library</H3></TH>
+			</TR>
+			<TR>
+				<TH>Playlist Number</TH>
+				<th>Playlist Name</th>
+				<TH>Playlist Clip</TH>
+				<TH>Select Playlist</TH>
+			</TR>
+			<TR ALIGN="CENTER">
+				<TD>1</TD>
+				<TD>Quietly Confident's Playlist</TD>
+				<TD></TD>
+
+				<td><input type="checkbox" /></td>
+			</TR>
+			<TR ALIGN="CENTER">
+				<TD>2</TD>
+				<TD>QC's Playlist #2</TD>
+				<TD></TD>
+				<td><input type="checkbox" /></td>
+		</TABLE>
+	</div>
+	<input type="button" value="Append Video Segment" onclick="AppendVS()" />
+	<input type="button" value="Remove Video Segment" onclick="RemoveVS()" />
+	<input type="button" value="Play Playlist" onclick="PlayPlaylist()" />
+	<input type="button" value="Add Playlist" onclick="AddPlaylist()" />
+	<input type="button" value="Remove Playlist" onclick="RemovePlaylist()" />
+	<input type="submit" value="Go To Playlists" />
+	<form action="http://google.com"></form>
+
+</body>
+</html>
