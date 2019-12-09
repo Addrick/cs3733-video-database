@@ -13,6 +13,7 @@
 <script type='text/javascript' src='../js/deletePlaylist.js'></script>
 <script type='text/javascript' src='../js/getRemote.js'></script>
 <script type='text/javascript' src='../js/append.js'></script>
+<script type='text/javascript' src='../js/addRemote.js'></script>
 
 <script type="text/javascript">
 	function initialize() {
@@ -34,8 +35,6 @@
 
 	<h3>Video List:</h3>
 	<div id="videoList"></div>
-
-</head>
 
 
 <h2>Upload New Video</h2>
@@ -81,5 +80,7 @@
 
 <h2>Remote Video Segments</h2>
 
-<div id="remoteVideoSegmentsList"></div>
+	<div id="remoteVideoSegmentsList"></div>
+	<button onclick="handleAddRemoteLibraryClick()">Add new remote library</button>
+	
 </body>

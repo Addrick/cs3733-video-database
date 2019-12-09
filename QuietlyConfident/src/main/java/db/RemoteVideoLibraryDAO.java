@@ -76,7 +76,7 @@ public class RemoteVideoLibraryDAO {
                 return false;
             }
 
-            ps = conn.prepareStatement("INSERT INTO `Video and Playlist DB`.`remote libraries` values(?,);");
+            ps = conn.prepareStatement("INSERT INTO `Video and Playlist DB`.`remote libraries` values(?);");
             ps.setString(1,  video.url);
             ps.execute();
             return true;
