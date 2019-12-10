@@ -98,7 +98,7 @@ public class VideoSegmentsDAO {
             ps.setString(2,  video.characters);
             ps.setString(3,  video.transcript);
             ps.setString(4,  video.url_video);
-            ps.setDouble(5, 1);
+            ps.setBoolean(5, video.system);
             ps.setDouble(6, 1);
             ps.execute();
             return true;
@@ -150,19 +150,16 @@ public class VideoSegmentsDAO {
             String query = "SELECT * FROM `Video and Playlist DB`.videos";
             ResultSet resultSet = statement.executeQuery(query);
 
-            while (resultSet.next()) {         System.out.println("nice");
-
-            VideoSegment c = generateVideoSegment(resultSet);
-                System.out.println(c.id_video);
-
-                allvideos.add(c);
+            while (resultSet.next()) {
+            	VideoSegment c = generateVideoSegment(resultSet);
+            	allvideos.add(c);
             }
             resultSet.close();
             statement.close();
             return allvideos;
 
         } catch (Exception e) {
-            throw new Exception("Failed in getting books: " + e.getMessage());
+            throw new Exception("Failed in getting videos: " + e.getMessage());
         }
     }
     
@@ -173,9 +170,10 @@ public class VideoSegmentsDAO {
         String characters  = resultSet.getString("characters");
         String transcript  = resultSet.getString("transcript");
         String url_video  = resultSet.getString("url_video");
+        boolean system = resultSet.getBoolean("system");
         boolean visible = resultSet.getBoolean("public");
 
-        return new VideoSegment (id_video, characters, transcript, url_video, visible);
+        return new VideoSegment (id_video, characters, transcript, url_video, system, visible);
     }
 
 }

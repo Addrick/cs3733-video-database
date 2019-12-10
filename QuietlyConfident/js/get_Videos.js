@@ -40,9 +40,10 @@ function processVideoSegmentListResponse(result, user) {
 		var characters = constantJson["characters"];
 		var transcript = constantJson["transcript"];
 		var url_video = constantJson["url_video"];
-		var visible = constantJson["system"];
-		console.log("user: " + user + "   visible: "+ visible);
-		var markButton = "<br>";
+		var system = constantJson["system"];
+		var visible = constantJson["visible"];
+		var markButton = " ";
+		var systemIcon = "<br>";
 		if(user)
 		{
 			if(visible){
@@ -55,12 +56,17 @@ function processVideoSegmentListResponse(result, user) {
 				 			 "<option>&#128274 Private</option>" +
 				 			 "<option>&#127758 Public</option>" +
 				 			 "</select>" + markButton;}
+			if(system){
+				systemIcon = "<span title=\"This video is stored in the local bucket\">&#128193</span>" + systemIcon;}
+			else{
+				systemIcon = "<span title=\"This video is stored in a remote library\">&#9729</span>" + systemIcon;}
 		}
 		output = output + "<div id=\"vs_" + id_video + "\">"
 						+ "<b>Video ID: " + id_video + "</b> "
-						+ "<button onclick=\"requestDeleteVideoSegment(document.getElementById('vs_" + id_video + "').id)\"><img src='deleteIcon.png'></img></button>"
-						+ "<button onclick=\"processAppendVideoSegment(document.getElementById('vs_" + id_video + "').id)\">Add to Playlist...</button>"
+						+ "<button onclick=\"requestDeleteVideoSegment(document.getElementById('vs_" + id_video + "').id)\"><img src='deleteIcon.png'></img></button> "
+						+ "<button onclick=\"processAppendVideoSegment(document.getElementById('vs_" + id_video + "').id)\">Add to Playlist...</button> "
 						+ markButton
+						+ systemIcon
 						+ "Transcript: " + transcript + "<br>"
 						+ "<TD><iframe allowfullscreen src = " + url_video + "></iframe> </TD><br><br></div>";
 	}
