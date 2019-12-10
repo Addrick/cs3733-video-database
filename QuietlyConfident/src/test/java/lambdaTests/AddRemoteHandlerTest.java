@@ -60,7 +60,7 @@ public class AddRemoteHandlerTest extends LambdaTest {
     @Test
     public void testAddRemoteSite() {
     	// create VideoSegment
-        AddRemoteRequest csr = new AddRemoteRequest("to-delete-again");
+        AddRemoteRequest csr = new AddRemoteRequest("to-delete-again", "some-key");
         
         AddRemoteResponse resp = new AddRemoteHandler().handleRequest(csr, createContext("create"));
         Assert.assertEquals(200, resp.httpCode);
