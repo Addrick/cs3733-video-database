@@ -16,6 +16,7 @@
 <script type='text/javascript' src='../js/unregisterRemote.js'></script>
 <script type='text/javascript' src='../js/mark.js'></script>
 <script type='text/javascript' src='../js/unmark.js'></script>
+<script type='text/javascript' src='../js/search.js'></script>
 
 <script type="text/javascript">
 	function initialize() {
@@ -36,7 +37,9 @@
 		<button onclick="handleCreateClick()">+</button></span></h2>
 	<div id="playlistList"></div><br>
 
-	<h2><u>Video List:</u></h2>
+	<h2><u>Video List:</u>  
+		<span title="Search for a video">
+		<button onclick="handleSearch()">&#128269</button></span></h2>
 	<div id="videoList"></div><br>
 	
 	<h2><u>Remote Libraries</u>
