@@ -99,7 +99,8 @@ public class RemoteVideoSegmentsDAO {
             while (resultSet.next()) {         System.out.println("nice");
 
             RemoteLibrary c = generateRemoteLibrary(resultSet);
-                System.out.println(c.url);
+            System.out.println(c.url);
+            System.out.println(c.key);
 
                 allvideos.add(c);
             }
@@ -114,7 +115,8 @@ public class RemoteVideoSegmentsDAO {
     
     private RemoteLibrary generateRemoteLibrary(ResultSet resultSet) throws Exception {
         String url  = resultSet.getString("url");
-        return new RemoteLibrary (url);
+        String key  = resultSet.getString("key");
+        return new RemoteLibrary (url, key);
     }
 
 }
