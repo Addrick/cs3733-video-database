@@ -46,20 +46,19 @@ function processVideoSegmentListResponse(result, user) {
 		var systemIcon = "<br>";
 		if(user)
 		{
-			if(visible){
-				markButton = "<select onchange=\"markVS(document.getElementById('vs_" + id_video + "').id)\">" +
-							 "<option>&#127758 Public</option>" +
-						   	 "<option>&#128274 Private</option>" +
-						   	 "</select>" + markButton;}
-			else{
-				markButton = "<select onchange=\"unmarkVS(document.getElementById('vs_" + id_video + "').id)\">" +
-				 			 "<option>&#128274 Private</option>" +
-				 			 "<option>&#127758 Public</option>" +
-				 			 "</select>" + markButton;}
 			if(system){
-				systemIcon = "<span title=\"This video is stored in the local bucket\">&#128193</span>" + systemIcon;}
-			else{
-				systemIcon = "<span title=\"This video is stored in a remote library\">&#9729</span>" + systemIcon;}
+				systemIcon = "<span title=\"This video is stored in the local bucket\">&#128193</span>" + systemIcon;
+				if(visible){
+					markButton = "<select onchange=\"markVS(document.getElementById('vs_" + id_video + "').id)\">" +
+								 "<option>&#127758 Public</option>" +
+								 "<option>&#128274 Private</option>" +
+								 "</select>" + markButton;}
+				else{
+					markButton = "<select onchange=\"unmarkVS(document.getElementById('vs_" + id_video + "').id)\">" +
+								 "<option>&#128274 Private</option>" +
+								 "<option>&#127758 Public</option>" +
+								 "</select>" + markButton;}}
+			else{systemIcon = "<span title=\"This video is stored in a remote library\">&#9729</span>" + systemIcon;}
 		}
 		output = output + "<div id=\"vs_" + id_video + "\">"
 						+ "<b>Video ID: " + id_video + "</b> "
