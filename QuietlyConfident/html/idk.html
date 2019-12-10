@@ -14,6 +14,7 @@
 <script type='text/javascript' src='../js/getRemote.js'></script>
 <script type='text/javascript' src='../js/append.js'></script>
 <script type='text/javascript' src='../js/addRemote.js'></script>
+<script type='text/javascript' src='../js/unregisterRemote.js'></script>
 
 <script type="text/javascript">
 	function initialize() {
@@ -29,11 +30,18 @@
 <body>
 <body onload="initialize()">
 
-	<h3>Playlist List  <span title="Create new Playlist"><button onclick="handleCreateClick()">+</button></span></h3>
-	<div id="playlistList"></div>
+	<h2><u>Playlist List</u>  
+		<span title="Create new Playlist">
+		<button onclick="handleCreateClick()">+</button></span></h2>
+	<div id="playlistList"></div><br>
 
-	<h3>Video List:</h3>
-	<div id="videoList"></div>
+	<h2><u>Video List:</u></h2>
+	<div id="videoList"></div><br>
+	
+	<h2><u>Remote Libraries</u>
+		<span title="Register new Remote Library">
+		<button onclick="addRemote()">+</button></span></h2>
+	<div id="remoteLibraryList"></div><br>
 
 
 <h2>Upload New Video</h2>
@@ -77,9 +85,6 @@
   document.getElementById('video_file').addEventListener('change', handleFileSelect, false);
 </script>
 
-<h2>Remote Video Segments</h2>
 
-	<div id="remoteVideoSegmentsList"></div>
-	<button onclick="handleAddRemoteLibraryClick()">Add new remote library</button>
 	
 </body>

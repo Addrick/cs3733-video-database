@@ -19,13 +19,13 @@ public class AddRemoteHandler implements RequestHandler<AddRemoteRequest,AddRemo
 	 *  
 	 * @throws Exception 
 	 */
-	boolean createRemoteLibrary(String url) throws Exception { 
+	boolean createRemoteLibrary(String url, String key) throws Exception { 
 		if (logger != null) { logger.log("in createRemoteLibrary"); }
 		RemoteVideoLibraryDAO dao = new RemoteVideoLibraryDAO();
 		
 		// check if present
 		RemoteLibrary exist = dao.getRemoteLibrary(url);
-		RemoteLibrary library = new RemoteLibrary (url); 
+		RemoteLibrary library = new RemoteLibrary(url, key); 
 		if (exist == null) {
 
 			System.out.println("RemoteLibrary didn't already exist");
@@ -44,7 +44,7 @@ public class AddRemoteHandler implements RequestHandler<AddRemoteRequest,AddRemo
 
 		AddRemoteResponse response;
 		try {
-			if (createRemoteLibrary(req.url))
+			if (createRemoteLibrary(req.url, req.key))
 			{
 				response = new AddRemoteResponse(req.url);
 			}

@@ -31,15 +31,14 @@ function processRemoteListResponse(result) {
 	console.log("res:" + result);
 	// Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
 	var js = JSON.parse(result);
-	var constList = document.getElementById('remoteVideoSegmentsList');
-
+	var constList = document.getElementById('remoteLibraryList');
 	var output = "";
 	for (var i = 0; i < js.list.length; i++) {
 		var constantJson = js.list[i];
 		console.log(constantJson);
 
-		var id_playlist = constantJson["url"];
-		output = output + "<div id=\"pl_" + id_playlist + "\"><b>" + "Playlist ID: " + id_playlist + ":</b> = " + " <button onclick=\"requestDeleteRemote(document.getElementById('pl_" + id_playlist + "').id)\"><img src='deleteIcon.png'></img></a> <br></div>";
+		var url = constantJson["url"];
+		output = output + "<div id=\"url_" + url + "\"><b>" + "Remote URL: " + url + "</b> <button onclick=\"requestUnregisterRemote(document.getElementById('url_" + url + "').id)\"><img src='deleteIcon.png'></img></a> <br></div>";
 	}
 
 	// Update computation result

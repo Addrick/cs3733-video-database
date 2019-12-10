@@ -3,9 +3,11 @@ package model;
 public class RemoteLibrary {
 	
 	public String url;
+	public String key;
 
-	public RemoteLibrary (String url) {
+	public RemoteLibrary (String url, String key) {
 		this.url = url;
+		this.key = key;
 	}
 	
 	/**

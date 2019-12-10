@@ -13,7 +13,7 @@ import model.RemoteLibrary;
  * @author 
  *
  */
-public class RemoteVideoLibraryDAO { 
+public class RemoteVideoLibraryDAO {
 
 	java.sql.Connection conn;
 
@@ -48,7 +48,7 @@ public class RemoteVideoLibraryDAO {
         }
     }
     
-    public boolean deleteRemoteLibrary(RemoteLibrary video) throws Exception {
+    public boolean unregisterRemoteLibrary(RemoteLibrary video) throws Exception {
         try {
             PreparedStatement ps = conn.prepareStatement("DELETE FROM `remote libraries` WHERE url = ?;");
             ps.setString(1, video.url);
@@ -76,8 +76,9 @@ public class RemoteVideoLibraryDAO {
                 return false;
             }
 
-            ps = conn.prepareStatement("INSERT INTO `Video and Playlist DB`.`remote libraries` values(?);");
+            ps = conn.prepareStatement("INSERT INTO `Video and Playlist DB`.`remote libraries` values(?, ?);");
             ps.setString(1,  video.url);
+            ps.setString(2,  video.key);
             ps.execute();
             return true;
 
@@ -118,7 +119,9 @@ public class RemoteVideoLibraryDAO {
     
     private RemoteLibrary generateRemoteLibrary(ResultSet resultSet) throws Exception {
         String url  = resultSet.getString("url");
-        return new RemoteLibrary (url);
+        String key  = resultSet.getString("key");
+        System.out.println(key);
+        return new RemoteLibrary (url, key);
     }
 
 }
