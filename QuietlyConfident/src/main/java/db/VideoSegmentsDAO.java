@@ -93,11 +93,13 @@ public class VideoSegmentsDAO {
                 return false;
             }
 
-            ps = conn.prepareStatement("INSERT INTO `Video and Playlist DB`.videos values(?,?,?,?);");
+            ps = conn.prepareStatement("INSERT INTO `Video and Playlist DB`.videos values(?,?,?,?,?,?);");
             ps.setString(1,  video.id_video);
             ps.setString(2,  video.characters);
             ps.setString(3,  video.transcript);
             ps.setString(4,  video.url_video);
+            ps.setDouble(5, 1);
+            ps.setDouble(6, 1);
             ps.execute();
             return true;
 

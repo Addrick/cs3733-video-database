@@ -33,7 +33,6 @@ function handleCreateClick()
 			if (xhr.readyState == XMLHttpRequest.DONE) {
 				if (xhr.status == 200) {
 					console.log ("XHR:" + xhr.responseText);
-					alert("XHR:" + xhr.responseText);
 					processCreateResponse(xhr.responseText);
 				} else {
 					processCreateResponse("N/A");
