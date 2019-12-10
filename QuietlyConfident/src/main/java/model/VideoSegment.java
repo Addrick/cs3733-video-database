@@ -6,7 +6,7 @@ public class VideoSegment {
 	public String characters;
 	public String transcript;
 	public String url_video;
-	public boolean system;      // when TRUE this is actually stored in S3 bucket
+	public boolean system;      // public when true, private when false
 	
 //	public VideoSegment (String name, String url, String chars, String transcript) {
 //		this.id_playlist = "";

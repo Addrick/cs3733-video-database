@@ -173,8 +173,9 @@ public class VideoSegmentsDAO {
         String characters  = resultSet.getString("characters");
         String transcript  = resultSet.getString("transcript");
         String url_video  = resultSet.getString("url_video");
+        boolean visible = resultSet.getBoolean("public");
 
-        return new VideoSegment (id_video, characters, transcript, url_video, false);
+        return new VideoSegment (id_video, characters, transcript, url_video, visible);
     }
 
 }

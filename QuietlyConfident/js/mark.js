@@ -1,24 +1,23 @@
-function markVSResponse(result) {
-  // Can grab any DIV or SPAN HTML element and can then manipulate its
-  // contents dynamically via javascript
+function markVSResponse(result)
+{
   console.log("marked :" + result);
-  
-  refreshVideoSegmentList();
+  refreshVideoSegmentsList();
 }
 
 function markVS(val) {
-		data["id_video"] = val.slice(3);
+	var data = {};
+	data["id_video"] = val.slice(3);
 
-		var js = JSON.stringify(data);
-		console.log("JS:" + js);
-		var xhr = new XMLHttpRequest();
-		  xhr.open("POST", mark_video_url, true);
+	var js = JSON.stringify(data);
+	console.log("JS:" + js);
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", mark_video_url, true);
 		
-		  // send the collected data as JSON
-		  xhr.send(js);
+	// send the collected data as JSON
+	xhr.send(js);
 		
-		  // This will process results and update HTML as appropriate. 
-		  xhr.onloadend = function () {
+	// This will process results and update HTML as appropriate. 
+	xhr.onloadend = function () {
 			  console.log(xhr);
 			  console.log(xhr.request);
 			  if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -34,7 +33,6 @@ function markVS(val) {
 			  } else {
 				  markVSResponse("N/A");
 			  }
-		  };
-	}
+	};
 }
 
