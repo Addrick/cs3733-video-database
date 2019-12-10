@@ -421,11 +421,11 @@ definitions:
     properties:
       id_video:
         type: string
-  	  characters:
+      characters:
         type: string
-  	  transcript:
+      transcript:
         type: string
-  	  base64EncodedValue:
+      base64EncodedValue:
         type: string 
            
   SearchVideoSegments:
