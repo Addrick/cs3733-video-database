@@ -47,6 +47,29 @@ public class VideoSegmentsDAO {
             throw new Exception("Failed in getting video: " + e.getMessage());
         }
     }
+    public List<VideoSegment> getPublicVideoSegments() throws Exception {
+        
+        try {
+            List<VideoSegment> allvideos = new ArrayList<>();
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM videos WHERE public=1;");
+            ResultSet resultSet = ps.executeQuery();
+            
+
+            while (resultSet.next()) {
+            	VideoSegment c = generateVideoSegment(resultSet);
+                System.out.println(c.id_video);
+
+            	allvideos.add(c);
+            }
+            resultSet.close();
+            ps.close();
+            return allvideos;
+            
+        } catch (Exception e) {
+        	e.printStackTrace();
+            throw new Exception("Failed in getting video: " + e.getMessage());
+        }
+    }
     
     public boolean updateVideoSegment(VideoSegment video) throws Exception {
         try {
