@@ -47,6 +47,42 @@ public class VideoSegmentsDAO {
             throw new Exception("Failed in getting video: " + e.getMessage());
         }
     }
+    
+    public List<VideoSegment> searchVideoSegment(String criteria) throws Exception {
+        
+        List<VideoSegment> allvideos = new ArrayList<>();
+        try {
+            Statement statement = conn.createStatement();
+            String query = "SELECT * FROM `Video and Playlist DB`.videos";
+            ResultSet resultSet = statement.executeQuery(query);
+            
+            // filter out all videos that don't contain criteria
+            System.out.println("looking based on criteria: " + criteria);
+            while (resultSet.next()) {
+            	VideoSegment c = generateVideoSegment(resultSet);
+            	System.out.println("Got here");
+            	if (c.characters != null) {           		
+            		if (c.characters.contains(criteria)) {
+            			allvideos.add(c);
+            			System.out.println("added a video");
+            		}
+            	}    
+            	else if (c.transcript != null) {           		
+                	if (c.transcript.contains(criteria)) {
+                		allvideos.add(c);
+                		System.out.println("added a video");
+                	}
+                }     
+            }
+            resultSet.close();
+            statement.close();
+            return allvideos;
+
+        } catch (Exception e) {
+            throw new Exception("Failed in getting videos: " + e.getMessage());
+        }
+    }
+    
     public List<VideoSegment> getPublicVideoSegments() throws Exception {
         
         try {
@@ -191,11 +227,13 @@ public class VideoSegmentsDAO {
         String id_video  = resultSet.getString("id_video");
     	System.out.println("got id");
         String characters  = resultSet.getString("characters");
-        String transcript  = resultSet.getString("transcript");
-        String url_video  = resultSet.getString("url_video");
+        System.out.println("characters: " + characters);
+        String transcript  = resultSet.getString("text");
+        System.out.println("transcript: " + transcript);
+        String url_video  = resultSet.getString("url");
         boolean system = resultSet.getBoolean("system");
         boolean visible = resultSet.getBoolean("public");
-
+        
         return new VideoSegment (id_video, characters, transcript, url_video, system, visible);
     }
 
