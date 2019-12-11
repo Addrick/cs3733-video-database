@@ -77,8 +77,8 @@ public class VideoSegmentsDAO {
         	PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, video.id_video);
             ps.setString(2, video.characters);
-            ps.setString(3, video.transcript);
-            ps.setString(4, video.url_video);
+            ps.setString(3, video.text);
+            ps.setString(4, video.url);
             int numAffected = ps.executeUpdate();
             ps.close();
             
@@ -119,8 +119,8 @@ public class VideoSegmentsDAO {
             ps = conn.prepareStatement("INSERT INTO `Video and Playlist DB`.videos values(?,?,?,?,?,?);");
             ps.setString(1,  video.id_video);
             ps.setString(2,  video.characters);
-            ps.setString(3,  video.transcript);
-            ps.setString(4,  video.url_video);
+            ps.setString(3,  video.text);
+            ps.setString(4,  video.url);
             ps.setBoolean(5, video.system);
             ps.setDouble(6, 1);
             ps.execute();
@@ -182,6 +182,7 @@ public class VideoSegmentsDAO {
             return allvideos;
 
         } catch (Exception e) {
+            System.out.println("Failed in getting videos: " + e.getMessage());
             throw new Exception("Failed in getting videos: " + e.getMessage());
         }
     }
@@ -191,12 +192,12 @@ public class VideoSegmentsDAO {
         String id_video  = resultSet.getString("id_video");
     	System.out.println("got id");
         String characters  = resultSet.getString("characters");
-        String transcript  = resultSet.getString("transcript");
-        String url_video  = resultSet.getString("url_video");
+        String text  = resultSet.getString("text");
+        String url  = resultSet.getString("url");
         boolean system = resultSet.getBoolean("system");
         boolean visible = resultSet.getBoolean("public");
 
-        return new VideoSegment (id_video, characters, transcript, url_video, system, visible);
+        return new VideoSegment (id_video, characters, text, url, system, visible);
     }
 
 }

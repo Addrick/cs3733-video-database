@@ -38,8 +38,8 @@ function processVideoSegmentListResponse(result, user) {
 
 		var id_video = constantJson["id_video"];
 		var characters = constantJson["characters"];
-		var transcript = constantJson["transcript"];
-		var url_video = constantJson["url_video"];
+		var text = constantJson["text"];
+		var url = constantJson["url"];
 		var system = constantJson["system"];
 		var visible = constantJson["visible"];
 		var markButton = " ";
@@ -66,8 +66,8 @@ function processVideoSegmentListResponse(result, user) {
 						+ "<button onclick=\"processAppendVideoSegment(document.getElementById('vs_" + id_video + "').id)\">Add to Playlist...</button> "
 						+ markButton
 						+ systemIcon
-						+ "Transcript: " + transcript + "<br>"
-						+ "<TD><iframe allowfullscreen src = " + url_video + "></iframe> </TD><br><br></div>";
+						+ "text: " + text + "<br>"
+						+ "<TD><iframe allowfullscreen src = " + url + "></iframe> </TD><br><br></div>";
 	}
 	// Update computation result
 	constList.innerHTML = output;

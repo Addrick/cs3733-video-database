@@ -57,16 +57,16 @@ public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegm
 	 * 
 	 * @throws Exception 
 	 */
-	boolean UploadVideoSegment(String id_video, String characters, String transcript, String url_video, boolean system) throws Exception { 
+	boolean UploadVideoSegment(String id_video, String characters, String text, String url, boolean system) throws Exception { 
 		if (logger != null) { logger.log("in UploadVideoSegment"); }
 		VideoSegmentsDAO dao = new VideoSegmentsDAO();
 		logger.log("video item id field: " + id_video);
 		logger.log("video item character field: " + characters);
-		logger.log("video item script field: " + transcript);
+		logger.log("video item script field: " + text);
 
 		// check if present
 		VideoSegment exist = dao.getVideoSegment(id_video);
-		VideoSegment VideoSegment = new VideoSegment (id_video, characters, transcript, url_video, system);
+		VideoSegment VideoSegment = new VideoSegment (id_video, characters, text, url, system);
 		if (exist == null) {
 			return dao.addVideoSegment(VideoSegment);
 		} else {
@@ -114,7 +114,7 @@ public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegm
 		try {
 			byte[] encoded = java.util.Base64.getDecoder().decode(req.base64EncodedValue);
 			if (uploadSystemVideoSegment(req.id_video + ".ogg", encoded)) {
-				if(UploadVideoSegment(req.id_video, req.characters, req.transcript, req.url_video, req.system)) {
+				if(UploadVideoSegment(req.id_video, req.characters, req.text, req.url, req.system)) {
 					System.out.println("Video added to RDS successfully.");
 				}
 				else {

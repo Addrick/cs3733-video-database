@@ -4,17 +4,17 @@ public class VideoSegment {
 	
 	public String id_video;
 	public String characters;
-	public String transcript;
-	public String url_video;
+	public String text;
+	public String url;
 	public boolean system;      // local when true, remote when false
 	public boolean visible;		// public when true, private when false
 	
-	public VideoSegment (String id_video, String characters, String transcript, String url_video, boolean system) {
+	public VideoSegment (String id_video, String characters, String text, String url, boolean system) {
 		this.id_video = id_video;
 		this.characters = characters;
-		this.transcript = transcript;
-		if(system) {this.url_video = "https://3733quietlyconfident.s3.us-east-2.amazonaws.com/videosegments/" + id_video + ".ogg";} 
-		else {this.url_video = url_video;}
+		this.text = text;
+		if(system) {this.url = "https://3733quietlyconfident.s3.us-east-2.amazonaws.com/videosegments/" + id_video + ".ogg";} 
+		else {this.url = url;}
 		this.system = system;
 		this.visible = true;
 	}
@@ -22,8 +22,8 @@ public class VideoSegment {
 	public VideoSegment (String id, String chars, String script, String url, boolean sys, boolean vis) {
 		this.id_video = id;
 		this.characters = chars;
-		this.transcript = script;
-		this.url_video = url;
+		this.text = script;
+		this.url = url;
 		this.system = sys;
 		this.visible = vis;
 	}
@@ -31,7 +31,7 @@ public class VideoSegment {
 	public boolean getSystem() { return system; }
 	public String getID() { return id_video; }
 	public String getChars() { return characters; }
-	public String getURL() { return url_video; }
+	public String getURL() { return url; }
 	public void setSystem(boolean s) {system = s;}
 	public void setVisible(boolean v) {visible = v;}
 	public boolean getVisible(boolean v) {return visible;}

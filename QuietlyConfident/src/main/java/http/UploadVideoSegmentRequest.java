@@ -3,8 +3,8 @@ package http;
 public class UploadVideoSegmentRequest {
 	public String id_video;
 	public String characters;
-	public String transcript;
-	public String url_video;
+	public String text;
+	public String url;
 	public String base64EncodedValue;
 
 	public boolean system;
@@ -15,11 +15,11 @@ public class UploadVideoSegmentRequest {
 	public String getCharacters( ) { return characters; }
 	public void setCharacters(String characters) { this.characters = characters; }	
 	
-	public String getTranscript( ) { return transcript; }
-	public void setTranscript(String transcript) { this.transcript = transcript; }	
+	public String gettext( ) { return text; }
+	public void settext(String text) { this.text = text; }	
 	
-	public String getUrl_video( ) { return url_video; }
-	public void setUrl_video(String url_video) { this.url_video = url_video; }
+	public String geturl( ) { return url; }
+	public void seturl(String url) { this.url = url; }
 	
 	public String getBase64EncodedValue() { return base64EncodedValue; }
 	public void setBase64EncodedValue(String base64EncodedValue) { this.base64EncodedValue = base64EncodedValue; }
@@ -30,11 +30,11 @@ public class UploadVideoSegmentRequest {
 	public UploadVideoSegmentRequest() {
 	}
 	
-	public UploadVideoSegmentRequest (String id_video, String characters, String transcript, boolean system) {
+	public UploadVideoSegmentRequest (String id_video, String characters, String text, boolean system) {
 		this.id_video = id_video;
 		this.characters = characters;
-		this.transcript = transcript;
-		this.url_video = "https://3733quietlyconfident.s3.us-east-2.amazonaws.com/videosegments/" + id_video + ".ogg"; 
+		this.text = text;
+		this.url = "https://3733quietlyconfident.s3.us-east-2.amazonaws.com/videosegments/" + id_video + ".ogg"; 
 		this.system = system;
 		
 
@@ -44,6 +44,6 @@ public class UploadVideoSegmentRequest {
 		return "upload_video(" + id_video + "," + base64EncodedValue + ")";
 	}	
 	public String toStringSQL() {
-		return "upload_video(" + id_video + "," + characters + "," + transcript + "," + url_video + ")";
+		return "upload_video(" + id_video + "," + characters + "," + text + "," + url + ")";
 	}
 }

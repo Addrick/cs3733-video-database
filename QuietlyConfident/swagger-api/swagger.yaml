@@ -423,7 +423,7 @@ definitions:
         type: string
       characters:
         type: string
-      transcript:
+      text:
         type: string
       base64EncodedValue:
         type: string 
