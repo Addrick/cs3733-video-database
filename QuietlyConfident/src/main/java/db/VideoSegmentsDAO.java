@@ -47,6 +47,42 @@ public class VideoSegmentsDAO {
             throw new Exception("Failed in getting video: " + e.getMessage());
         }
     }
+    
+    public List<VideoSegment> searchVideoSegment(String criteria) throws Exception {
+        
+        List<VideoSegment> allvideos = new ArrayList<>();
+        try {
+            Statement statement = conn.createStatement();
+            String query = "SELECT * FROM `Video and Playlist DB`.videos";
+            ResultSet resultSet = statement.executeQuery(query);
+            
+            // filter out all videos that don't contain criteria
+            System.out.println("looking based on criteria: " + criteria);
+            while (resultSet.next()) {
+            	VideoSegment c = generateVideoSegment(resultSet);
+            	System.out.println("Got here");
+            	if (c.characters != null) {           		
+            		if (c.characters.contains(criteria)) {
+            			allvideos.add(c);
+            			System.out.println("added a video");
+            		}
+            	}    
+            	else if (c.text != null) {           		
+                	if (c.text.contains(criteria)) {
+                		allvideos.add(c);
+                		System.out.println("added a video");
+                	}
+                }     
+            }
+            resultSet.close();
+            statement.close();
+            return allvideos;
+
+        } catch (Exception e) {
+            throw new Exception("Failed in getting videos: " + e.getMessage());
+        }
+    }
+    
     public List<VideoSegment> getPublicVideoSegments() throws Exception {
         
         try {
@@ -194,10 +230,12 @@ public class VideoSegmentsDAO {
         String characters  = resultSet.getString("characters");
         String text  = resultSet.getString("text");
         String url  = resultSet.getString("url");
+        System.out.println("characters: " + characters);
+        System.out.println("text: " + text);
         boolean system = resultSet.getBoolean("system");
         boolean visible = resultSet.getBoolean("public");
 
         return new VideoSegment (id_video, characters, text, url, system, visible);
-    }
+      }
 
 }

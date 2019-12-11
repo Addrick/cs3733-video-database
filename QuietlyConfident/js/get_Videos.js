@@ -20,6 +20,33 @@ function refreshVideoSegmentsList() {
 	};
 }
 
+function handleSearch() {
+	if(document.title == "Administrator Landing Page") {var user = 1;}
+	else {var user = 0;}
+	var criteria = prompt("Search by characters or text text:", "");
+	if(criteria == null || criteria == "") {}
+	else
+	{
+		var data = {};
+		data["criteria"] = criteria;
+		var js = JSON.stringify(data);
+		console.log("JS:" + js);
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", search_videos_url, true);
+		xhr.send(js);
+	
+		// This will process results and update HTML as appropriate. 
+		xhr.onloadend = function () {
+			if (xhr.readyState == XMLHttpRequest.DONE) {
+				console.log ("XHR:" + xhr.responseText);
+				processVideoSegmentListResponse(xhr.responseText, user);
+			} else {
+				processVideoSegmentListResponse("N/A", user);
+			}
+		};
+	}
+}
+
 /**
  * Respond to server JSON object.
  *
@@ -37,8 +64,8 @@ function processVideoSegmentListResponse(result, user) {
 		console.log(constantJson);
 
 		var id_video = constantJson["id_video"];
-		var characters = constantJson["characters"];
 		var text = constantJson["text"];
+		var characters = constantJson["characters"];
 		var url = constantJson["url"];
 		var system = constantJson["system"];
 		var visible = constantJson["visible"];
@@ -67,6 +94,7 @@ function processVideoSegmentListResponse(result, user) {
 						+ markButton
 						+ systemIcon
 						+ "text: " + text + "<br>"
+						+ "characters: " + characters + "<br>"
 						+ "<TD><iframe allowfullscreen src = " + url + "></iframe> </TD><br><br></div>";
 	}
 	// Update computation result

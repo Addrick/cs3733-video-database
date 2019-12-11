@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Star Trek Video DB</title>
+<title>Star Trek Video DB</title>
 
 <script type='text/javascript' src='../js/api.js'></script>
 <script type='text/javascript' src='../js/get_Playlists.js'></script>
@@ -14,6 +14,8 @@
 <script type='text/javascript' src='../js/append.js'></script>
 <script type='text/javascript' src='../js/addRemote.js'></script>
 <script type='text/javascript' src='../js/unregisterRemote.js'></script>
+<script type='text/javascript' src='../js/mark.js'></script>
+<script type='text/javascript' src='../js/unmark.js'></script>
 
 <script type="text/javascript">
 	function initialize() {
@@ -34,7 +36,12 @@
 		<button onclick="handleCreateClick()">+</button></span></h2>
 	<div id="playlistList"></div><br>
 
-	<h2><u>Video List:</u></h2>
+	<h2><u>Video List:</u>
+		<span title="Upload new video">
+		<button onclick="showUpload()">+</button></span>
+		<span title="Search for a video">
+		<button onclick="handleSearch()">&#128269</button></span></h2>
+	<div id="videoUpload"></div>
 	<div id="videoList"></div><br>
 	
 	<h2><u>Remote Libraries</u>
@@ -42,6 +49,7 @@
 		<button onclick="addRemote()">+</button></span></h2>
 	<div id="remoteLibraryList"></div><br>
 
+<<<<<<< HEAD
 
 <h2>Upload New Video</h2>
 
@@ -84,5 +92,7 @@
   document.getElementById('video_file').addEventListener('change', handleFileSelect, false);
 </script>
 
+=======
+>>>>>>> refs/remotes/origin/bettermaybe
 </body>
 </html>

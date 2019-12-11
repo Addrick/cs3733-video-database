@@ -11,7 +11,6 @@
 <script type='text/javascript' src='../js/deleteVideo.js'></script>
 <script type='text/javascript' src='../js/deletePlaylist.js'></script>
 <script type='text/javascript' src='../js/append.js'></script>
-<script type='text/javascript' src='../js/search.js'></script>
 
 <script type="text/javascript">
 	function initialize() {
@@ -24,6 +23,7 @@
 </script>
 </head>
 <body onload="initialize()">
+<<<<<<< HEAD
 <div id=0></div>
 
 <h2><u>Playlist List</u>  
@@ -76,6 +76,21 @@
   // register
   document.getElementById('video_file').addEventListener('change', handleFileSelect, false);
 </script>
+=======
+	<div id=0></div>
+	
+	<h2><u>Playlist List</u>  
+		<span title="Create new Playlist">
+		<button onclick="handleCreateClick()">+</button></span></h2>
+	<div id="playlistList"></div><br>
+	
+	<h2><u>Video List:</u>
+			<span title="Upload new video">
+			<button onclick="showUpload()">+</button></span>
+			<span title="Search for a video">
+			<button onclick="handleSearch()">&#128269</button></span></h2>
+		<div id="videoUpload"></div>
+	<div id="videoList"></div><br>
 
 </body>
 </html>
