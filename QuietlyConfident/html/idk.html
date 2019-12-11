@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Star Trek Video DB</title>
+<title>Star Trek Video DB</title>
 
 <script type='text/javascript' src='../js/api.js'></script>
 <script type='text/javascript' src='../js/get_Playlists.js'></script>
@@ -14,6 +14,8 @@
 <script type='text/javascript' src='../js/append.js'></script>
 <script type='text/javascript' src='../js/addRemote.js'></script>
 <script type='text/javascript' src='../js/unregisterRemote.js'></script>
+<script type='text/javascript' src='../js/mark.js'></script>
+<script type='text/javascript' src='../js/unmark.js'></script>
 
 <script type="text/javascript">
 	function initialize() {
@@ -34,55 +36,18 @@
 		<button onclick="handleCreateClick()">+</button></span></h2>
 	<div id="playlistList"></div><br>
 
-	<h2><u>Video List:</u></h2>
+	<h2><u>Video List:</u>
+		<span title="Upload new video">
+		<button onclick="showUpload()">+</button></span>
+		<span title="Search for a video">
+		<button onclick="handleSearch()">&#128269</button></span></h2>
+	<div id="videoUpload"></div>
 	<div id="videoList"></div><br>
 	
 	<h2><u>Remote Libraries</u>
 		<span title="Register new Remote Library">
 		<button onclick="addRemote()">+</button></span></h2>
 	<div id="remoteLibraryList"></div><br>
-
-
-<h2>Upload New Video</h2>
-
-<form name="createForm" method="post">
-	<input name="id_video" value="id_video" /> 
-	<input name="characters" value="characters" /> 
-	<input name="transcript" value="transcript" />
-
-	<input name="base64Encoding" hidden="" value="" /> Select a video in
-	file: <input type="file" id="video_file" name="video_file"> <input
-		type="button" id="createButton" value="Upload Video" disabled
-		onClick="JavaScript:handleUploadClick(this)">
-</form>
-
-<script>
-
-  // prepares the base64-encoded string and enabled button
-  function getBase64(file) {
-	var reader = new FileReader();
-	reader.readAsDataURL(file);
-
-	reader.onload = function () {
-	  document.createForm.base64Encoding.value = reader.result;
-	  document.createForm.createButton.disabled = false;
-	};
-  }
-
-  // When file is selected, stash base64 value in the encoding field.  
-  function handleFileSelect(evt) {
-    var files = evt.target.files; 
-    if (files[0].size > 10000000000) {  // make as large or small as you need
-    	document.createForm.base64Encoding.value = "";
-    	alert("File size too large to use:" + files[0].size + " bytes");
-    } else {
-    	getBase64(files[0]); // request the load (async)
-    }
-  }
-  
-  // register
-  document.getElementById('video_file').addEventListener('change', handleFileSelect, false);
-</script>
 
 </body>
 </html>
