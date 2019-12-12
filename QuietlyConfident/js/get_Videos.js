@@ -12,7 +12,7 @@ function refreshVideoSegmentsList() {
 	// This will process results and update HTML as appropriate. 
 	xhr.onloadend = function () {
 		if (xhr.readyState == XMLHttpRequest.DONE) {
-			console.log ("XHR:" + xhr.responseText);
+//			console.log ("XHR:" + xhr.responseText);
 			processVideoSegmentListResponse(xhr.responseText, user);
 		} else {
 			processVideoSegmentListResponse("N/A", user);
@@ -61,7 +61,6 @@ function processVideoSegmentListResponse(result, user) {
 	var output = "";
 	for (var i = 0; i < js.list.length; i++) {
 		var constantJson = js.list[i];
-		console.log(constantJson);
 
 		var id_video = constantJson["id_video"];
 		var text = constantJson["text"];

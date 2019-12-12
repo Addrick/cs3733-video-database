@@ -26,12 +26,6 @@ var remote_url = "https://rct351a2w3.execute-api.us-east-1.amazonaws.com/secure/
 
 var search_remote_url = remote_url + "remote";
 
-var apikey = "I14G0D8EJn4Q44b8dFhtb6CcdIraLflm9dpcyXAX";
 
 // test directly 
 // curl -X POST -H "x-api-key: theKey" -H "Content-Type: application/json" -d '{"key":"val"}' https://[api-id].execute-api.[region].amazonaws.com
-
-// NEWLY ADDED to show how one might write remote video segment API
-// used same API key from above. 
-var sample_video_segments_url = "https://g75v8iurq5.execute-api.us-east-1.amazonaws.com/RemoteSite/publicsegments";
-
