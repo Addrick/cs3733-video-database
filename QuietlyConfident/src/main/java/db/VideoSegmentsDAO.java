@@ -107,23 +107,6 @@ public class VideoSegmentsDAO {
         }
     }
     
-    public boolean updateVideoSegment(VideoSegment video) throws Exception {
-        try {
-        	String query = "UPDATE videos SET value=? WHERE id_video=?;";
-        	PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, video.id_video);
-            ps.setString(2, video.characters);
-            ps.setString(3, video.text);
-            ps.setString(4, video.url);
-            int numAffected = ps.executeUpdate();
-            ps.close();
-            
-            return (numAffected == 1);
-        } catch (Exception e) {
-            throw new Exception("Failed to update report: " + e.getMessage());
-        }
-    }
-    
     public boolean deleteVideoSegment(VideoSegment video) throws Exception {
         try {
             PreparedStatement ps = conn.prepareStatement("DELETE FROM videos WHERE id_video = ?;");

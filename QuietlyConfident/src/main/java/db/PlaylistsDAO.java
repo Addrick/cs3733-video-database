@@ -48,21 +48,6 @@ public class PlaylistsDAO {
         }
     }
     
-    public boolean updatePlaylist(Playlist playlist) throws Exception {
-        try {
-        	String query = "UPDATE `Video and Playlist DB`.playlists SET order_playlist=? WHERE id_playlist=?;";
-        	PreparedStatement ps = conn.prepareStatement(query);
-            ps.setDouble(1, playlist.order_playlist);
-            ps.setString(2, playlist.id_playlist);
-            int numAffected = ps.executeUpdate();
-            ps.close();
-            
-            return (numAffected == 1);
-        } catch (Exception e) {
-            throw new Exception("Failed to update report: " + e.getMessage());
-        }
-    }
-    
     public boolean deletePlaylist(Playlist playlist) throws Exception {
         try {
             PreparedStatement ps = conn.prepareStatement("DELETE FROM `Video and Playlist DB`.playlists WHERE id_playlist = ?;");
