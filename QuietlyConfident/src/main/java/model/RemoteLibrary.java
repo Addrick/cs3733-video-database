@@ -11,7 +11,7 @@ public class RemoteLibrary {
 	}
 	
 	/**
-	 * no idea what this does
+	 * checks if two remote libraries are equal via their urls
 	 */
 	public boolean equals (Object o) {
 		if (o == null) { System.out.println("got null"); return false; }
@@ -22,6 +22,6 @@ public class RemoteLibrary {
 			return url.equals(other.url);
 		}
 		
-		return false;  // not a Constant
+		return false;  // not even a remote library
 	}
 }
