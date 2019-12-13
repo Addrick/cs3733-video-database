@@ -45,14 +45,15 @@ function processPlaylistListResponse(result) {
 			s = "s";
 		var videos = constantJson["videos"];
 		var vidlist = "";
+		var removevid = "";
 		for(var j = 0; j < videos.length; j++) {
-			vidlist = vidlist + "<br>" + "<TD><video width='320' height='240' controls src = " + videos[j] + ">type='video/ogg'</video> </TD>"
-			+ "<button onclick=\"processRemoveVideoSegment('" + videos[j] + "')\">Remove from Playlist</button> " ;
+			vidlist = vidlist + "<TD><video width='320' height='240' controls src = " + videos[j] + ">type='video/ogg'</video> </TD>";
+			removevid = removevid +  "<button style='width:320px' onclick=\"processRemoveVideoSegment('" + videos[j] + "')\">Remove from Playlist</button> " ;
 
 		}
 		output = output + "<div id=\"pl_" + id_playlist + "\"><b>" + "Playlist ID: " + id_playlist + "</b> (" + order_playlist + " video" + s + ") " +
-				"<button onclick=\"requestDeletePlaylist(document.getElementById('pl_" + id_playlist + "').id)\"><img src='deleteIcon.png'></img></button>" +
-		vidlist + "</div>";
+				"<button onclick=\"requestDeletePlaylist(document.getElementById('pl_" + id_playlist + "').id)\"><img src='deleteIcon.png'></img></button><br>" +
+		vidlist + "<br>" + removevid + "</div>";
 	}
 
 	// Update computation result
