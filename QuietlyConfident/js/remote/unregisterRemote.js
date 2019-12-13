@@ -1,12 +1,12 @@
 function processUnregisterResponse(result)
 {
 	console.log("result:" + result);
+	remoteVideoList.innerHTML = "";
 	refreshRemoteList();
 }
 
 function requestUnregisterRemote(val)
 {
-	val = val.slice(4);
 	if (confirm("Are you sure you want to unregister the site " + val + "?")) {processUnregisterRemote(val);}
 }
 
