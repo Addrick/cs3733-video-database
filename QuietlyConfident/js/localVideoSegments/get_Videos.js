@@ -58,7 +58,7 @@ function processVideoSegmentListResponse(result, user) {
 	var js = JSON.parse(result);
 	var videoList = document.getElementById('videoList');
 
-	var output = "<Table>";
+	var output = "<table style='table-layout: fixed; width: 100%'>";
 	for (var i = 0; i < js.list.length; i++) {
 		var constantJson = js.list[i];
 
@@ -71,8 +71,8 @@ function processVideoSegmentListResponse(result, user) {
 		var markButton = " ";
 		var systemIcon = "<br>";
 		
-		if (i%4 == 0){output = output + "<tr>"}
-		output = output + "<TD>"
+		if (i%3 == 0){output = output + "<tr>"}
+		output = output + "<td style='word-wrap: break-word; height:300px'>"
 		if(user)
 		{
 			if(system){
@@ -90,7 +90,7 @@ function processVideoSegmentListResponse(result, user) {
 			else{systemIcon = "<span title=\"This video is stored in a remote library\">&#9729</span>" + systemIcon;}
 		}
 		output = output + "<div id=\"vs_" + id_video + "\">"
-						+ "<b>Video ID: " + id_video + "</b> "
+						+ "<b>Video ID: " + id_video + "</b><br> "
 						+ "<button onclick=\"requestDeleteVideoSegment(document.getElementById('vs_" + id_video + "').id)\"><img src='deleteIcon.png'></img></button> "
 						+ "<button onclick=\"processAppendVideoSegment('" + url + "')\">Add to Playlist...</button> "
 						+ markButton
@@ -98,7 +98,7 @@ function processVideoSegmentListResponse(result, user) {
 						+ "Text: " + text + "<br>"
 						+ "Characters: " + characters + "<br>"
 						+ "<video width='320' height='240' controls src = " + url + "></video> <br><br></div>";
-		if (i%4 == 3){output = output + "</tr>"}
+		if (i%3 == 2){output = output + "</tr>"}
 
 	}
 	// Update computation result
