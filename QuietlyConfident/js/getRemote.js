@@ -31,7 +31,7 @@ function processRemoteListResponse(result) {
 	console.log("res:" + result);
 	// Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
 	var js = JSON.parse(result);
-	var constList = document.getElementById('remoteLibraryList');
+	var constList = document.getElementById('remoteVideoList');
 	var output = "";
 	for (var i = 0; i < js.list.length; i++) {
 		var constantJson = js.list[i];
@@ -47,13 +47,13 @@ function processRemoteListResponse(result) {
 		    var api = urlapi.substring(q+8);
 		    console.log(url);
 		    console.log(api);
-
+		    remoteVideoList.innerHTML = remoteVideoList.innerHTML + "<br> Remote Site: " + url;
 		    refreshRemoteVideoSegmentsList(url, api);
 		  }
 	}
 
 	// Update computation result
-	constList.innerHTML = output;
+//	constList.innerHTML = output;
 }
 
 function refreshRemoteVideoSegmentsList(url, apikey) {
@@ -99,14 +99,12 @@ function processRemoteVideoSegmentListResponse(result) {
 		var url = constantJson["url"];
 		
 		output = output + "<div id=\"vs_" + url + "\">"
-						+ "<b>RemoteVideo ID: " + url + "</b> "
-						+ "<button onclick=\"processAppendRemoteVideoSegment(document.getElementById('vs_" + url + "').id)\">Add to Playlist...</button> <br>"
-						+ "text: " + text + "<br>"
-						+ "characters: " + characters + "<br>"
+						+ "<b>Remote Video URL: " + url + "</b> "
+						+ "<button onclick=\"processAppendVideoSegment(document.getElementById('vs_" + url + "').id)\">Add to Playlist...</button> <br>"
+						+ "Text: " + text + "<br>"
+						+ "Characters: " + characters + "<br>"
 						+ "<TD><iframe allowfullscreen src = " + url + "></iframe> </TD><br><br></div>";
 	}
-	// Update computation result
-	console.log("Output: " + output);
-
+	// Update list
 	remoteVideoList.innerHTML = remoteVideoList.innerHTML + output;
 }

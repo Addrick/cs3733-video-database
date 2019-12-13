@@ -92,8 +92,8 @@ function processVideoSegmentListResponse(result, user) {
 						+ "<button onclick=\"processAppendVideoSegment(document.getElementById('vs_" + id_video + "').id)\">Add to Playlist...</button> "
 						+ markButton
 						+ systemIcon
-						+ "text: " + text + "<br>"
-						+ "characters: " + characters + "<br>"
+						+ "Text: " + text + "<br>"
+						+ "Characters: " + characters + "<br>"
 						+ "<TD><iframe allowfullscreen src = " + url + "></iframe> </TD><br><br></div>";
 	}
 	// Update computation result

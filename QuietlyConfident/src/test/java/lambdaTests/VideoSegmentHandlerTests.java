@@ -21,8 +21,11 @@ import com.google.gson.Gson;
 import db.PlaylistsDAO;
 import db.VideoSegmentsDAO;
 import http.AllPlaylistsResponse;
+import http.DeleteVideoSegmentRequest;
+import http.DeleteVideoSegmentResponse;
 import http.UploadVideoSegmentRequest;
 import http.UploadVideoSegmentResponse;
+import lambda.DeleteVideoSegmentHandler;
 import lambda.UploadVideoSegmentHandler;
 import model.Playlist;
 import model.VideoSegment;
@@ -43,7 +46,7 @@ import com.amazonaws.services.s3.model.PutObjectResult;
 /**
  * A simple test harness for locally invoking your Lambda function handler.
  */
-public class UploadVideoSegmentHandlerTest extends LambdaTest {
+public class VideoSegmentHandlerTests extends LambdaTest {
 
     void testSuccessInput(String incoming) throws IOException {
     	UploadVideoSegmentHandler handler = new UploadVideoSegmentHandler();
@@ -83,20 +86,7 @@ public class UploadVideoSegmentHandlerTest extends LambdaTest {
 //    }
    
     // NOTE: this proliferates large number of VideoSegments! Be mindful
-    @Test
-    public void testShouldBeOk() {
-    	int rndNum = (int)(990*(Math.random()));
-    	String var = "throwAway" + rndNum;
-    	
-    	UploadVideoSegmentRequest ccr = new UploadVideoSegmentRequest(var, "Mi43MTgyODE4Mjg=", var, false);
-        String SAMPLE_INPUT_STRING = new Gson().toJson(ccr);  
-        
-        try {
-        	testSuccessInput(SAMPLE_INPUT_STRING);
-        } catch (IOException ioe) {
-        	Assert.fail("Invalid:" + ioe.getMessage());
-        }
-    }
+
 //    
 //    @Test
 //    public void testFailInput() {
@@ -123,16 +113,6 @@ public class UploadVideoSegmentHandlerTest extends LambdaTest {
 //        }
 //    }
 //    
-    // overwrites into it
-    @Test
-    public void testCreateSystemVideoSegment() {
-    	// create VideoSegment
-        UploadVideoSegmentRequest csr = new UploadVideoSegmentRequest("to-delete-again", "characters", "text", true);
-        csr.base64EncodedValue = "Mi43MTgyODE4Mjg=";
-        
-        UploadVideoSegmentResponse resp = new UploadVideoSegmentHandler().handleRequest(csr, createContext("create"));
-        Assert.assertEquals(200, resp.statusCode);
-    }
     
     @Test
     public void testUploadRequestMethods() throws IOException {
@@ -152,6 +132,32 @@ public class UploadVideoSegmentHandlerTest extends LambdaTest {
     	Assert.assertFalse(req.getSystem());
     	Assert.assertEquals("upload_video(aa,ee)", req.toStringS3());
     	Assert.assertEquals("upload_video(aa,bb,cc,dd)", req.toStringSQL());
+    }
+    @Test
+    public void testShouldBeOk() {
+    	int rndNum = (int)(990*(Math.random()));
+    	String var = "throwAway" + rndNum;
+    	
+    	UploadVideoSegmentRequest ccr = new UploadVideoSegmentRequest("to-delete-again", "Mi43MTgyODE4Mjg=", var, false);
+    	ccr.base64EncodedValue = "Mi43MTgyODE4Mjg=";
+        String SAMPLE_INPUT_STRING = new Gson().toJson(ccr);  
+        ccr.toString();
+        
+        try {
+        	testSuccessInput(SAMPLE_INPUT_STRING);
+        } catch (IOException ioe) {
+        	Assert.fail("Invalid:" + ioe.getMessage());
+        }
+    }
+    @Test
+    public void testRemoveSystemVideoSegment() {
+    	// create VideoSegment
+        DeleteVideoSegmentRequest csr = new DeleteVideoSegmentRequest("to-delete-again");
+        csr.toString();
+        
+        DeleteVideoSegmentResponse resp = new DeleteVideoSegmentHandler().handleRequest(csr, createContext("delete"));
+        resp.toString();
+        Assert.assertEquals(200, resp.statusCode);
     }
     
 }
