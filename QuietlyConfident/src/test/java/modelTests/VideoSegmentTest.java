@@ -17,7 +17,8 @@ public class VideoSegmentTest {
 		VideoSegment vs = new VideoSegment(id,characters,text,url,system);
 		Assert.assertEquals(id,vs.getID());
 		Assert.assertEquals(characters,vs.getChars());
-		Assert.assertEquals("https://3733quietlyconfident.s3.us-east-2.amazonaws.com/videosegments/" + id + ".ogg",vs.getURL());
+		Assert.assertEquals("https://3733quietlyconfident.s3.us-"
+				+ "east-2.amazonaws.com/videosegments/" + id + ".ogg",vs.getURL());
 		vs.setSystem(false);
 		Assert.assertFalse(vs.getSystem());
 		vs.setVisible(true);
