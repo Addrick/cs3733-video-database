@@ -56,9 +56,9 @@ function processVideoSegmentListResponse(result, user) {
 	console.log("res:" + result);
 	// Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
 	var js = JSON.parse(result);
-	var constList = document.getElementById('videoList');
+	var videoList = document.getElementById('videoList');
 
-	var output = "";
+	var output = "<Table>";
 	for (var i = 0; i < js.list.length; i++) {
 		var constantJson = js.list[i];
 
@@ -70,6 +70,9 @@ function processVideoSegmentListResponse(result, user) {
 		var visible = constantJson["visible"];
 		var markButton = " ";
 		var systemIcon = "<br>";
+		
+		if (i%4 == 0){output = output + "<tr>"}
+		output = output + "<TD>"
 		if(user)
 		{
 			if(system){
@@ -94,8 +97,10 @@ function processVideoSegmentListResponse(result, user) {
 						+ systemIcon
 						+ "Text: " + text + "<br>"
 						+ "Characters: " + characters + "<br>"
-						+ "<TD><video width='320' height='240' controls src = " + url + "></video> </TD><br><br></div>";
+						+ "<video width='320' height='240' controls src = " + url + "></video> <br><br></div>";
+		if (i%4 == 3){output = output + "</tr>"}
+
 	}
 	// Update computation result
-	constList.innerHTML = output;
+	videoList.innerHTML = output + "</Table>";
 }
