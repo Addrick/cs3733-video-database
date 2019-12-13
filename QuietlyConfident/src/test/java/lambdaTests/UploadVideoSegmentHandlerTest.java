@@ -134,4 +134,24 @@ public class UploadVideoSegmentHandlerTest extends LambdaTest {
         Assert.assertEquals(200, resp.statusCode);
     }
     
+    @Test
+    public void testUploadRequestMethods() throws IOException {
+    	UploadVideoSegmentRequest req = new UploadVideoSegmentRequest("a", "b", "c", true);
+    	UploadVideoSegmentRequest blank = new UploadVideoSegmentRequest();
+    	req.setID("aa");
+    	Assert.assertEquals("aa", req.getID());
+    	req.setCharacters("bb");
+    	Assert.assertEquals("bb", req.getCharacters());
+    	req.setText("cc");
+    	Assert.assertEquals("cc", req.getText());
+    	req.setUrl("dd");
+    	Assert.assertEquals("dd", req.getUrl());
+    	req.setBase64EncodedValue("ee");
+    	Assert.assertEquals("ee", req.getBase64EncodedValue());
+    	req.setSystem(false);
+    	Assert.assertFalse(req.getSystem());
+    	Assert.assertEquals("upload_video(aa,ee)", req.toStringS3());
+    	Assert.assertEquals("upload_video(aa,bb,cc,dd)", req.toStringSQL());
+    }
+    
 }

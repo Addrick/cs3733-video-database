@@ -22,6 +22,6 @@ public class UploadVideoSegmentResponse {
 	}
 	
 	public String toString() {
-		return "Response(" + response + ")";
+		return "Response(" + statusCode + ", " + response + ")";
 	}
 }
