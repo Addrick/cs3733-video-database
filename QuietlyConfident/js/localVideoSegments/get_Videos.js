@@ -89,7 +89,7 @@ function processVideoSegmentListResponse(result, user) {
 		output = output + "<div id=\"vs_" + id_video + "\">"
 						+ "<b>Video ID: " + id_video + "</b> "
 						+ "<button onclick=\"requestDeleteVideoSegment(document.getElementById('vs_" + id_video + "').id)\"><img src='deleteIcon.png'></img></button> "
-						+ "<button onclick=\"processAppendVideoSegment(document.getElementById('vs_" + id_video + "').id)\">Add to Playlist...</button> "
+						+ "<button onclick=\"processAppendVideoSegment('" + url + "')\">Add to Playlist...</button> "
 						+ markButton
 						+ systemIcon
 						+ "Text: " + text + "<br>"

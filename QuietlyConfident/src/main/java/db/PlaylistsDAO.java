@@ -82,7 +82,7 @@ public class PlaylistsDAO {
             ps.setDouble(2,  playlist.order_playlist);
             ps.execute();
             ps = conn.prepareStatement("CREATE TABLE `Video and Playlist DB`.`" + playlist.id_playlist
-            							+ "` (`id_video` VARCHAR(64) NOT NULL);");
+            							+ "` (`id_video` VARCHAR(256) NOT NULL);");
             ps.execute();
             return true;
 
@@ -144,7 +144,7 @@ public class PlaylistsDAO {
                     return true; // Returns true when both playlist and video segment exists, meaning the VS was removed to the playlist
                 }
 
-            return false; // Returns false if either the playlist or video segment does not exist in the databases
+            return false; // Returns false if either the playlist does not exist in the databases
 
         } catch (Exception e) {
             throw new Exception("Failed to remove video segment from playlist: " + e.getMessage());

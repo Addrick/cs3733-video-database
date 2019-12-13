@@ -46,11 +46,14 @@ function processPlaylistListResponse(result) {
 		var videos = constantJson["videos"];
 		var vidlist = "<ol>";
 		for(var j = 0; j < videos.length; j++) {
-			vidlist = vidlist + "<li>" + videos[j] + "</li>";
+			vidlist = vidlist + "<li>" + "<TD><iframe allowfullscreen src = " + videos[j] + "></iframe> </TD><br><br></div>" + "</li>"
+			+ "<button onclick=\"processRemoveVideoSegment('" + videos[j] + "')\">Remove from Playlist</button> ";
+
 		}
 		vidlist = vidlist + "</ol>";
-		output = output + "<div id=\"pl_" + id_playlist + "\"><b>" + "Playlist ID: " + id_playlist + "</b> (" + order_playlist + " video" + s + ") <button onclick=\"requestDeletePlaylist(document.getElementById('pl_" + id_playlist + "').id)\"><img src='deleteIcon.png'></img></button>" +
-				vidlist + "</div>";
+		output = output + "<div id=\"pl_" + id_playlist + "\"><b>" + "Playlist ID: " + id_playlist + "</b> (" + order_playlist + " video" + s + ") " +
+				"<button onclick=\"requestDeletePlaylist(document.getElementById('pl_" + id_playlist + "').id)\"><img src='deleteIcon.png'></img></button>" +
+		vidlist + "</div>";
 	}
 
 	// Update computation result
