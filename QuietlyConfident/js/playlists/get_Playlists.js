@@ -44,16 +44,18 @@ function processPlaylistListResponse(result) {
 		if(order_playlist != 1)
 			s = "s";
 		var videos = constantJson["videos"];
-		var vidlist = "";
+		var vidlist = "<Table>";
 		var removevid = "";
 		for(var j = 0; j < videos.length; j++) {
-			vidlist = vidlist + "<TD><video width='320' height='240' controls src = " + videos[j] + ">type='video/ogg'</video> </TD>";
-			removevid = removevid +  "<button style='width:320px' onclick=\"processRemoveVideoSegment('" + id_playlist + "', '" + videos[j] + "')\">Remove from Playlist</button> " ;
+			if (j%4 == 0){vidlist = vidlist + "<tr>"}
+			vidlist = vidlist + "<TD>" + "<video width='320' height='240' controls src = " + videos[j] + ">type='video/ogg'</video><br>"
+			+ "<button style='width:320px' onclick=\"processRemoveVideoSegment('" + id_playlist + "', '" + videos[j] + "')\">Remove from Playlist</button> " + "</TD>";
+			if (j%4 == 3){vidlist = vidlist + "</tr>"}
 
 		}
 		output = output + "<div id=\"pl_" + id_playlist + "\"><b>" + "Playlist ID: " + id_playlist + "</b> (" + order_playlist + " video" + s + ") " +
 				"<button onclick=\"requestDeletePlaylist(document.getElementById('pl_" + id_playlist + "').id)\"><img src='deleteIcon.png'></img></button><br>" +
-		vidlist + "<br>" + removevid + "</div>";
+		vidlist + removevid + "</Table></div>";
 	}
 
 	// Update computation result
