@@ -61,10 +61,17 @@ public class VideoSegmentsDAO {
             while (resultSet.next()) {
             	VideoSegment c = generateVideoSegment(resultSet);
             	System.out.println("Got here");
-            	if (c.characters != null) {           		
-            		if (c.characters.contains(criteria)) {
-            			allvideos.add(c);
-            			System.out.println("added a video");
+            	if (c.characters != null)
+            	{           		
+            		if (c.text != null) {
+            			if (c.characters.contains(criteria) || c.text.contains(criteria)) {
+            				allvideos.add(c);
+            				System.out.println("added a video");
+            			}
+            		}
+            		else if (c.characters.contains(criteria)) {
+                		allvideos.add(c);
+                		System.out.println("added a video");
             		}
             	}    
             	else if (c.text != null) {           		
