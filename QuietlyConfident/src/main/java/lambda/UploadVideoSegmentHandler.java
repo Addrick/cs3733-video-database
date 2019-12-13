@@ -56,7 +56,7 @@ public class UploadVideoSegmentHandler implements RequestHandler<UploadVideoSegm
 	/** Store into RDS.
 	 * 
 	 * @throws Exception 
-	 */
+	 */ 
 	boolean UploadVideoSegment(String id_video, String characters, String text, String url, boolean system) throws Exception { 
 		if (logger != null) { logger.log("in UploadVideoSegment"); }
 		VideoSegmentsDAO dao = new VideoSegmentsDAO();
