@@ -102,7 +102,7 @@ function processRemoteVideoSegmentListResponse(result) {
 		+ "<button onclick=\"processAppendVideoSegment(document.getElementById('vs_" + url + "').id)\">Add to Playlist...</button> <br>"
 		+ "Text: " + text + "<br>"
 		+ "Characters: " + characters + "<br>"
-		+ "<TD><iframe allowfullscreen src = " + url + "></iframe> </TD><br><br></div>";
+		+ "<TD><video width='320' height='240' controls src = " + url + "></video> </TD><br><br></div>";
 	}
 	// Update list
 	remoteVideoList.innerHTML = remoteVideoList.innerHTML + output;
