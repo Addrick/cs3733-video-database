@@ -48,7 +48,7 @@ function processPlaylistListResponse(result) {
 		var removevid = "";
 		for(var j = 0; j < videos.length; j++) {
 			vidlist = vidlist + "<TD><video width='320' height='240' controls src = " + videos[j] + ">type='video/ogg'</video> </TD>";
-			removevid = removevid +  "<button style='width:320px' onclick=\"processRemoveVideoSegment('" + videos[j] + "')\">Remove from Playlist</button> " ;
+			removevid = removevid +  "<button style='width:320px' onclick=\"processRemoveVideoSegment('" + id_playlist + "', '" + videos[j] + "')\">Remove from Playlist</button> " ;
 
 		}
 		output = output + "<div id=\"pl_" + id_playlist + "\"><b>" + "Playlist ID: " + id_playlist + "</b> (" + order_playlist + " video" + s + ") " +

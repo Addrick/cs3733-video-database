@@ -48,11 +48,10 @@ function processAppendVideoSegment(val) {
 	}
 }
 
-function processRemoveVideoSegment(val) {
-	var id_playlist = "test" //idk what to put here, must grab correct playlist
+function processRemoveVideoSegment(pl, vs) {
 		var data = {};
-		data["id_playlist"] = id_playlist;
-		data["id_video"] = val;
+		data["id_playlist"] = pl;
+		data["id_video"] = vs;
 		
 		var js = JSON.stringify(data);
 		console.log("JS:" + js);

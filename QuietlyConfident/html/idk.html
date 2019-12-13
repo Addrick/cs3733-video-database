@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Star Trek Video DB</title>
+<title>Test: Star Trek Video DB</title>
 
 <script type='text/javascript' src='../js/api.js'></script>
 <script type='text/javascript'
@@ -29,11 +29,48 @@
 		refreshRemoteList();
 	}
 </script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 20px;
+}
+body{
+	background-color: #696969}
+h1{
+	color:white;
+}
+h3{
+	color:white;
+}
+	
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #B9B8B5;
+}
+</style>
 </head>
 
+<h1>Star Trek Mashup Video Database</h1>
+<h3>Team QuietlyConfident</h3>
 <body>
 <body onload="initialize()">
 
+ <!-- Playlist Collapsible-->
 <button type="button" class="collapsible">Playlists:</button>
 <div class="content">
 	<h2>

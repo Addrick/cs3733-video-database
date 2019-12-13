@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Participant Landing Page</title>
+<title>Star Trek Video DB</title>
 
 <script type='text/javascript' src='../js/api.js'></script>
 <script type='text/javascript'
@@ -23,84 +23,145 @@
 
 <script type="text/javascript">
 	function initialize() {
-
 		// get all videos and playlists
 		refreshPlaylistList();
 		refreshVideoSegmentsList();
 		refreshRemoteList();
-
 	}
 </script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 20px;
+}
+body{
+	background-color: #696969}
+h1{
+	color:white;
+}
+h3{
+	color:white;
+}
+	
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #B9B8B5;
+}
+</style>
 </head>
+
+<h1>Star Trek Mashup Video Database</h1>
+<h3>Team QuietlyConfident</h3>
+<body>
 <body onload="initialize()">
-<div id=0></div>
 
-<h2><u>Playlist List</u>  
-	<span title="Create new Playlist">
-	<button onclick="handleCreateClick()">+</button></span></h2>
-<div id="playlistList"></div><br>
+ <!-- Playlist Collapsible-->
+<button type="button" class="collapsible">Playlists:</button>
+<div class="content">
+	<h2>
+		<u>Playlist List</u> <span title="Create new Playlist">
+			<button onclick="handleCreateClick()">+</button>
+		</span>
+	</h2>
+	<div id="playlistList"></div>
+	<br>
+</div>
 
-<h2><u>Video List:</u>  
-	<span title="Search for a video">
-	<button onclick="handleSearch()">&#128269</button></span></h2>
-<div id="videoList"></div><br>
+ <!--Local Library Collapsible-->
+<button type="button" class="collapsible">Local Video Segments:</button>
+<div class="content">
+	<h2>Upload New Video</h2>
+	<form name="createForm" method="post">
+		<input name="id_video" value="id_video" /> <input name="characters"
+			value="characters" /> <input name="text" value="text" /> <input
+			name="base64Encoding" hidden="" value="" /> Select a video in file:
+		<input type="file" id="video_file" name="video_file"> <input
+			type="button" id="createButton" value="Upload Video" disabled
+			onClick="JavaScript:handleUploadClick(this)">
+	</form>
 
-<h2>Upload New Video</h2>
+	<h2>
+		<u>Video List:</u> <span title="Upload new video">
+			<button onclick="showUpload()">+</button>
+		</span> <span title="Search for a video">
+			<button onclick="handleSearch()">&#128269</button>
+		</span>
+	</h2>
+	<div id="videoUpload"></div>
+	<div id="videoList"></div>
+	<br>
+		</div>
+	
+</body>
 
-<form name="createForm" method="post">
-	<input name="id_video" value="id_video" /> 
-	<input name="characters" value="characters" /> 
-	<input name="text" value="text" />
+ <!--Remote Libraries Collapsible-->
+<button type="button" class="collapsible">Remote Video Libraries:</button>
+<div class="content">
+<h2>
+	<u>Remote Libraries</u> <span title="Register new Remote Library">
+		<button onclick="handleAddRemoteClick()">+</button>
+	</span>
+</h2>
+<body><u>Current Remote Databases:</u> </body>
+<div id="remoteVideoList"></div>
+<br>
+</div>
 
-	<input name="base64Encoding" hidden="" value="" /> Select a video in
-	file: <input type="file" id="video_file" name="video_file"> <input
-		type="button" id="createButton" value="Upload Video" disabled
-		onClick="JavaScript:handleUploadClick(this)">
-</form>
+	<script>
+		// prepares the base64-encoded string and enabled button
+		function getBase64(file) {
+			var reader = new FileReader();
+			reader.readAsDataURL(file);
+
+			reader.onload = function() {
+				document.createForm.base64Encoding.value = reader.result;
+				document.createForm.createButton.disabled = false;
+			};
+		}
+		// When file is selected, stash base64 value in the encoding field.  
+		function handleFileSelect(evt) {
+			var files = evt.target.files;
+			if (files[0].size > 10000000000) { // make as large or small as you need
+				document.createForm.base64Encoding.value = "";
+				alert("File size too large to use:" + files[0].size + " bytes");
+			} else {
+				getBase64(files[0]); // request the load (async)
+			}
+		}
+		// register
+		document.getElementById('video_file').addEventListener('change',
+				handleFileSelect, false);
+	</script>
 
 <script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
 
-  // prepares the base64-encoded string and enabled button
-  function getBase64(file) {
-	var reader = new FileReader();
-	reader.readAsDataURL(file);
-
-	reader.onload = function () {
-	  document.createForm.base64Encoding.value = reader.result;
-	  document.createForm.createButton.disabled = false;
-	};
-  }
-
-  // When file is selected, stash base64 value in the encoding field.  
-  function handleFileSelect(evt) {
-    var files = evt.target.files; 
-    if (files[0].size > 10000000000) {  // make as large or small as you need
-    	document.createForm.base64Encoding.value = "";
-    	alert("File size too large to use:" + files[0].size + " bytes");
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
     } else {
-    	getBase64(files[0]); // request the load (async)
+      content.style.display = "block";
     }
-  }
-  
-  // register
-  document.getElementById('video_file').addEventListener('change', handleFileSelect, false);
+  });
+}
 </script>
-=======
-	<div id=0></div>
-
-	
-	<h2><u>Remote Libraries</u>
-		<span title="Register new Remote Library">
-		<button onclick="addRemote()">+</button></span></h2>
-	<div id="remoteLibraryList"></div><br>
-	
-	<h2><u>Video List:</u>
-			<span title="Upload new video">
-			<button onclick="showUpload()">+</button></span>
-			<span title="Search for a video">
-			<button onclick="handleSearch()">&#128269</button></span></h2>
-		<div id="videoUpload"></div>
-	<div id="videoList"></div><br>
-
-</body>
 </html>

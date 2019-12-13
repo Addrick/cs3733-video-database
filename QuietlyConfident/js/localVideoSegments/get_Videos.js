@@ -1,7 +1,7 @@
 // Refreshes list of video segments in the page view.
 // This function passes in a value to signify the user. 0 for participant, 1 for administrator
 function refreshVideoSegmentsList() {
-	if(document.title == "Administrator Landing Page") {var user = 1;}
+	if(document.title == "Admin: Star Trek Video DB") {var user = 1;}
 	else {var user = 0;}
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", list_vid_url, true);
