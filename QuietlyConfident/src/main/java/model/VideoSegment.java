@@ -34,7 +34,7 @@ public class VideoSegment {
 	public String getURL() { return url; }
 	public void setSystem(boolean s) {system = s;}
 	public void setVisible(boolean v) {visible = v;}
-	public boolean getVisible(boolean v) {return visible;}
+	public boolean getVisible() {return visible;}
 	
 	public boolean equals (Object o) {
 		if (o == null) {return false;}
