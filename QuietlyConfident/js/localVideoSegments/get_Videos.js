@@ -23,7 +23,7 @@ function refreshVideoSegmentsList() {
 function handleSearch() {
 	if(document.title == "Administrator Landing Page") {var user = 1;}
 	else {var user = 0;}
-	var criteria = prompt("Search by characters or text text:", "");
+	var criteria = prompt("Search by characters or transcript text (queries are case-sensitive):", "");
 	if(criteria == null || criteria == "") {}
 	else
 	{

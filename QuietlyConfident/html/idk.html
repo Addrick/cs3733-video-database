@@ -86,23 +86,19 @@ h3{
  <!--Local Library Collapsible-->
 <button type="button" class="collapsible">Local Video Segments:</button>
 <div class="content">
-	<h2>Upload New Video</h2>
-	<form name="createForm" method="post">
-		<input name="id_video" value="id_video" /> <input name="characters"
-			value="characters" /> <input name="text" value="text" /> <input
-			name="base64Encoding" hidden="" value="" /> Select a video in file:
-		<input type="file" id="video_file" name="video_file"> <input
-			type="button" id="createButton" value="Upload Video" disabled
-			onClick="JavaScript:handleUploadClick(this)">
-	</form>
 
 	<h2>
 		<u>Video List:</u> <span title="Upload new video">
-			<button onclick="showUpload()">+</button>
+			<button onclick="showUpload()">Upload New...</button>
 		</span> <span title="Search for a video">
 			<button onclick="handleSearch()">&#128269</button>
+
+		<span title="Load all lists">
+			<button onclick="initialize()">Reset All Video Lists</button>
 		</span>
+				</span>
 	</h2>
+		
 	<div id="videoUpload"></div>
 	<div id="videoList"></div>
 	<br>
@@ -116,8 +112,11 @@ h3{
 <h2>
 	<u>Remote Libraries</u> <span title="Register new Remote Library">
 		<button onclick="handleAddRemoteClick()">+</button>
-	</span>
-</h2>
+		<span title="Load all lists">
+			<button onclick="initialize()">Reset All Video Lists</button>
+		</span>
+				</span>
+	</h2></h2>
 <body><u>Current Remote Databases:</u> </body>
 <div id="remoteVideoList"></div>
 <br>
