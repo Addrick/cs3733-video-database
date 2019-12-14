@@ -29,6 +29,6 @@ public class ListRemoteSegmentsHandler implements RequestHandler<Object,RemoteSe
 		list.add(three);
 		
 		RemoteSegmentsResponse response = new RemoteSegmentsResponse(list, 200);
-		return response;
+		return response; 
 	}
 }

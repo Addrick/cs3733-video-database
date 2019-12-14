@@ -50,6 +50,7 @@ public class VideoSegmentsDAO {
     
     public List<VideoSegment> searchVideoSegment(String criteria) throws Exception {
         
+    	 
         List<VideoSegment> allvideos = new ArrayList<>();
         try {
             Statement statement = conn.createStatement();
@@ -64,7 +65,7 @@ public class VideoSegmentsDAO {
             	if (c.characters != null)
             	{           		
             		if (c.text != null) {
-            			if (c.characters.contains(criteria) || c.text.contains(criteria)) {
+            			if (c.characters.contains(criteria) || c.text.contains(criteria)) { 
             				allvideos.add(c);
             				System.out.println("added a video");
             			}
@@ -218,8 +219,8 @@ public class VideoSegmentsDAO {
         String id_video  = resultSet.getString("id_video");
     	System.out.println("got id");
         String characters  = resultSet.getString("characters");
-        String text  = resultSet.getString("text");
-        String url  = resultSet.getString("url");
+        String text = resultSet.getString("text");
+        String url = resultSet.getString("url");
         System.out.println("characters: " + characters);
         System.out.println("text: " + text);
         boolean system = resultSet.getBoolean("system");
