@@ -27,6 +27,7 @@ function handleSearch() {
 	if(criteria == null || criteria == "") {}
 	else
 	{
+		filterRemoteList(criteria);
 		var data = {};
 		data["criteria"] = criteria;
 		var js = JSON.stringify(data);
@@ -72,7 +73,7 @@ function processVideoSegmentListResponse(result, user) {
 		var systemIcon = "<br>";
 		
 		if (i%3 == 0){output = output + "<tr>"}
-		output = output + "<td style='word-wrap: break-word; height:300px; width:320px'>"
+		output = output + "<td valign='bottom'; style='word-wrap:break-word; height:300px; width:320px'>"
 		if(user)
 		{
 			if(system){

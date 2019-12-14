@@ -118,6 +118,39 @@ function processRemoteVideoSegmentListResponse(result) {
 	remoteVideoList.innerHTML = remoteVideoList.innerHTML + output;
 }
 
+function processFilteredRemoteVideoSegmentListResponse(result, filter) {
+	console.log("res:" + result);
+	// Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
+	var js = JSON.parse(result);
+	var remoteVideoList = document.getElementById('remoteVideoList');
+
+	console.log("text: " + js.segments);
+	var output = "<table border='1'; style='table-layout: fixed; width:960px'>";
+
+	for (var i = 0; i < js.segments.length; i++) {
+		var constantJson = js.segments[i];
+
+		var text = constantJson["text"];
+		var characters = constantJson["character"];
+		var url = constantJson["url"];
+		
+		if (i%3 == 0){output = output + "<tr>"}
+		output = output + "<td valign='bottom'; style='word-wrap:break-word; height:300px; width:320px'>"
+
+		output = output + "<div id=\"vs_" + url + "\">"
+		+ "<b>Remote Video URL:</b> " + url + "<br> "
+		+ "<button onclick=\"processAppendVideoSegment(document.getElementById('vs_" + url + "').id)\">Add to Playlist...</button> <br>"
+		+ "<b>Text:</b> " + text + "<br>"
+		+ "<b>Characters:</b> " + characters + "<br>"
+		+ "<video width='320' height='240' controls src = " + url + "></video> </TD></div>";
+
+		if (i%3 == 2){output = output + "</tr>"}
+
+	}
+	// Update list
+	remoteVideoList.innerHTML = remoteVideoList.innerHTML + output;
+}
+
 function handleAddRemoteClick()
 {
 	var url = prompt("Enter Remote Library URL:", "New Remote Site");
