@@ -29,9 +29,12 @@ function refreshRemoteList() {
  */
 function processRemoteListResponse(result) {
 	console.log("res:" + result);
+	
 	// Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
 	var js = JSON.parse(result);
 	var remoteVideoList = document.getElementById('remoteVideoList');
+	remoteVideoList.innerHTML = "";
+
 	for (var i = 0; i < js.list.length; i++) {
 		var constantJson = js.list[i];
 //		console.log(constantJson);
@@ -41,7 +44,7 @@ function processRemoteListResponse(result) {
 		var q = urlapi.indexOf("?apikey=");
 		if (q == -1) {
 			alert("Malformed Remote Library URL or API key");
-			remoteVideoList.innerHTML = remoteVideoList.innerHTML + "<b>Invalid Remote Site:</b> " + urlapi + "(<a href='javaScript:requestUnregisterRemote(\"" + urlapi + "\")'><img src='deleteIcon.png'></img></a>) <br></div>";
+			remoteVideoList.innerHTML = "<b>Invalid Remote Site:</b> " + urlapi + "(<a href='javaScript:requestUnregisterRemote(\"" + urlapi + "\")'><img src='deleteIcon.png'></img></a>) <br></div>";
 		} else {
 			var url = urlapi.substring(0, q);
 			var api = urlapi.substring(q+8);
@@ -89,7 +92,7 @@ function processRemoteVideoSegmentListResponse(result) {
 	var remoteVideoList = document.getElementById('remoteVideoList');
 
 	console.log("text: " + js.segments);
-	var output = "<table style='table-layout: fixed; width: 100%'>";
+	var output = "<table border='1'; style='table-layout: fixed; width:960px'>";
 
 	for (var i = 0; i < js.segments.length; i++) {
 		var constantJson = js.segments[i];
@@ -99,13 +102,13 @@ function processRemoteVideoSegmentListResponse(result) {
 		var url = constantJson["url"];
 		
 		if (i%3 == 0){output = output + "<tr>"}
-		output = output + "<td style='word-wrap: break-word; height:300px'>"
+		output = output + "<td valign='bottom'; style='word-wrap:break-word; height:300px; width:320px'>"
 
 		output = output + "<div id=\"vs_" + url + "\">"
 		+ "<b>Remote Video URL:</b> " + url + "<br> "
+		+ "<button onclick=\"processAppendVideoSegment(document.getElementById('vs_" + url + "').id)\">Add to Playlist...</button> <br>"
 		+ "<b>Text:</b> " + text + "<br>"
 		+ "<b>Characters:</b> " + characters + "<br>"
-		+ "<button onclick=\"processAppendVideoSegment(document.getElementById('vs_" + url + "').id)\">Add to Playlist...</button> <br>"
 		+ "<video width='320' height='240' controls src = " + url + "></video> </TD></div>";
 
 		if (i%3 == 2){output = output + "</tr>"}

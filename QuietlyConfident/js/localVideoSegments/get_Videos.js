@@ -58,7 +58,7 @@ function processVideoSegmentListResponse(result, user) {
 	var js = JSON.parse(result);
 	var videoList = document.getElementById('videoList');
 
-	var output = "<table style='table-layout: fixed; width: 100%'>";
+	var output = "<table style='table-layout: fixed'>";
 	for (var i = 0; i < js.list.length; i++) {
 		var constantJson = js.list[i];
 
@@ -72,7 +72,7 @@ function processVideoSegmentListResponse(result, user) {
 		var systemIcon = "<br>";
 		
 		if (i%3 == 0){output = output + "<tr>"}
-		output = output + "<td style='word-wrap: break-word; height:300px'>"
+		output = output + "<td style='word-wrap: break-word; height:300px; width:320px'>"
 		if(user)
 		{
 			if(system){
@@ -95,8 +95,8 @@ function processVideoSegmentListResponse(result, user) {
 						+ "<button onclick=\"processAppendVideoSegment('" + url + "')\">Add to Playlist...</button> "
 						+ markButton
 						+ systemIcon
-						+ "Text: " + text + "<br>"
-						+ "Characters: " + characters + "<br>"
+						+ "<b>Text:</b> " + text + "<br>"
+						+ "<b>Characters:</b> " + characters + "<br>"
 						+ "<video width='320' height='240' controls src = " + url + "></video> <br><br></div>";
 		if (i%3 == 2){output = output + "</tr>"}
 
