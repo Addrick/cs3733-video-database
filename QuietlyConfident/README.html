@@ -13,7 +13,6 @@ body {
     text-rendering: optimizeLegibility;
     background-color: #F2F2F2;
 }
-
 h2 {
     font-size: 1.3em;
     line-height: 1.5em;
@@ -21,14 +20,11 @@ h2 {
     margin: 20px 0 0 0;
     padding: 0;
     border-bottom: 3px solid #eee;
-
     /* icon setup */
     padding: 0.2em 1em 0.2em 30px;
     background-position: 0 50%;
     background-repeat: no-repeat;
 }
-
-
 /*************************************
 SECTIONS
 *************************************/
@@ -37,12 +33,10 @@ div#content {
     padding: 0 30px 15px 30px;
     background-color: #fff;
     width: 940px;
-
     /* box-shadow */
     -moz-box-shadow: 0 5px 10px #aaa;
     -webkit-box-shadow: 0 5px 10px #aaa;
     box-shadow: 0 5px 10px #aaa;
-
     /* bottom corners */
     -webkit-border-bottom-right-radius: 7px;
     -webkit-border-bottom-left-radius: 7px;
@@ -51,42 +45,33 @@ div#content {
     border-bottom-right-radius: 7px;
     border-bottom-left-radius: 7px;
 }
-
 /*div#content div.section {}*/
-
 div#content div.section ul {
     margin: 0;
     padding: 1em 0 0 2em;
     overflow: hidden;
 }
-
 div#content div.section ul li {
     list-style-type: square;
     white-space: nowrap;
     line-height: 1.5em;
 }
-
 /* Section titles */
 div#content div.section.s3 h2 {
     background-image: url(../images/drive.png);
 }
-
 div#content div.section.ec2 h2 {
     background-image: url(../images/server.png);
 }
-
 div#content div.section.sdb h2 {
     background-image: url(../images/database.png);
 }
-
-
 /*************************************
 CONTAINERS
 *************************************/
 .container {
     zoom: 1;
 }
-
 .container:after {
     content: ".";
     display: block;
@@ -94,8 +79,6 @@ CONTAINERS
     clear: both;
     visibility: hidden;
 }
-
-
 /*************************************
 GRIDS
 *************************************/
@@ -103,7 +86,6 @@ GRIDS
 .gridlast { margin-right: 0; }
 .grid5 { width: 300px; }
 .grid15 { width: 940px; }
-
 </style>
 </head>
 <div style="left: 32px; width: 975px; height: 753px;">
@@ -111,9 +93,9 @@ GRIDS
 
 <div>
 
-<h1>Welcome to AWS Lambda Eclipse Plugin</h1>
+<h1>Quietly Confident User Manual</h1>
 
-<p><strong>Congratulations</strong>! You have created your first AWS Lambda project. So what's next?</p>
+<h2>Participant and Administrator Functionality</h2>
 
 <hr>
 
@@ -121,12 +103,64 @@ GRIDS
 
 <div>
 
-<h3>Step 1: Implement your function</h3>
+<h3>Creating a playlist:</h3>
 
-<p>Open up <strong>LambdaFunctionHandler.java</strong> and implement the <strong>handleRequest</strong> method. This method is the entry point for your Lambda function, and it will be invoked by Lambda in response to input from the event sources of your function.</p>
+<p>Press the <strong>"+"</strong> button immediately next to the <strong>Playlist List</strong> </p>
+<p>This will open an alert which will prompt you for the name of the playlist you wish to create</p>
+
+<hr>
+
+</div>
+
+<div>
+
+<h3>Showing playlists and videos</h3>
+
+<p>Playlists are listed under the <strong>Playlists</strong> on the initial loading screen, and clicking it will release a drop down menu</p>
+<p>All video segments that have been uploaded are shown in the local library, and the remote ones are found further below. All videos are presented in order as they are played in the playlist</p>
+
+<hr>
+
+</div>
+
+<div>
+
+<h3>Deleting playlists and videos</h3>
+
+<p>To delete any playlist or video simply click the trash can icon next to it and it will be deleted from the library</p>
+
+<hr>
+
+</div>
+
+<div>
+
+<h3>Appending videos to playlists</h3>
+
+<p>If you'd like to append a video to a playlist, whether the video is local or remote, you can do so by clicking "<strong>Add to Playlist...</strong>" right above the text of the video you wish to add</p>
+
+<hr>
+
+</div>
+
+<div>
+
+<h3>Removing video segments from playlists</h3>
+
+<p>In order to remove a video segment from a playlist, click <strong>Remove from Playlist</strong> below the video you wish to remove.</p>
+
+<hr>
+
+</div>
+
+<div>
+
+<h3>Searching for videos (local and remote)</h3>
+
+<p>Using the magnifying glass, above either local or remote video collections, type in (precisely) letters from the character's name or the transcript of the video you are looking for</p>
 
 <blockquote>
-  <p><strong>Note:</strong> You can add new classes and additional external dependencies in your project if needed.</p>
+  <p><strong>Note:</strong> You can search via the magnifying glass in either view, the list will be a composite of the two libraries</p>
 </blockquote>
 
 <hr>
@@ -135,13 +169,9 @@ GRIDS
 
 <div>
 
-<h3>Step 2: Test your function</h3>
+<h3>Play playlist</h3>
 
-<p>Open up <strong>LambdaFunctionHandlerTest.java</strong>. Fill in your test logic to validate the input and output of your function handler, and then run it locally as a normal JUnit test.</p>
-
-<blockquote>
-  <p><strong>Note:</strong> The unit test provides a sample JSON input file if you have chosen a predefined event type as your function input. You can modify the JSON file, or create new ones based on it.</p>
-</blockquote>
+<p>To play a playlist, click on the videos you wish to play as listed from left to right on the webpage and enjoy.</p>
 
 <hr>
 
@@ -149,13 +179,19 @@ GRIDS
 
 <div>
 
-<h3>Step 3: Upload your function</h3>
+<h3>Removing video segments from playlists</h3>
 
-<p>
-Under Project or Package Explorer View, right-click on your project and select <strong>Amazon Web Services -&gt; Upload Function to AWS Lambda</strong>.
-Then follow the steps to create a new Lambda function or upload your code to an existing function.
-</p>
-</ul>
+<p>In order to remove a video segment from a playlist, click <strong>Remove from Playlist</strong> below the video you wish to remove.</p>
+
+
+
+<h2>Administrator-Only Functionality</h2>
+
+<hr>
+
+<h3>Mark and unmark local video segments</h3>
+
+<p>Using the drop-down menu select whether you want each video to be public or private, the default is public</p>
 
 <hr>
 
@@ -163,39 +199,9 @@ Then follow the steps to create a new Lambda function or upload your code to an 
 
 <div>
 
-<h3>Step 4: Invoke your function</h3>
+<h3>Registering third parties</h3>
 
-<p>Now we are ready to run the function in the cloud. Right-click on your project again and select <strong>Amazon Web Services -&gt; Run on AWS Lambda</strong>. <br>
-In the input dialog, enter the JSON input for your function, or select one of the JSON files in your project.</p>
-
-<blockquote>
-  <p><strong>Tip:</strong> You can add new JSON input files in your project, and they will show up in this dialog as long as the file name ends with ".json".</p>
-</blockquote>
-
-<p>Click <strong>Invoke</strong> and check the output of your function in the Eclipse Console View.</p>
-
-<hr>
-
-</div>
-
-<div>
-
-<h3>What's next?</h3>
-
-<p>If you want to know more about AWS Lambda, check out the following links:</p>
-
-<ul>
-<li><a href="http://aws.amazon.com/lambda/details/">AWS Lambda Product Details</a></li>
-<li><a href="http://docs.aws.amazon.com/lambda/latest/dg/welcome.html">AWS Lambda Developer Guide</a></li>
-</ul>
-
-<p><a href="mailto:aws-eclipse-feedback@amazon.com">Contact us</a> to send bug reports and feedbacks.</p>
-
-<p><strong><em>AWS SDK for Java team</em></strong></p>
-
-</div>
-
-</div>
+<p>To register a third party site, click the <strong>+</strong> button above the remote libraries and paste the url of the remote library you'd like to insert.</p>
 
 </div>
 </html>
