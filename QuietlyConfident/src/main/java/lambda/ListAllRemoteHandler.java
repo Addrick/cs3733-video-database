@@ -50,7 +50,7 @@ public class ListAllRemoteHandler implements RequestHandler<Object,AllRemoteResp
 		} catch (Exception e) {
 			response = new AllRemoteResponse(409, e.getMessage());
 			System.out.println(response);
-		}
+		} 
 		
 		return response;
 	}

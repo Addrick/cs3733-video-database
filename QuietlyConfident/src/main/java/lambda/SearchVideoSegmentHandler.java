@@ -38,7 +38,7 @@ public class SearchVideoSegmentHandler implements RequestHandler<SearchVideoSegm
 
 			// get all user defined videos
 			List<VideoSegment> list = searchVideoSegment(req.criteria);
-
+			
 			response = new SearchVideoSegmentResponse(list, 200);
 		} catch (Exception e) {
 			response = new SearchVideoSegmentResponse(400, e.getMessage());

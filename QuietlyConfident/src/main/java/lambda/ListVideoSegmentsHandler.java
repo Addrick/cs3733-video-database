@@ -38,7 +38,6 @@ public class ListVideoSegmentsHandler implements RequestHandler<Object,AllVideoS
 
 			// get all user defined videos
 			List<VideoSegment> list = getVideoSegments();
-
 			response = new AllVideoSegmentsResponse(list, 200);
 		} catch (Exception e) {
 			response = new AllVideoSegmentsResponse(400, e.getMessage());
